@@ -18,4 +18,4 @@ architecture arc of pipes is
 
 
 
-end architecture arc;
+end architecture arc

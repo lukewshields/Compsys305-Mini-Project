@@ -23,7 +23,7 @@ architecture beh of clock_divider is
 				count <= 1;
 				tmp <= '0';
 			elsif(Clk'event and Clk = '1') then
-				if(count = 25000000) then
+				if(count = 2) then
 					tmp <= not tmp;
 					count <= 1;
 			end if;
