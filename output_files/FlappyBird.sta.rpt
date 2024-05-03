@@ -1,5 +1,5 @@
 Timing Analyzer report for FlappyBird
-Fri May 03 12:24:21 2024
+Fri May 03 14:03:08 2024
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
 
 
@@ -93,12 +93,12 @@ refer to the applicable agreement for further details.
 ; Number detected on machine ; 24          ;
 ; Maximum allowed            ; 16          ;
 ;                            ;             ;
-; Average used               ; 1.03        ;
+; Average used               ; 1.04        ;
 ; Maximum used               ; 16          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processors 2-16        ;   0.2%      ;
+;     Processors 2-16        ;   0.3%      ;
 +----------------------------+-------------+
 
 
@@ -440,7 +440,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
-    Info: Processing started: Fri May 03 12:24:18 2024
+    Info: Processing started: Fri May 03 14:03:05 2024
 Info: Command: quartus_sta FlappyBird -c FlappyBird
 Info: qsta_default_script.tcl version: #1
 Warning (20013): Ignored 24 assignments for entity "DE0_CV_Default" -- entity does not exist in design
@@ -525,8 +525,8 @@ Info (332140): No Minimum Pulse Width paths to report
 Info (332101): Design is fully constrained for setup requirements
 Info (332101): Design is fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 31 warnings
-    Info: Peak virtual memory: 5194 megabytes
-    Info: Processing ended: Fri May 03 12:24:21 2024
+    Info: Peak virtual memory: 5197 megabytes
+    Info: Processing ended: Fri May 03 14:03:08 2024
     Info: Elapsed time: 00:00:03
     Info: Total CPU time (on all processors): 00:00:01
 

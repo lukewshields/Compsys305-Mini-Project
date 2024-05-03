@@ -7,7 +7,7 @@ use IEEE.std_logic_unsigned.all;
 entity clock_divider is
 	port ( 
 		Clk, reset: in std_logic;
-		clock_1HZ: out std_logic
+		clock_25: out std_logic
 		);
 
 end entity clock_divider;
@@ -28,6 +28,6 @@ architecture beh of clock_divider is
 					count <= 1;
 			end if;
 		end if;
-	 clock_1HZ <= tmp;
+	 clock_25 <= tmp;
 	 end process;
 end architecture beh;

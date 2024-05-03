@@ -1,5 +1,5 @@
 Analysis & Synthesis report for FlappyBird
-Fri May 03 12:23:59 2024
+Fri May 03 14:02:46 2024
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
 
 
@@ -46,7 +46,7 @@ refer to the applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +---------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Fri May 03 12:23:59 2024           ;
+; Analysis & Synthesis Status     ; Successful - Fri May 03 14:02:46 2024           ;
 ; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Standard Edition ;
 ; Revision Name                   ; FlappyBird                                      ;
 ; Top-level Entity Name           ; FlappyBird                                      ;
@@ -322,7 +322,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
-    Info: Processing started: Fri May 03 12:23:53 2024
+    Info: Processing started: Fri May 03 14:02:33 2024
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off FlappyBird -c FlappyBird
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
@@ -360,13 +360,13 @@ Info (12021): Found 2 design units, including 1 entities, in source file bird.vh
     Info (12022): Found design unit 1: bird-behavior File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/bird.vhd Line: 14
     Info (12023): Found entity 1: bird File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/bird.vhd Line: 7
 Info (12127): Elaborating entity "FlappyBird" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at FlappyBird.vhd(29): object "pixel_row_vga" assigned a value but never read File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 29
-Warning (10036): Verilog HDL or VHDL warning at FlappyBird.vhd(30): object "pixel_col_vga" assigned a value but never read File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 30
+Warning (10036): Verilog HDL or VHDL warning at FlappyBird.vhd(30): object "pixel_row_vga" assigned a value but never read File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 30
+Warning (10036): Verilog HDL or VHDL warning at FlappyBird.vhd(31): object "pixel_col_vga" assigned a value but never read File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 31
 Warning (10873): Using initial value X (don't care) for net "VGA_R[2..0]" at FlappyBird.vhd(11) File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 11
 Warning (10873): Using initial value X (don't care) for net "VGA_G[2..0]" at FlappyBird.vhd(11) File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 11
 Warning (10873): Using initial value X (don't care) for net "VGA_B[2..0]" at FlappyBird.vhd(11) File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 11
-Info (12128): Elaborating entity "VGA_SYNC" for hierarchy "VGA_SYNC:vga" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 34
-Info (12128): Elaborating entity "clock_divider" for hierarchy "clock_divider:divider" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 49
+Info (12128): Elaborating entity "VGA_SYNC" for hierarchy "VGA_SYNC:vga" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 35
+Info (12128): Elaborating entity "clock_divider" for hierarchy "clock_divider:divider" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 50
 Warning (10492): VHDL Process Statement warning at clock_divider.vhd(31): signal "tmp" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/clock_divider.vhd Line: 31
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "VGA_HS" is stuck at GND File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 10
@@ -420,9 +420,9 @@ Info (21057): Implemented 18 device resources after synthesis - the final resour
     Info (21058): Implemented 4 input pins
     Info (21059): Implemented 14 output pins
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 52 warnings
-    Info: Peak virtual memory: 4862 megabytes
-    Info: Processing ended: Fri May 03 12:23:59 2024
-    Info: Elapsed time: 00:00:06
-    Info: Total CPU time (on all processors): 00:00:02
+    Info: Peak virtual memory: 4865 megabytes
+    Info: Processing ended: Fri May 03 14:02:46 2024
+    Info: Elapsed time: 00:00:13
+    Info: Total CPU time (on all processors): 00:00:03
 
 

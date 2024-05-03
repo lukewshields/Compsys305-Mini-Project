@@ -1,22 +1,22 @@
 |FlappyBird
 CLOCK_50 => clock_divider:divider.Clk
-SW[0] => vga_sync:vga.red
-SW[1] => vga_sync:vga.green
-SW[2] => vga_sync:vga.blue
-VGA_HS <= vga_sync:vga.horiz_sync_out
-VGA_VS <= vga_sync:vga.vert_sync_out
+SW[0] => VGA_SYNC:vga.red
+SW[1] => VGA_SYNC:vga.green
+SW[2] => VGA_SYNC:vga.blue
+VGA_HS <= VGA_SYNC:vga.horiz_sync_out
+VGA_VS <= VGA_SYNC:vga.vert_sync_out
 VGA_R[0] <= <GND>
 VGA_R[1] <= <GND>
 VGA_R[2] <= <GND>
-VGA_R[3] <= vga_sync:vga.red_out
+VGA_R[3] <= VGA_SYNC:vga.red_out
 VGA_G[0] <= <GND>
 VGA_G[1] <= <GND>
 VGA_G[2] <= <GND>
-VGA_G[3] <= vga_sync:vga.green_out
+VGA_G[3] <= VGA_SYNC:vga.green_out
 VGA_B[0] <= <GND>
 VGA_B[1] <= <GND>
 VGA_B[2] <= <GND>
-VGA_B[3] <= vga_sync:vga.blue_out
+VGA_B[3] <= VGA_SYNC:vga.blue_out
 
 
 |FlappyBird|VGA_SYNC:vga
