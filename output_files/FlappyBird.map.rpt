@@ -1,5 +1,5 @@
 Analysis & Synthesis report for FlappyBird
-Mon May 06 12:55:12 2024
+Mon May 06 13:27:11 2024
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
 
 
@@ -48,13 +48,13 @@ refer to the applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +---------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Mon May 06 12:55:12 2024           ;
+; Analysis & Synthesis Status     ; Successful - Mon May 06 13:27:11 2024           ;
 ; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Standard Edition ;
 ; Revision Name                   ; FlappyBird                                      ;
 ; Top-level Entity Name           ; FlappyBird                                      ;
 ; Family                          ; Cyclone V                                       ;
 ; Logic utilization (in ALMs)     ; N/A                                             ;
-; Total registers                 ; 48                                              ;
+; Total registers                 ; 57                                              ;
 ; Total pins                      ; 18                                              ;
 ; Total virtual pins              ; 0                                               ;
 ; Total block memory bits         ; 0                                               ;
@@ -191,16 +191,16 @@ refer to the applicable agreement for further details.
 +---------------------------------------------+----------------------------------------------------------------------+
 ; Resource                                    ; Usage                                                                ;
 +---------------------------------------------+----------------------------------------------------------------------+
-; Estimate of Logic utilization (ALMs needed) ; 39                                                                   ;
+; Estimate of Logic utilization (ALMs needed) ; 56                                                                   ;
 ;                                             ;                                                                      ;
-; Combinational ALUT usage for logic          ; 65                                                                   ;
+; Combinational ALUT usage for logic          ; 93                                                                   ;
 ;     -- 7 input functions                    ; 1                                                                    ;
-;     -- 6 input functions                    ; 7                                                                    ;
-;     -- 5 input functions                    ; 10                                                                   ;
+;     -- 6 input functions                    ; 14                                                                   ;
+;     -- 5 input functions                    ; 13                                                                   ;
 ;     -- 4 input functions                    ; 4                                                                    ;
-;     -- <=3 input functions                  ; 43                                                                   ;
+;     -- <=3 input functions                  ; 61                                                                   ;
 ;                                             ;                                                                      ;
-; Dedicated logic registers                   ; 48                                                                   ;
+; Dedicated logic registers                   ; 57                                                                   ;
 ;                                             ;                                                                      ;
 ; I/O pins                                    ; 18                                                                   ;
 ;                                             ;                                                                      ;
@@ -211,8 +211,8 @@ refer to the applicable agreement for further details.
 ;                                             ;                                                                      ;
 ; Maximum fan-out node                        ; pll:divider|pll_0002:pll_inst|altera_pll:altera_pll_i|outclk_wire[0] ;
 ; Maximum fan-out                             ; 49                                                                   ;
-; Total fan-out                               ; 370                                                                  ;
-; Average fan-out                             ; 2.47                                                                 ;
+; Total fan-out                               ; 490                                                                  ;
+; Average fan-out                             ; 2.62                                                                 ;
 +---------------------------------------------+----------------------------------------------------------------------+
 
 
@@ -221,9 +221,9 @@ refer to the applicable agreement for further details.
 +------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------+-------------+--------------+
 ; Compilation Hierarchy Node         ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                               ; Entity Name ; Library Name ;
 +------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------+-------------+--------------+
-; |FlappyBird                        ; 65 (0)              ; 48 (0)                    ; 0                 ; 0          ; 18   ; 0            ; |FlappyBird                                                       ; FlappyBird  ; work         ;
+; |FlappyBird                        ; 93 (1)              ; 57 (0)                    ; 0                 ; 0          ; 18   ; 0            ; |FlappyBird                                                       ; FlappyBird  ; work         ;
 ;    |VGA_SYNC:vga|                  ; 40 (40)             ; 48 (48)                   ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|VGA_SYNC:vga                                          ; VGA_SYNC    ; work         ;
-;    |pipes:pipe|                    ; 25 (25)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|pipes:pipe                                            ; pipes       ; work         ;
+;    |pipes:pipe|                    ; 52 (52)             ; 9 (9)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|pipes:pipe                                            ; pipes       ; work         ;
 ;    |pll:divider|                   ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|pll:divider                                           ; pll         ; pll          ;
 ;       |pll_0002:pll_inst|          ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|pll:divider|pll_0002:pll_inst                         ; pll_0002    ; pll          ;
 ;          |altera_pll:altera_pll_i| ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|pll:divider|pll_0002:pll_inst|altera_pll:altera_pll_i ; altera_pll  ; work         ;
@@ -240,14 +240,21 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------+--------------+---------+--------------+--------------+-------------------------+-----------------+
 
 
-+--------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                             ;
-+---------------------------------------+----------------------------------------+
-; Register name                         ; Reason for Removal                     ;
-+---------------------------------------+----------------------------------------+
-; VGA_SYNC:vga|pixel_row[9]             ; Stuck at GND due to stuck port data_in ;
-; Total Number of Removed Registers = 1 ;                                        ;
-+---------------------------------------+----------------------------------------+
++---------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                              ;
++----------------------------------------+----------------------------------------+
+; Register name                          ; Reason for Removal                     ;
++----------------------------------------+----------------------------------------+
+; pipes:pipe|pipe_width[0]               ; Stuck at GND due to stuck port data_in ;
+; pipes:pipe|pipe_width[1]               ; Stuck at VCC due to stuck port data_in ;
+; pipes:pipe|pipe_width[2,3]             ; Stuck at GND due to stuck port data_in ;
+; pipes:pipe|pipe_width[4,5]             ; Stuck at VCC due to stuck port data_in ;
+; pipes:pipe|pipe_width[6..9]            ; Stuck at GND due to stuck port data_in ;
+; pipes:pipe|pipe_x_pos[1]               ; Merged with pipes:pipe|pipe_x_pos[0]   ;
+; pipes:pipe|pipe_x_pos[0]               ; Stuck at GND due to stuck port data_in ;
+; VGA_SYNC:vga|pixel_row[9]              ; Stuck at GND due to stuck port data_in ;
+; Total Number of Removed Registers = 13 ;                                        ;
++----------------------------------------+----------------------------------------+
 
 
 +------------------------------------------------------+
@@ -255,9 +262,9 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 48    ;
+; Total registers                              ; 57    ;
 ; Number of registers using Synchronous Clear  ; 20    ;
-; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Synchronous Load   ; 9     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 29    ;
@@ -545,30 +552,32 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_ff             ; 48                          ;
+; arriav_ff             ; 57                          ;
 ;     ENA               ; 19                          ;
 ;     ENA SCLR          ; 10                          ;
 ;     SCLR              ; 10                          ;
+;     SLD               ; 9                           ;
 ;     plain             ; 9                           ;
-; arriav_lcell_comb     ; 66                          ;
-;     arith             ; 37                          ;
+; arriav_lcell_comb     ; 93                          ;
+;     arith             ; 53                          ;
 ;         0 data inputs ; 1                           ;
-;         1 data inputs ; 35                          ;
+;         1 data inputs ; 51                          ;
 ;         2 data inputs ; 1                           ;
 ;     extend            ; 1                           ;
 ;         7 data inputs ; 1                           ;
-;     normal            ; 28                          ;
+;     normal            ; 39                          ;
 ;         0 data inputs ; 1                           ;
+;         1 data inputs ; 1                           ;
 ;         2 data inputs ; 3                           ;
 ;         3 data inputs ; 3                           ;
 ;         4 data inputs ; 4                           ;
-;         5 data inputs ; 10                          ;
-;         6 data inputs ; 7                           ;
+;         5 data inputs ; 13                          ;
+;         6 data inputs ; 14                          ;
 ; boundary_port         ; 18                          ;
 ; generic_pll           ; 1                           ;
 ;                       ;                             ;
-; Max LUT depth         ; 3.80                        ;
-; Average LUT depth     ; 2.48                        ;
+; Max LUT depth         ; 4.60                        ;
+; Average LUT depth     ; 2.84                        ;
 +-----------------------+-----------------------------+
 
 
@@ -587,7 +596,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
-    Info: Processing started: Mon May 06 12:55:06 2024
+    Info: Processing started: Mon May 06 13:27:05 2024
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off FlappyBird -c FlappyBird
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
@@ -616,8 +625,8 @@ Info (12021): Found 2 design units, including 1 entities, in source file flappyb
     Info (12022): Found design unit 1: FlappyBird-arc File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 15
     Info (12023): Found entity 1: FlappyBird File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 7
 Info (12021): Found 2 design units, including 1 entities, in source file pipes.vhd
-    Info (12022): Found design unit 1: pipes-arc File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/pipes.vhd Line: 14
-    Info (12023): Found entity 1: pipes File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/pipes.vhd Line: 6
+    Info (12022): Found design unit 1: pipes-arc File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/pipes.vhd Line: 15
+    Info (12023): Found entity 1: pipes File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/pipes.vhd Line: 7
 Info (12021): Found 2 design units, including 1 entities, in source file bird.vhd
     Info (12022): Found design unit 1: bird-behavior File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/bird.vhd Line: 14
     Info (12023): Found entity 1: bird File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/bird.vhd Line: 7
@@ -699,7 +708,6 @@ Info (12133): Instantiated megafunction "pll:divider|pll_0002:pll_inst|altera_pl
     Info (12134): Parameter "pll_type" = "General"
     Info (12134): Parameter "pll_subtype" = "General"
 Info (12128): Elaborating entity "pipes" for hierarchy "pipes:pipe" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 79
-Warning (10036): Verilog HDL or VHDL warning at pipes.vhd(21): object "pipe_x_motion" assigned a value but never read File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/pipes.vhd Line: 21
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "VGA_R[0]" is stuck at GND File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 11
     Warning (13410): Pin "VGA_R[1]" is stuck at GND File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 11
@@ -744,14 +752,14 @@ Warning (21074): Design contains 3 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "SW[0]" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 9
     Warning (15610): No output dependent on input pin "SW[1]" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 9
     Warning (15610): No output dependent on input pin "SW[2]" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 9
-Info (21057): Implemented 109 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 137 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 4 input pins
     Info (21059): Implemented 14 output pins
-    Info (21061): Implemented 90 logic cells
+    Info (21061): Implemented 118 logic cells
     Info (21065): Implemented 1 PLLs
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 46 warnings
-    Info: Peak virtual memory: 4925 megabytes
-    Info: Processing ended: Mon May 06 12:55:12 2024
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 45 warnings
+    Info: Peak virtual memory: 4929 megabytes
+    Info: Processing ended: Mon May 06 13:27:11 2024
     Info: Elapsed time: 00:00:06
     Info: Total CPU time (on all processors): 00:00:04
 
