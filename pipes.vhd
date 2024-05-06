@@ -4,42 +4,53 @@ USE  IEEE.STD_LOGIC_ARITH.all;
 USE  IEEE.STD_LOGIC_UNSIGNED.all;
 
 entity pipes is 
-	port (clk : in std_logic;
-		pixel_row, pixel_col, vert_sync : in std_logic_vector (9 downto 0);
-		red_out, green_out, blue_out : out std_logic; --write to vga2 just above the background
-		
-	);
+    port (pixel_row, pixel_col : in std_logic_vector (9 downto 0);
+        clk, vert_sync, enable: in std_logic;
+        red, green, blue: out std_logic
+    );
 
 end entity pipes;
 
 architecture arc of pipes is 
-signal size : std_logic_vector (9 downto 0); --holds current size
-signal x_pos: std_logic_vector (9 downto 0); --current middle x of pipe
-signal y_pos: std_logic_vector (9 downto 0); --current middle y of pipe
-signal gap_x : std_logic_vector (9 downto 0);
-signal gap_y : std_logic_vector (9 downto 0);
-signal gapsize : std_logic_vector (9 downto 0);
-signal pipe_x_motion: std_logic (9 downto 0); --motion for pipe to move left
-signal pipe_on : std_logic;
-signal pipe_width: std_logic_vector(9 downto 0); --need to initialize this?
+    --could get rid of all the pipe before the variable names maybe
+    signal  pipes_on : std_logic;
+    signal pipe_height : std_logic_vector (9 downto 0);
+    signal pipe_width : std_logic_vector (9 downto 0);
+    --signal pip_gap : std_logic_vector (9 downto 0);
+    --signal pipe_separation : std_logic_vector (9 downto 0);
+    signal pipe_x_motion : std_logic_vector (9 downto 0);
+    signal pipe_x_pos : std_logic_vector (10 downto 0);
+	 --signal pipe_x_pos : signed (10 downto 0);
+	 signal bottom : std_logic_vector (9 downto 0);
 
+    begin
 
+    red <= not pipes_on; --purple bg and green pipes lol
+    green <= pipes_on;
+    blue <= not pipes_on;
+	 
+	 pipe_width <= conv_std_logic_vector(50, 10);
+	 pipe_height <= conv_std_logic_vector(150, 10);
+	 --pipe_x_pos <= to_signed(240, 11);
+	 pipe_x_pos <= conv_std_logic_vector(240, 11);
+	 bottom <= conv_std_logic_vector(479,10);
+	 pipe_x_motion <= conv_std_logic_vector(4, 10);
 
-
-begin
-
-size <= CONV_STD_LOGIC_VECTOR(15, 10);
-
-
-move_pipe: process (vert_sync)
-	begin
-		pipe_on => '1' when ((pixel_column > gap_x - pipe_width) and (pixel_column < gap_x) and ((gap_y + gapsize <= pixel_row) or (pixel_row <= gap_y - gapsize)))
-						else '0';
-		if(rising_edge(vert_sync) then
+	 pipes_on <= '1' when ((pixel_row <= pipe_height or (pixel_row + pipe_height >= bottom)) and pipe_x_pos <= pixel_col + pipe_width 
+							and pixel_col<= pipe_x_pos + pipe_width) else '0';
+							
+	 
+	--move_pipe : process(vert_sync)
+	--begin
+	--if (rising_edge(vert_sync)) then
+	--	if (pipe_x_pos + signed(pipe_width) <= 0) then
+	--		pipe_x_pos <= to_signed(600, 11);
+	--	else 
+	--		pipe_x_pos <= pipe_x_pos - signed(pipe_x_motion);
+	--	end if;
+	--end if;
 		
-		
-		end if;
-			
+	--end process move_pipe;
 
 
 
