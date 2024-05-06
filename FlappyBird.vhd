@@ -36,6 +36,7 @@ architecture arc of FlappyBird is
 	
 	component pipes is 
 		 port (pixel_row, pixel_col : in std_logic_vector (9 downto 0);
+		  start_pos : in std_logic_vector (10 downto 0);
         clk, vert_sync, enable: in std_logic;
         red, green, blue: out std_logic
 		);
@@ -80,6 +81,7 @@ begin
 		port map (
 			pixel_row => pixel_row_vga,
 			pixel_col => pixel_col_vga,
+			start_pos => conv_std_logic_vector(200, 11),
 			clk => clk_25, 
 			vert_sync => vert_s,
 			enable => '1',
@@ -87,5 +89,18 @@ begin
 			green => green,
 			blue => blue
 		);
+		
+	--pipe2 : pipes -- red green and blue cannot be assigned to more than 1 value need to use more bits of the vga_r values?
+		--port map (
+			--pixel_row => pixel_row_vga,
+			--pixel_col => pixel_col_vga,
+			--start_pos => conv_std_logic_vector(450, 11),
+			--clk => clk_25, 
+			--vert_sync => vert_s,
+			--enable => '1',
+			--red => red,
+			--green => green,
+			--blue => blue
+		--);
 		
 end architecture arc;
