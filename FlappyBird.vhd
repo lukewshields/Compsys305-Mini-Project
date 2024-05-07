@@ -8,7 +8,9 @@ entity FlappyBird is
 	port (CLOCK_50: in std_logic;
 			SW : in std_logic_vector (2 downto 0);
 			VGA_HS, VGA_VS : out std_logic;
-			VGA_R, VGA_G, VGA_B : out std_logic_vector (3 downto 0)
+			VGA_R, VGA_G, VGA_B : out std_logic_vector (3 downto 0);
+			PS2_DAT, PS2_CLK : inout std_logic
+			
 			);
 end entity FlappyBird;
 
@@ -42,19 +44,33 @@ architecture arc of FlappyBird is
 	end component pipes;
 		
 	component bird is 
-	    port (clk, vert_sync	: IN std_logic;
+	    port (clk, vert_sync, click	: IN std_logic;
        pixel_row, pixel_col	: IN std_logic_vector(9 DOWNTO 0);
 		 red, green, blue 			: OUT std_logic);		
 	end component bird;
 	
+	component mouse is
+		PORT( clock_25Mhz, reset 		: IN std_logic;
+			mouse_data					: INOUT std_logic;
+         mouse_clk 					: INOUT std_logic;
+         left_button, right_button	: OUT std_logic;
+			mouse_cursor_row 			: OUT std_logic_vector(9 DOWNTO 0); 
+			mouse_cursor_column 		: OUT std_logic_vector(9 DOWNTO 0)
+		);     
+	end component mouse;
+	
 	signal clk_25, red, green, blue, vert_s : std_logic;
 	signal pixel_row_vga : std_logic_vector (9 downto 0);
 	signal pixel_col_vga : std_logic_vector (9 downto 0);
-	signal trash : std_logic;
+	signal trash3 : std_logic;
 	signal red_pipes, green_pipes, blue_pipes : std_logic;
 	signal red_bird, green_bird, blue_bird : std_logic;
 	signal red_final, green_final, blue_final : std_logic;
-
+	signal leftclick : std_logic;
+	
+	signal trash : std_logic_vector (9 downto 0);
+	signal trash2 : std_logic_vector (9 downto 0);
+	signal trash4 : std_logic;
 begin
 
 	vga : vga_sync 
@@ -81,7 +97,7 @@ begin
 			refclk => CLOCK_50,
 			rst => '0',
 			outclk_0 => clk_25,
-			locked => trash
+			locked => trash3
 		);
 	
 	pipe : pipes
@@ -104,24 +120,26 @@ begin
 		port map (
 			clk => clk_25,
 		   vert_sync => vert_s,
+			click => leftclick,
 		   pixel_row => pixel_row_vga, 
 		   pixel_col => pixel_col_vga,
 		   red => red_bird, -- this will have issues with writing to the same vga bit cant have multiple drivers, create different signals for each then assign to vga pins
 		   green => green_bird,
 		   blue => blue_bird
 		);
-		
-	--pipe2 : pipes -- red green and blue cannot be assigned to more than 1 value need to use more bits of the vga_r values?
-		--port map (
-			--pixel_row => pixel_row_vga,
-			--pixel_col => pixel_col_vga,
-			--start_pos => conv_std_logic_vector(450, 11),
-			--clk => clk_25, 
-			--vert_sync => vert_s,
-			--enable => '1',
-			--red => red,
-			--green => green,
-			--blue => blue
-		--);
+	
+	l : mouse 
+		port map(
+			clock_25Mhz => clk_25,
+			reset => '0',
+			mouse_data => PS2_DAT,
+			mouse_clk => PS2_CLK,
+         left_button => leftclick,
+			right_button => trash4,
+			mouse_cursor_row => trash,			 
+			mouse_cursor_column => trash2
+		);
+	
+	--for death detection use pixel clashes between red and green signals
 		
 end architecture arc;

@@ -22,6 +22,14 @@
 				{
 					"name" : "VGA_B[3]",
 					"strict" : false
+				},
+				{
+					"name" : "PS2_DAT",
+					"strict" : false
+				},
+				{
+					"name" : "PS2_CLK",
+					"strict" : false
 				}
 			]
 		}
