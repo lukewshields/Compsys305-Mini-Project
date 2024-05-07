@@ -36,26 +36,33 @@ architecture arc of FlappyBird is
 	
 	component pipes is 
 		 port (pixel_row, pixel_col : in std_logic_vector (9 downto 0);
-		  start_pos : in std_logic_vector (10 downto 0);
         clk, vert_sync, enable: in std_logic;
         red, green, blue: out std_logic
 		);
 	end component pipes;
+		
+	component bird is 
+	    port (clk, vert_sync	: IN std_logic;
+       pixel_row, pixel_col	: IN std_logic_vector(9 DOWNTO 0);
+		 red, green, blue 			: OUT std_logic);		
+	end component bird;
 	
 	signal clk_25, red, green, blue, vert_s : std_logic;
 	signal pixel_row_vga : std_logic_vector (9 downto 0);
 	signal pixel_col_vga : std_logic_vector (9 downto 0);
 	signal trash : std_logic;
-	
+	signal red_pipes, green_pipes, blue_pipes : std_logic;
+	signal red_bird, green_bird, blue_bird : std_logic;
+	signal red_final, green_final, blue_final : std_logic;
 
 begin
 
 	vga : vga_sync 
 		port map(
 			clock_25Mhz => clk_25,
-			red => red,
-			green => green,
-			blue => blue,
+			red => red_final,
+			green => green_final,
+			blue => blue_final,
 			red_out => VGA_R(3),
 			green_out => VGA_G(3),
 			blue_out => VGA_B(3),
@@ -81,13 +88,27 @@ begin
 		port map (
 			pixel_row => pixel_row_vga,
 			pixel_col => pixel_col_vga,
-			start_pos => conv_std_logic_vector(200, 11),
 			clk => clk_25, 
 			vert_sync => vert_s,
 			enable => '1',
-			red => red,
-			green => green,
-			blue => blue
+			red => red_pipes,
+			green => green_pipes,
+			blue => blue_pipes
+		);
+	
+	red_final <= red_bird;
+	green_final <= green_pipes;
+	blue_final <= blue_pipes and not red_bird;
+		
+	avatar : bird 
+		port map (
+			clk => clk_25,
+		   vert_sync => vert_s,
+		   pixel_row => pixel_row_vga, 
+		   pixel_col => pixel_col_vga,
+		   red => red_bird, -- this will have issues with writing to the same vga bit cant have multiple drivers, create different signals for each then assign to vga pins
+		   green => green_bird,
+		   blue => blue_bird
 		);
 		
 	--pipe2 : pipes -- red green and blue cannot be assigned to more than 1 value need to use more bits of the vga_r values?

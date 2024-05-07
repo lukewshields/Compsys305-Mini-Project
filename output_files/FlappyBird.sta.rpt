@@ -1,5 +1,5 @@
 Timing Analyzer report for FlappyBird
-Mon May 06 17:28:02 2024
+Tue May 07 13:31:42 2024
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
 
 
@@ -97,19 +97,26 @@ refer to the applicable agreement for further details.
 ; Number detected on machine ; 24          ;
 ; Maximum allowed            ; 16          ;
 ;                            ;             ;
-; Average used               ; 1.24        ;
+; Average used               ; 1.65        ;
 ; Maximum used               ; 16          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   2.4%      ;
-;     Processor 3            ;   2.4%      ;
-;     Processor 4            ;   2.3%      ;
-;     Processor 5            ;   2.2%      ;
-;     Processor 6            ;   2.2%      ;
-;     Processor 7            ;   2.2%      ;
-;     Processor 8            ;   2.2%      ;
-;     Processors 9-16        ;   1.0%      ;
+;     Processor 2            ;   4.6%      ;
+;     Processor 3            ;   4.5%      ;
+;     Processor 4            ;   4.4%      ;
+;     Processor 5            ;   4.4%      ;
+;     Processor 6            ;   4.3%      ;
+;     Processor 7            ;   4.3%      ;
+;     Processor 8            ;   4.3%      ;
+;     Processor 9            ;   4.3%      ;
+;     Processor 10           ;   4.3%      ;
+;     Processor 11           ;   4.2%      ;
+;     Processor 12           ;   4.2%      ;
+;     Processor 13           ;   4.2%      ;
+;     Processor 14           ;   4.2%      ;
+;     Processor 15           ;   4.2%      ;
+;     Processor 16           ;   4.2%      ;
 +----------------------------+-------------+
 
 
@@ -130,8 +137,8 @@ refer to the applicable agreement for further details.
 +------------+-----------------+-------------------------------------------------------------------------+------+
 ; Fmax       ; Restricted Fmax ; Clock Name                                                              ; Note ;
 +------------+-----------------+-------------------------------------------------------------------------+------+
-; 87.37 MHz  ; 87.37 MHz       ; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ;      ;
-; 183.25 MHz ; 183.25 MHz      ; VGA_SYNC:vga|vert_sync_out                                              ;      ;
+; 72.17 MHz  ; 72.17 MHz       ; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ;      ;
+; 135.63 MHz ; 135.63 MHz      ; VGA_SYNC:vga|vert_sync_out                                              ;      ;
 +------------+-----------------+-------------------------------------------------------------------------+------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
@@ -147,8 +154,8 @@ HTML report is unavailable in plain text report export.
 +-------------------------------------------------------------------------+--------+---------------+
 ; Clock                                                                   ; Slack  ; End Point TNS ;
 +-------------------------------------------------------------------------+--------+---------------+
-; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; -4.958 ; -14.824       ;
-; VGA_SYNC:vga|vert_sync_out                                              ; -4.457 ; -103.312      ;
+; VGA_SYNC:vga|vert_sync_out                                              ; -6.373 ; -229.650      ;
+; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; -5.509 ; -11.004       ;
 +-------------------------------------------------------------------------+--------+---------------+
 
 
@@ -157,8 +164,8 @@ HTML report is unavailable in plain text report export.
 +-------------------------------------------------------------------------+-------+---------------+
 ; Clock                                                                   ; Slack ; End Point TNS ;
 +-------------------------------------------------------------------------+-------+---------------+
-; VGA_SYNC:vga|vert_sync_out                                              ; 0.551 ; 0.000         ;
-; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 0.566 ; 0.000         ;
+; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 0.342 ; 0.000         ;
+; VGA_SYNC:vga|vert_sync_out                                              ; 0.902 ; 0.000         ;
 +-------------------------------------------------------------------------+-------+---------------+
 
 
@@ -179,7 +186,7 @@ No paths to report.
 +-------------------------------------------------------------------------+--------+---------------+
 ; Clock                                                                   ; Slack  ; End Point TNS ;
 +-------------------------------------------------------------------------+--------+---------------+
-; VGA_SYNC:vga|vert_sync_out                                              ; -0.538 ; -21.782       ;
+; VGA_SYNC:vga|vert_sync_out                                              ; -0.538 ; -30.728       ;
 ; divider|pll_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]   ; 1.666  ; 0.000         ;
 ; CLOCK_50                                                                ; 9.949  ; 0.000         ;
 ; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 19.268 ; 0.000         ;
@@ -197,8 +204,8 @@ No synchronizer chains to report.
 +------------+-----------------+-------------------------------------------------------------------------+------+
 ; Fmax       ; Restricted Fmax ; Clock Name                                                              ; Note ;
 +------------+-----------------+-------------------------------------------------------------------------+------+
-; 87.65 MHz  ; 87.65 MHz       ; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ;      ;
-; 184.74 MHz ; 184.74 MHz      ; VGA_SYNC:vga|vert_sync_out                                              ;      ;
+; 70.84 MHz  ; 70.84 MHz       ; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ;      ;
+; 140.17 MHz ; 140.17 MHz      ; VGA_SYNC:vga|vert_sync_out                                              ;      ;
 +------------+-----------------+-------------------------------------------------------------------------+------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
@@ -208,8 +215,8 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------------------------------------------------------------------------+--------+---------------+
 ; Clock                                                                   ; Slack  ; End Point TNS ;
 +-------------------------------------------------------------------------+--------+---------------+
-; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; -4.611 ; -13.797       ;
-; VGA_SYNC:vga|vert_sync_out                                              ; -4.413 ; -102.475      ;
+; VGA_SYNC:vga|vert_sync_out                                              ; -6.134 ; -222.379      ;
+; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; -5.119 ; -10.219       ;
 +-------------------------------------------------------------------------+--------+---------------+
 
 
@@ -218,8 +225,8 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-------------------------------------------------------------------------+-------+---------------+
 ; Clock                                                                   ; Slack ; End Point TNS ;
 +-------------------------------------------------------------------------+-------+---------------+
-; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 0.157 ; 0.000         ;
-; VGA_SYNC:vga|vert_sync_out                                              ; 0.583 ; 0.000         ;
+; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 0.074 ; 0.000         ;
+; VGA_SYNC:vga|vert_sync_out                                              ; 0.986 ; 0.000         ;
 +-------------------------------------------------------------------------+-------+---------------+
 
 
@@ -240,7 +247,7 @@ No paths to report.
 +-------------------------------------------------------------------------+--------+---------------+
 ; Clock                                                                   ; Slack  ; End Point TNS ;
 +-------------------------------------------------------------------------+--------+---------------+
-; VGA_SYNC:vga|vert_sync_out                                              ; -0.538 ; -21.745       ;
+; VGA_SYNC:vga|vert_sync_out                                              ; -0.538 ; -31.399       ;
 ; divider|pll_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]   ; 1.666  ; 0.000         ;
 ; CLOCK_50                                                                ; 9.980  ; 0.000         ;
 ; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 19.187 ; 0.000         ;
@@ -258,8 +265,8 @@ No synchronizer chains to report.
 +-------------------------------------------------------------------------+--------+---------------+
 ; Clock                                                                   ; Slack  ; End Point TNS ;
 +-------------------------------------------------------------------------+--------+---------------+
-; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; -3.019 ; -8.974        ;
-; VGA_SYNC:vga|vert_sync_out                                              ; -2.202 ; -42.635       ;
+; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; -3.330 ; -6.652        ;
+; VGA_SYNC:vga|vert_sync_out                                              ; -3.001 ; -107.461      ;
 +-------------------------------------------------------------------------+--------+---------------+
 
 
@@ -268,8 +275,8 @@ No synchronizer chains to report.
 +-------------------------------------------------------------------------+-------+---------------+
 ; Clock                                                                   ; Slack ; End Point TNS ;
 +-------------------------------------------------------------------------+-------+---------------+
-; VGA_SYNC:vga|vert_sync_out                                              ; 0.168 ; 0.000         ;
-; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 0.270 ; 0.000         ;
+; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 0.174 ; 0.000         ;
+; VGA_SYNC:vga|vert_sync_out                                              ; 0.403 ; 0.000         ;
 +-------------------------------------------------------------------------+-------+---------------+
 
 
@@ -290,10 +297,10 @@ No paths to report.
 +-------------------------------------------------------------------------+--------+---------------+
 ; Clock                                                                   ; Slack  ; End Point TNS ;
 +-------------------------------------------------------------------------+--------+---------------+
-; VGA_SYNC:vga|vert_sync_out                                              ; 0.094  ; 0.000         ;
+; VGA_SYNC:vga|vert_sync_out                                              ; -0.004 ; -0.012        ;
 ; divider|pll_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]   ; 1.666  ; 0.000         ;
 ; CLOCK_50                                                                ; 9.643  ; 0.000         ;
-; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 19.552 ; 0.000         ;
+; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 19.554 ; 0.000         ;
 +-------------------------------------------------------------------------+--------+---------------+
 
 
@@ -308,19 +315,19 @@ No synchronizer chains to report.
 +-------------------------------------------------------------------------+--------+---------------+
 ; Clock                                                                   ; Slack  ; End Point TNS ;
 +-------------------------------------------------------------------------+--------+---------------+
-; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; -2.302 ; -6.850        ;
-; VGA_SYNC:vga|vert_sync_out                                              ; -1.892 ; -37.167       ;
+; VGA_SYNC:vga|vert_sync_out                                              ; -2.625 ; -92.921       ;
+; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; -2.536 ; -5.064        ;
 +-------------------------------------------------------------------------+--------+---------------+
 
 
-+-------------------------------------------------------------------------------------------------+
-; Fast 1100mV 0C Model Hold Summary                                                               ;
-+-------------------------------------------------------------------------+-------+---------------+
-; Clock                                                                   ; Slack ; End Point TNS ;
-+-------------------------------------------------------------------------+-------+---------------+
-; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 0.054 ; 0.000         ;
-; VGA_SYNC:vga|vert_sync_out                                              ; 0.154 ; 0.000         ;
-+-------------------------------------------------------------------------+-------+---------------+
++--------------------------------------------------------------------------------------------------+
+; Fast 1100mV 0C Model Hold Summary                                                                ;
++-------------------------------------------------------------------------+--------+---------------+
+; Clock                                                                   ; Slack  ; End Point TNS ;
++-------------------------------------------------------------------------+--------+---------------+
+; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; -0.076 ; -0.141        ;
+; VGA_SYNC:vga|vert_sync_out                                              ; 0.395  ; 0.000         ;
++-------------------------------------------------------------------------+--------+---------------+
 
 
 -----------------------------------------
@@ -340,10 +347,10 @@ No paths to report.
 +-------------------------------------------------------------------------+--------+---------------+
 ; Clock                                                                   ; Slack  ; End Point TNS ;
 +-------------------------------------------------------------------------+--------+---------------+
-; VGA_SYNC:vga|vert_sync_out                                              ; 0.114  ; 0.000         ;
+; VGA_SYNC:vga|vert_sync_out                                              ; 0.024  ; 0.000         ;
 ; divider|pll_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]   ; 1.666  ; 0.000         ;
 ; CLOCK_50                                                                ; 9.632  ; 0.000         ;
-; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 19.545 ; 0.000         ;
+; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 19.547 ; 0.000         ;
 +-------------------------------------------------------------------------+--------+---------------+
 
 
@@ -353,22 +360,22 @@ No paths to report.
 No synchronizer chains to report.
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------+
-; Multicorner Timing Analysis Summary                                                                                                    ;
-+--------------------------------------------------------------------------+----------+-------+----------+---------+---------------------+
-; Clock                                                                    ; Setup    ; Hold  ; Recovery ; Removal ; Minimum Pulse Width ;
-+--------------------------------------------------------------------------+----------+-------+----------+---------+---------------------+
-; Worst-case Slack                                                         ; -4.958   ; 0.054 ; N/A      ; N/A     ; -0.538              ;
-;  CLOCK_50                                                                ; N/A      ; N/A   ; N/A      ; N/A     ; 9.632               ;
-;  VGA_SYNC:vga|vert_sync_out                                              ; -4.457   ; 0.154 ; N/A      ; N/A     ; -0.538              ;
-;  divider|pll_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]   ; N/A      ; N/A   ; N/A      ; N/A     ; 1.666               ;
-;  divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; -4.958   ; 0.054 ; N/A      ; N/A     ; 19.187              ;
-; Design-wide TNS                                                          ; -118.136 ; 0.0   ; 0.0      ; 0.0     ; -21.782             ;
-;  CLOCK_50                                                                ; N/A      ; N/A   ; N/A      ; N/A     ; 0.000               ;
-;  VGA_SYNC:vga|vert_sync_out                                              ; -103.312 ; 0.000 ; N/A      ; N/A     ; -21.782             ;
-;  divider|pll_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]   ; N/A      ; N/A   ; N/A      ; N/A     ; 0.000               ;
-;  divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; -14.824  ; 0.000 ; N/A      ; N/A     ; 0.000               ;
-+--------------------------------------------------------------------------+----------+-------+----------+---------+---------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Multicorner Timing Analysis Summary                                                                                                     ;
++--------------------------------------------------------------------------+----------+--------+----------+---------+---------------------+
+; Clock                                                                    ; Setup    ; Hold   ; Recovery ; Removal ; Minimum Pulse Width ;
++--------------------------------------------------------------------------+----------+--------+----------+---------+---------------------+
+; Worst-case Slack                                                         ; -6.373   ; -0.076 ; N/A      ; N/A     ; -0.538              ;
+;  CLOCK_50                                                                ; N/A      ; N/A    ; N/A      ; N/A     ; 9.632               ;
+;  VGA_SYNC:vga|vert_sync_out                                              ; -6.373   ; 0.395  ; N/A      ; N/A     ; -0.538              ;
+;  divider|pll_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]   ; N/A      ; N/A    ; N/A      ; N/A     ; 1.666               ;
+;  divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; -5.509   ; -0.076 ; N/A      ; N/A     ; 19.187              ;
+; Design-wide TNS                                                          ; -240.654 ; -0.141 ; 0.0      ; 0.0     ; -31.399             ;
+;  CLOCK_50                                                                ; N/A      ; N/A    ; N/A      ; N/A     ; 0.000               ;
+;  VGA_SYNC:vga|vert_sync_out                                              ; -229.650 ; 0.000  ; N/A      ; N/A     ; -31.399             ;
+;  divider|pll_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0]   ; N/A      ; N/A    ; N/A      ; N/A     ; 0.000               ;
+;  divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; -11.004  ; -0.141 ; N/A      ; N/A     ; 0.000               ;
++--------------------------------------------------------------------------+----------+--------+----------+---------+---------------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -498,9 +505,9 @@ No synchronizer chains to report.
 +-------------------------------------------------------------------------+-------------------------------------------------------------------------+----------+----------+----------+----------+
 ; From Clock                                                              ; To Clock                                                                ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +-------------------------------------------------------------------------+-------------------------------------------------------------------------+----------+----------+----------+----------+
-; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 1547     ; 0        ; 0        ; 0        ;
-; VGA_SYNC:vga|vert_sync_out                                              ; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 384      ; 0        ; 0        ; 0        ;
-; VGA_SYNC:vga|vert_sync_out                                              ; VGA_SYNC:vga|vert_sync_out                                              ; 345      ; 0        ; 0        ; 0        ;
+; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 37141    ; 0        ; 0        ; 0        ;
+; VGA_SYNC:vga|vert_sync_out                                              ; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 488      ; 0        ; 0        ; 0        ;
+; VGA_SYNC:vga|vert_sync_out                                              ; VGA_SYNC:vga|vert_sync_out                                              ; 5426     ; 0        ; 0        ; 0        ;
 +-------------------------------------------------------------------------+-------------------------------------------------------------------------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -510,9 +517,9 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 +-------------------------------------------------------------------------+-------------------------------------------------------------------------+----------+----------+----------+----------+
 ; From Clock                                                              ; To Clock                                                                ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +-------------------------------------------------------------------------+-------------------------------------------------------------------------+----------+----------+----------+----------+
-; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 1547     ; 0        ; 0        ; 0        ;
-; VGA_SYNC:vga|vert_sync_out                                              ; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 384      ; 0        ; 0        ; 0        ;
-; VGA_SYNC:vga|vert_sync_out                                              ; VGA_SYNC:vga|vert_sync_out                                              ; 345      ; 0        ; 0        ; 0        ;
+; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 37141    ; 0        ; 0        ; 0        ;
+; VGA_SYNC:vga|vert_sync_out                                              ; divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk ; 488      ; 0        ; 0        ; 0        ;
+; VGA_SYNC:vga|vert_sync_out                                              ; VGA_SYNC:vga|vert_sync_out                                              ; 5426     ; 0        ; 0        ; 0        ;
 +-------------------------------------------------------------------------+-------------------------------------------------------------------------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -587,7 +594,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
-    Info: Processing started: Mon May 06 17:27:59 2024
+    Info: Processing started: Tue May 07 13:31:37 2024
 Info: Command: quartus_sta FlappyBird -c FlappyBird
 Info: qsta_default_script.tcl version: #1
 Warning (20013): Ignored 24 assignments for entity "DE0_CV_Default" -- entity does not exist in design
@@ -638,22 +645,22 @@ Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
 Info: Analyzing Slow 1100mV 85C Model
 Critical Warning (332148): Timing requirements not met
     Info (11105): For recommendations on closing timing, run Report Timing Closure Recommendations in the Timing Analyzer.
-Info (332146): Worst-case setup slack is -4.958
+Info (332146): Worst-case setup slack is -6.373
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -4.958             -14.824 divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-    Info (332119):    -4.457            -103.312 VGA_SYNC:vga|vert_sync_out 
-Info (332146): Worst-case hold slack is 0.551
+    Info (332119):    -6.373            -229.650 VGA_SYNC:vga|vert_sync_out 
+    Info (332119):    -5.509             -11.004 divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+Info (332146): Worst-case hold slack is 0.342
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.551               0.000 VGA_SYNC:vga|vert_sync_out 
-    Info (332119):     0.566               0.000 divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+    Info (332119):     0.342               0.000 divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+    Info (332119):     0.902               0.000 VGA_SYNC:vga|vert_sync_out 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -0.538
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -0.538             -21.782 VGA_SYNC:vga|vert_sync_out 
+    Info (332119):    -0.538             -30.728 VGA_SYNC:vga|vert_sync_out 
     Info (332119):     1.666               0.000 divider|pll_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0] 
     Info (332119):     9.949               0.000 CLOCK_50 
     Info (332119):    19.268               0.000 divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
@@ -667,22 +674,22 @@ Info (332097): The following timing edges are non-unate.  The Timing Analyzer wi
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
 Critical Warning (332148): Timing requirements not met
     Info (11105): For recommendations on closing timing, run Report Timing Closure Recommendations in the Timing Analyzer.
-Info (332146): Worst-case setup slack is -4.611
+Info (332146): Worst-case setup slack is -6.134
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -4.611             -13.797 divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-    Info (332119):    -4.413            -102.475 VGA_SYNC:vga|vert_sync_out 
-Info (332146): Worst-case hold slack is 0.157
+    Info (332119):    -6.134            -222.379 VGA_SYNC:vga|vert_sync_out 
+    Info (332119):    -5.119             -10.219 divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+Info (332146): Worst-case hold slack is 0.074
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.157               0.000 divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-    Info (332119):     0.583               0.000 VGA_SYNC:vga|vert_sync_out 
+    Info (332119):     0.074               0.000 divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+    Info (332119):     0.986               0.000 VGA_SYNC:vga|vert_sync_out 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -0.538
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -0.538             -21.745 VGA_SYNC:vga|vert_sync_out 
+    Info (332119):    -0.538             -31.399 VGA_SYNC:vga|vert_sync_out 
     Info (332119):     1.666               0.000 divider|pll_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0] 
     Info (332119):     9.980               0.000 CLOCK_50 
     Info (332119):    19.187               0.000 divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
@@ -696,25 +703,25 @@ Info (332097): The following timing edges are non-unate.  The Timing Analyzer wi
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
 Critical Warning (332148): Timing requirements not met
     Info (11105): For recommendations on closing timing, run Report Timing Closure Recommendations in the Timing Analyzer.
-Info (332146): Worst-case setup slack is -3.019
+Info (332146): Worst-case setup slack is -3.330
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -3.019              -8.974 divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-    Info (332119):    -2.202             -42.635 VGA_SYNC:vga|vert_sync_out 
-Info (332146): Worst-case hold slack is 0.168
+    Info (332119):    -3.330              -6.652 divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+    Info (332119):    -3.001            -107.461 VGA_SYNC:vga|vert_sync_out 
+Info (332146): Worst-case hold slack is 0.174
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.168               0.000 VGA_SYNC:vga|vert_sync_out 
-    Info (332119):     0.270               0.000 divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+    Info (332119):     0.174               0.000 divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+    Info (332119):     0.403               0.000 VGA_SYNC:vga|vert_sync_out 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
-Info (332146): Worst-case minimum pulse width slack is 0.094
+Info (332146): Worst-case minimum pulse width slack is -0.004
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.094               0.000 VGA_SYNC:vga|vert_sync_out 
+    Info (332119):    -0.004              -0.012 VGA_SYNC:vga|vert_sync_out 
     Info (332119):     1.666               0.000 divider|pll_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0] 
     Info (332119):     9.643               0.000 CLOCK_50 
-    Info (332119):    19.552               0.000 divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+    Info (332119):    19.554               0.000 divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
 Info: Analyzing Fast 1100mV 0C Model
 Info (332097): The following timing edges are non-unate.  The Timing Analyzer will assume pos-unate behavior for these edges in the clock network.
     Info (332098): Cell: divider|pll_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL  from: refclkin  to: fbclk
@@ -723,31 +730,31 @@ Info (332097): The following timing edges are non-unate.  The Timing Analyzer wi
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
 Critical Warning (332148): Timing requirements not met
     Info (11105): For recommendations on closing timing, run Report Timing Closure Recommendations in the Timing Analyzer.
-Info (332146): Worst-case setup slack is -2.302
+Info (332146): Worst-case setup slack is -2.625
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -2.302              -6.850 divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-    Info (332119):    -1.892             -37.167 VGA_SYNC:vga|vert_sync_out 
-Info (332146): Worst-case hold slack is 0.054
+    Info (332119):    -2.625             -92.921 VGA_SYNC:vga|vert_sync_out 
+    Info (332119):    -2.536              -5.064 divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+Info (332146): Worst-case hold slack is -0.076
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.054               0.000 divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
-    Info (332119):     0.154               0.000 VGA_SYNC:vga|vert_sync_out 
+    Info (332119):    -0.076              -0.141 divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+    Info (332119):     0.395               0.000 VGA_SYNC:vga|vert_sync_out 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
-Info (332146): Worst-case minimum pulse width slack is 0.114
+Info (332146): Worst-case minimum pulse width slack is 0.024
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     0.114               0.000 VGA_SYNC:vga|vert_sync_out 
+    Info (332119):     0.024               0.000 VGA_SYNC:vga|vert_sync_out 
     Info (332119):     1.666               0.000 divider|pll_inst|altera_pll_i|general[0].gpll~FRACTIONAL_PLL|vcoph[0] 
     Info (332119):     9.632               0.000 CLOCK_50 
-    Info (332119):    19.545               0.000 divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
+    Info (332119):    19.547               0.000 divider|pll_inst|altera_pll_i|general[0].gpll~PLL_OUTPUT_COUNTER|divclk 
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 31 warnings
-    Info: Peak virtual memory: 5247 megabytes
-    Info: Processing ended: Mon May 06 17:28:02 2024
-    Info: Elapsed time: 00:00:03
-    Info: Total CPU time (on all processors): 00:00:02
+    Info: Peak virtual memory: 5245 megabytes
+    Info: Processing ended: Tue May 07 13:31:42 2024
+    Info: Elapsed time: 00:00:05
+    Info: Total CPU time (on all processors): 00:00:01
 
 
