@@ -1,0 +1,26 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.all;
+USE  IEEE.STD_LOGIC_ARITH.all;
+USE  IEEE.STD_LOGIC_SIGNED.all;
+
+entity collision is 
+	port (bird, pipes, vert_sync : in std_logic;
+		collide : out std_logic;
+	);
+end entity collision;
+
+architecture arc of collision is
+
+
+begin
+
+process(vert_sync)
+	if(bird = '1' and pipes = '1') then
+		collide <= '1';
+	else 
+		collide <= '0';
+	end if;
+end process;
+
+
+end architecture arc;

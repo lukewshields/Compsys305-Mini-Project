@@ -7,6 +7,7 @@ USE  IEEE.STD_LOGIC_UNSIGNED.all;
 entity FlappyBird is 
 	port (CLOCK_50: in std_logic;
 			SW : in std_logic_vector (2 downto 0);
+			KEY : in std_logic_vector (1 downto 0);
 			VGA_HS, VGA_VS : out std_logic;
 			VGA_R, VGA_G, VGA_B : out std_logic_vector (3 downto 0);
 			PS2_DAT, PS2_CLK : inout std_logic
@@ -44,7 +45,7 @@ architecture arc of FlappyBird is
 	end component pipes;
 		
 	component bird is 
-	    port (clk, vert_sync, click	: IN std_logic;
+	    port (clk, vert_sync, click, enable	: IN std_logic;
        pixel_row, pixel_col	: IN std_logic_vector(9 DOWNTO 0);
 		 red, green, blue 			: OUT std_logic);		
 	end component bird;
@@ -59,6 +60,21 @@ architecture arc of FlappyBird is
 		);     
 	end component mouse;
 	
+	
+	component collision is 
+		port (bird, pipes, enable : in std_logic;
+			pixel_row, pixel_col : in std_logic_vector(9 downto 0);
+			collide : out std_logic
+		);
+	end component collision;
+	
+	component enable_handle is 
+		port (enable: in std_logic;
+			hold_enable : out std_logic
+		);
+	end component enable_handle;
+
+	
 	signal clk_25, red, green, blue, vert_s : std_logic;
 	signal pixel_row_vga : std_logic_vector (9 downto 0);
 	signal pixel_col_vga : std_logic_vector (9 downto 0);
@@ -67,10 +83,14 @@ architecture arc of FlappyBird is
 	signal red_bird, green_bird, blue_bird : std_logic;
 	signal red_final, green_final, blue_final : std_logic;
 	signal leftclick : std_logic;
+	signal moveup : std_logic;
+	signal collide : std_logic;
+	signal hold_enable : std_logic;
 	
 	signal trash : std_logic_vector (9 downto 0);
 	signal trash2 : std_logic_vector (9 downto 0);
 	signal trash4 : std_logic;
+	
 begin
 
 	vga : vga_sync 
@@ -106,7 +126,7 @@ begin
 			pixel_col => pixel_col_vga,
 			clk => clk_25, 
 			vert_sync => vert_s,
-			enable => '1',
+			enable => hold_enable,
 			red => red_pipes,
 			green => green_pipes,
 			blue => blue_pipes
@@ -121,6 +141,7 @@ begin
 			clk => clk_25,
 		   vert_sync => vert_s,
 			click => leftclick,
+			enable => hold_enable,
 		   pixel_row => pixel_row_vga, 
 		   pixel_col => pixel_col_vga,
 		   red => red_bird, -- this will have issues with writing to the same vga bit cant have multiple drivers, create different signals for each then assign to vga pins
@@ -139,6 +160,23 @@ begin
 			mouse_cursor_row => trash,			 
 			mouse_cursor_column => trash2
 		);
+	
+	c: collision 
+		port map (
+			bird => red_bird,
+			pipes => green_pipes,
+			enable => hold_enable,
+			pixel_row => pixel_row_vga, 
+		   pixel_col => pixel_col_vga,
+			collide => collide
+		);
+		
+	e : enable_handle 
+		port map (
+			enable => not KEY(0),
+			hold_enable => hold_enable
+		);
+		
 	
 	--for death detection use pixel clashes between red and green signals
 		
