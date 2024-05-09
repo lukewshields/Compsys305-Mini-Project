@@ -13,17 +13,19 @@ architecture arc of collision is
 
 begin
 
-process(bird_on, pipes_on)
-begin
-	if (enable = '1') then
-		if(bird_on = '1' and pipes_on = '1') then
-			collide <= '1';
-		else
-			collide <= '0';
-		end if;
-	end if;
-end process;
---
+collide <= '1' when bird_on = '1' and pipes_on = '1' else '0';
+
+--process(bird_on, pipes_on)
+--begin
+--	if (enable = '1') then
+--		if(bird_on = '1' and pipes_on = '1') then
+--			collide <= '1';
+--		else
+--			collide <= '0';
+--		end if;
+--	end if;
+--end process;
+
 --process(collision) 
 --begin
 --	if (collision = '1') then
