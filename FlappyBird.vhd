@@ -8,6 +8,7 @@ entity FlappyBird is
 	port (CLOCK_50: in std_logic;
 			SW : in std_logic_vector (2 downto 0);
 			KEY : in std_logic_vector (1 downto 0);
+			LEDR : out std_logic_vector (1 downto 0);
 			VGA_HS, VGA_VS : out std_logic;
 			VGA_R, VGA_G, VGA_B : out std_logic_vector (3 downto 0);
 			PS2_DAT, PS2_CLK : inout std_logic
@@ -38,16 +39,17 @@ architecture arc of FlappyBird is
 	end component pll;
 	
 	component pipes is 
-		 port (pixel_row, pixel_col : in std_logic_vector (9 downto 0);
-        clk, vert_sync, enable: in std_logic;
-        red, green, blue: out std_logic
-		);
+		  port (pixel_row, pixel_col: in std_logic_vector (9 downto 0);
+			clk, vert_sync, enable: in std_logic;
+			red, green, blue, pipes_on_out: out std_logic
+			);
 	end component pipes;
 		
 	component bird is 
-	    port (clk, vert_sync, click, enable	: IN std_logic;
-       pixel_row, pixel_col	: IN std_logic_vector(9 DOWNTO 0);
-		 red, green, blue 			: OUT std_logic);		
+		port (clk, vert_sync, click, enable	: IN std_logic;
+			pixel_row, pixel_col	: IN std_logic_vector(9 DOWNTO 0);
+			red, green, blue, bird_on_out : OUT std_logic
+		);		
 	end component bird;
 	
 	component mouse is
@@ -62,8 +64,7 @@ architecture arc of FlappyBird is
 	
 	
 	component collision is 
-		port (bird, pipes, enable : in std_logic;
-			pixel_row, pixel_col : in std_logic_vector(9 downto 0);
+		port (bird_on, pipes_on, enable, vert_sync : in std_logic;
 			collide : out std_logic
 		);
 	end component collision;
@@ -80,12 +81,13 @@ architecture arc of FlappyBird is
 	signal pixel_col_vga : std_logic_vector (9 downto 0);
 	signal trash3 : std_logic;
 	signal red_pipes, green_pipes, blue_pipes : std_logic;
+	signal green_pipes2, blue_pipes2 : std_logic;
 	signal red_bird, green_bird, blue_bird : std_logic;
 	signal red_final, green_final, blue_final : std_logic;
 	signal leftclick : std_logic;
-	signal moveup : std_logic;
 	signal collide : std_logic;
 	signal hold_enable : std_logic;
+	signal pipes_on, bird_on : std_logic;
 	
 	signal trash : std_logic_vector (9 downto 0);
 	signal trash2 : std_logic_vector (9 downto 0);
@@ -112,6 +114,10 @@ begin
 	--vert_s <= VGA_VS;
 	VGA_VS <= vert_s;
 	
+			
+	LEDR(1) <= pipes_on;
+	LEDR(0) <= collide;
+	
 	divider : pll 
 		port map (
 			refclk => CLOCK_50,
@@ -120,19 +126,36 @@ begin
 			locked => trash3
 		);
 	
-	pipe : pipes
+	pipe1 : pipes
 		port map (
 			pixel_row => pixel_row_vga,
 			pixel_col => pixel_col_vga,
+			--init_x_pos => conv_std_logic_vector(600, 11),
 			clk => clk_25, 
 			vert_sync => vert_s,
 			enable => hold_enable,
 			red => red_pipes,
 			green => green_pipes,
-			blue => blue_pipes
+			blue => blue_pipes,
+			pipes_on_out => pipes_on
 		);
+		
+--	pipe2 : pipes
+--		port map (
+--			pixel_row => pixel_row_vga,
+--			pixel_col => pixel_col_vga,
+--			--pipe_x_pos => conv_std_logic_vector(300, 11),
+--			clk => clk_25, 
+--			vert_sync => vert_s,
+--			enable => hold_enable,
+--			red => red_pipes,
+--			green => green_pipes2,
+--			blue => blue_pipes2
+--		);
+--		
+		
 	
-	red_final <= red_bird;
+	red_final <= red_bird and not collide;
 	green_final <= green_pipes;
 	blue_final <= blue_pipes and not red_bird;
 		
@@ -144,9 +167,10 @@ begin
 			enable => hold_enable,
 		   pixel_row => pixel_row_vga, 
 		   pixel_col => pixel_col_vga,
-		   red => red_bird, -- this will have issues with writing to the same vga bit cant have multiple drivers, create different signals for each then assign to vga pins
+		   red => red_bird, 
 		   green => green_bird,
-		   blue => blue_bird
+		   blue => blue_bird,
+			bird_on_out => bird_on
 		);
 	
 	l : mouse 
@@ -163,11 +187,10 @@ begin
 	
 	c: collision 
 		port map (
-			bird => red_bird,
-			pipes => green_pipes,
+			bird_on => bird_on,
+			pipes_on => pipes_on,
 			enable => hold_enable,
-			pixel_row => pixel_row_vga, 
-		   pixel_col => pixel_col_vga,
+			vert_sync => vert_s,
 			collide => collide
 		);
 		
@@ -176,7 +199,7 @@ begin
 			enable => not KEY(0),
 			hold_enable => hold_enable
 		);
-		
+
 	
 	--for death detection use pixel clashes between red and green signals
 		

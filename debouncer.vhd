@@ -6,40 +6,21 @@ USE  IEEE.STD_LOGIC_SIGNED.all;
 
 entity debouncer is 
 	port (click : in std_logic;
-	debounce : out std_logic
+			debounce : out std_logic;
 	);
 end entity debouncer;
 
 architecture arc of debouncer is 
-
-
+--signal debounce1 : std_logic;
 
 begin
 
 process (click)
-variable onclick: std_logic;
-variable counter: integer;
 	begin
-
-		--if (falling_edge(click)) then
-			--debounce <= '1';
-		--else 
-			--debounce <= '0';
-		--end if;
-		if(click = '1') then
-			   onclick := '1';
-			else 
-			 onclick := '0';
-			counter := 1;
-			end if;
-			
-			if (onclick = '1' and counter = 1) then
+		if(falling_edge(click)) then
 			debounce <= '1';
-			counter := 0;
-			else 
+		else 
 			debounce <= '0';
-			end if;
+		end if;
 end process;
 end architecture arc;
-
-	

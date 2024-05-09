@@ -6,57 +6,39 @@ USE  IEEE.STD_LOGIC_ARITH.all;
 USE  IEEE.STD_LOGIC_UNSIGNED.all;
 
 entity pipes is 
-    port (pixel_row, pixel_col : in std_logic_vector (9 downto 0);
+    port (pixel_row, pixel_col: in std_logic_vector (9 downto 0);
+		  --pipe_x_pos : in std_logic_vector(10 downto 0);
         clk, vert_sync, enable: in std_logic;
-        red, green, blue: out std_logic
+        red, green, blue, pipes_on_out: out std_logic
     );
-
 end entity pipes;
 
 architecture arc of pipes is 
     --could get rid of all the pipe before the variable names maybe
-    signal  pipes_on : std_logic;
+	 --signal pipe_gap : std_logic_vector (9 downto 0);
+	 
+    signal pipes_on : std_logic;
     signal pipe_height : std_logic_vector (9 downto 0) := conv_std_logic_vector(150, 10);
     signal pipe_width : std_logic_vector (9 downto 0) := conv_std_logic_vector(60, 10);
-    --signal pip_gap : std_logic_vector (9 downto 0);
+
     signal pipe_separation : std_logic_vector (9 downto 0);
     signal pipe_x_motion : std_logic_vector (9 downto 0) := conv_std_logic_vector(4, 10);
 	 
     signal pipe_x_pos : std_logic_vector (10 downto 0) := conv_std_logic_vector(600, 11);
-	 signal pipe_x_pos2 : std_logic_vector (10 downto 0) := conv_std_logic_vector(300, 11);
-	 --signal pipe_x_pos2 : std_logic_vector (10 downto 0);
-	 --signal pipe_x_pos : signed (10 downto 0);
+	 --signal pipe_x_pos2 : std_logic_vector(10 dow
 	 
 	 signal bottom : std_logic_vector (9 downto 0) := conv_std_logic_vector(479,10);
-	 --signal edge_right : std_logic_vector (10 downto 0);
-	 --signal zero : std_logic_vector(10 downto 0);
+	 signal ground : std_logic_vector (9 downto 0) := conv_std_logic_vector(450, 10);
 	 
     begin
 
     red <= not pipes_on; --purple bg and green pipes lol
     green <= pipes_on;
-    blue <= not pipes_on;
+    blue <= not pipes_on; 
 	 
-	 --edge_right <= conv_std_logic_vector(599, 11);
-	 --zero <= conv_std_logic_vector(0, 11);
-	
-
-	 
-	 
-	 
-	 --pipe_separation <= conv_std_logic_vector(80, 10);
-	 
-	-- pipe_width <= conv_std_logic_vector(50, 10);
-	-- pipe_x_pos <= conv_std_logic_vector(600, 11);
-	 
-	 --pipe_x_pos <= to_signed(240, 11);
-	
-	 
+	 pipes_on_out <= pipes_on;
     
-
-	 pipes_on <= '1' when ((pixel_row <= pipe_height or pixel_row + pipe_height >= bottom) and ((pipe_x_pos <= pixel_col + pipe_width and pixel_col <= pipe_x_pos + pipe_width)
-
-	 or (pipe_x_pos2 <= pixel_col + pipe_width and pixel_col <= pipe_x_pos2 + pipe_width))) else '0'; --need the extra statements??
+	 pipes_on <= '1' when ((pixel_row <= pipe_height or pixel_row + pipe_height >= bottom) and (pipe_x_pos <= pixel_col and pixel_col <= pipe_x_pos + pipe_width)) else '0'; --need the extra statements??
     -- or same expressions but replace pipe_x_pos with pipe_x_pos2							
 	 
 	 
@@ -74,18 +56,20 @@ architecture arc of pipes is
         end if;
     end process move_pipe;
 	 
-	 move_pipe2 : process(vert_sync)
-		begin
-			if (rising_edge(vert_sync)) then
-				if (enable = '1') then
-					if (pipe_x_pos2 + pipe_width <= conv_std_logic_vector(1,11)) then
-						pipe_x_pos2 <= conv_std_logic_vector(700, 11);
-					else 
-						pipe_x_pos2 <= pipe_x_pos2 - pipe_x_motion;
-					end if;
-				end if;
-			end if;
-	end process move_pipe2;
+--	 move_pipe2 : process(vert_sync)
+--		begin
+--			if (rising_edge(vert_sync)) then
+--				if (enable = '1') then
+--					if (pipe_x_pos2 + pipe_width <= conv_std_logic_vector(1,11)) then
+--						pipe_x_pos2 <= conv_std_logic_vector(700, 11);
+--					else 
+--						pipe_x_pos2 <= pipe_x_pos2 - pipe_x_motion;
+--					end if;
+--				end if;
+--			end if;
+--	end process move_pipe2;
+
+
 
 
 end architecture arc;

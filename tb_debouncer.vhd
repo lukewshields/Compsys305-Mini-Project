@@ -1,9 +1,3 @@
-LIBRARY IEEE;
-USE IEEE.STD_LOGIC_1164.all;
-USE  IEEE.STD_LOGIC_ARITH.all;
-USE  IEEE.STD_LOGIC_SIGNED.all;
-
-
 entity tb_debouncer is 
 end entity tb_debouncer;
 
@@ -12,10 +6,9 @@ architecture arc of tb_debouncer is
 
 component debouncer is 
 	port (click : in std_logic;
-		debounce : out std_logic
+			debounce : out std_logic
 	);
 end component debouncer;
-
 signal t_click, t_debounce : std_logic;
 begin
 	DUT: debouncer port map (t_click, t_debounce);
@@ -23,7 +16,6 @@ begin
 	gen_click : process 
 	begin 
 		t_click <= '0', '1' after 40 ns, '0' after 80 ns, '1' after 100 ns, '0' after 103 ns;
-		wait;
-	end process gen_click;
+	end process;
 
 end architecture arc;

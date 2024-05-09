@@ -4,30 +4,33 @@ USE  IEEE.STD_LOGIC_ARITH.all;
 USE  IEEE.STD_LOGIC_SIGNED.all;
 
 entity collision is 
-	port (bird, pipes, enable : in std_logic;
-		pixel_row, pixel_col : in std_logic_vector(9 downto 0);
+	port (bird_on, pipes_on, enable, vert_sync : in std_logic;
 		collide : out std_logic
 	);
 end entity collision;
 
 architecture arc of collision is
-signal s_collide : std_logic := '0';
-
 
 begin
 
-process(pixel_row, pixel_col)
+process(bird_on, pipes_on)
 begin
-
 	if (enable = '1') then
-		if(bird = '1' and pipes = '1') then
-			s_collide <= '1';
-		else 
-			s_collide <= '0';
+		if(bird_on = '1' and pipes_on = '1') then
+			collide <= '1';
+		else
+			collide <= '0';
 		end if;
 	end if;
 end process;
-
-collide <= s_collide;
+--
+--process(collision) 
+--begin
+--	if (collision = '1') then
+--		collide <= '1';
+--	else 
+--		collide <= '0';
+--	end if;
+--end process;
 
 end architecture arc;
