@@ -23,12 +23,6 @@ architecture arc of FlappyBird is
 				pixel_row, pixel_column: OUT STD_LOGIC_VECTOR(9 DOWNTO 0));
 	end component;
 
-
-	--component clock_divider is 
-	--		port ( 
-	--		Clk, reset: in std_logic;
-	--		clock_25: out std_logic);
---	end component; 
 	component pll is 
 		port (
 			refclk   : in  std_logic := '0'; --  refclk.clk
@@ -44,14 +38,6 @@ architecture arc of FlappyBird is
 			red, green, blue, pipes_on_out: out std_logic
 			);
 	end component pipes;
-	
---	component pipes is 
---		  port (pixel_row, pixel_col: in std_logic_vector (9 downto 0);
---			init_x_pos : in std_logic_vector(10 downto 0);
---			clk, vert_sync, enable: in std_logic;
---			red, green, blue, pipes_on_out: out std_logic
---			);
---	end component pipes;
 		
 	component bird is 
 		port (clk, vert_sync, click, enable	: IN std_logic;
@@ -105,6 +91,7 @@ architecture arc of FlappyBird is
 	signal clk_25, red, green, blue, vert_s : std_logic;
 	signal pixel_row_vga : std_logic_vector (9 downto 0);
 	signal pixel_col_vga : std_logic_vector (9 downto 0);
+	
 	signal trash3 : std_logic;
 	signal red_pipes, green_pipes, blue_pipes : std_logic;
 	signal green_pipes2, blue_pipes2 : std_logic;
@@ -171,22 +158,6 @@ begin
 		);
 		
 	
-		
---	pipe2 : pipes
---		port map (
---			pixel_row => pixel_row_vga,
---			pixel_col => pixel_col_vga,
-			--init_x_pos => conv_std_logic_vector(600, 11),
---			clk => clk_25, 
---			vert_sync => vert_s,
---			enable => hold_enable,
---			red => red_pipes,
---			green => green_pipes2,
---			blue => blue_pipes2
---		);
---		
-		
-	
 	red_final <= (red_bird and not collide) or rom_mux_addy;
 	green_final <= green_pipes or rom_mux_addy;
 	blue_final <= (blue_pipes and not red_bird) or rom_mux_addy;
@@ -236,21 +207,20 @@ begin
 	ch: char_rom
 		port map(
 			character_address => char_addy,
-		font_row => pixel_row_vga (2 downto 0), 
-		font_col	=> pixel_row_vga (2 downto 0),
-		clock => clk_25,
-		rom_mux_output => rom_mux_addy
+			font_row => pixel_row_vga (2 downto 0), 
+			font_col	=> pixel_row_vga (2 downto 0),
+			clock => clk_25,
+			rom_mux_output => rom_mux_addy
 		);
 	
 	--text_setter port map(pixel_row => pixel_row_vga (5 downto 0), pixel_col => pixel_col_vga (5 downto 0), clk => clk_25, character_address => char_addy);
-	 text_setter
-    port map (
-        pixel_row => pixel_row_vga(5 downto 0),
-        pixel_col => pixel_col_vga(5 downto 0),
-        clk => clk_25,
-        character_address => char_addy
-    );
-
-	--for death detection use pixel clashes between red and green signals
+	 t: text_setter
+		 port map (
+			  pixel_row => pixel_row_vga(5 downto 0),
+			  pixel_col => pixel_col_vga(5 downto 0),
+			  clk => clk_25,
+			  character_address => char_addy
+		 );
+	--text_setter port map(pixel_row_vga(5 downto 0), pixel_col_vga(5 downto 0), clk_25, char_addy);
 		
 end architecture arc;
