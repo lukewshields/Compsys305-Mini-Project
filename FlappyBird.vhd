@@ -39,10 +39,13 @@ architecture arc of FlappyBird is
 	end component pll;
 	
 	component pipes is 
-		  port (pixel_row, pixel_col: in std_logic_vector (9 downto 0);
+    port (pixel_row, pixel_col: in std_logic_vector (9 downto 0);
+		  --init_x_pos : in std_logic_vector(10 downto 0);
 			clk, vert_sync, enable: in std_logic;
-			red, green, blue, pipes_on_out: out std_logic
-			);
+			red, green, blue, pipes_on_out: out std_logic;
+			pipes_x_pos1_out,pipes_x_pos2_out,pipes_x_pos3_out : out std_logic_vector (10 downto 0);
+			pipe_width_out: out std_logic_vector (9 downto 0)
+	 );
 	end component pipes;
 	
 --	component pipes is 
@@ -54,10 +57,11 @@ architecture arc of FlappyBird is
 --	end component pipes;
 		
 	component bird is 
-		port (clk, vert_sync, click, enable	: IN std_logic;
-			pixel_row, pixel_col	: IN std_logic_vector(9 DOWNTO 0);
-			red, green, blue, bird_on_out : OUT std_logic
-		);		
+    port (clk, vert_sync, click, enable	: IN std_logic;
+       pixel_row, pixel_col	: IN std_logic_vector(9 DOWNTO 0);
+		 red, green, blue, bird_on_out : OUT std_logic;
+		 bird_x_pos_out: out std_logic_vector(9 DOWNTO 0)
+		 );			
 	end component bird;
 	
 	component mouse is
@@ -96,10 +100,20 @@ architecture arc of FlappyBird is
 	component text_setter is 
 		port (
 			pixel_row, pixel_col : in std_logic_vector (9 downto 4);
+			score : in std_logic_vector(5 downto 0);
 			clk,enable : in std_logic;
 			character_address : out std_logic_vector (5 downto 0)
 		);
 	end component text_setter;
+	
+	component score_check is 
+	port(
+		vert_sync, Enable: in std_logic;
+		pipe_x_pos1,pipe_x_pos2,pipe_x_pos3 : in std_logic_vector (10 downto 0);
+		pipe_width,bird_x_pos : in std_logic_vector (9 downto 0);
+		score: out std_logic_vector (5 downto 0) --std logic vector for use of arithemetic
+	);
+end component score_check;
 
 	
 	signal clk_25, red, green, blue, vert_s : std_logic;
@@ -114,6 +128,10 @@ architecture arc of FlappyBird is
 	signal collide : std_logic;
 	signal hold_enable : std_logic;
 	signal pipes_on, bird_on : std_logic;
+	signal pipes_x_pos,pipes_x_pos2,pipes_x_pos3 : std_logic_vector (10 downto 0);
+	signal bird_x_pos, pipe_width: std_logic_vector (9 downto 0);
+	signal score : std_logic_vector (5 downto 0);
+	
 	
 	signal char_addy : std_logic_vector (5 downto 0);
 	signal rom_mux_addy : std_logic;
@@ -167,7 +185,11 @@ begin
 			red => red_pipes,
 			green => green_pipes,
 			blue => blue_pipes,
-			pipes_on_out => pipes_on
+			pipes_on_out => pipes_on,
+			pipes_x_pos1_out => pipes_x_pos,
+			pipes_x_pos2_out => pipes_x_pos2,
+			pipes_x_pos3_out => pipes_x_pos3,
+			pipe_width_out => pipe_width
 		);
 		
 	
@@ -205,7 +227,8 @@ begin
 		   red => red_bird, 
 		   green => green_bird,
 		   blue => blue_bird,
-			bird_on_out => bird_on
+			bird_on_out => bird_on,
+			bird_x_pos_out => bird_x_pos
 		);
 	
 	l : mouse 
@@ -257,9 +280,22 @@ begin
 	 port map(
 	 pixel_row => pixel_row_vga(9 downto 4),
 	 pixel_col => pixel_col_vga (9 downto 4),
-	 clk=>vert_s,
+	 score => score,
+	 clk=>clk_25,
 	 enable=>hold_enable,
 	 character_address=> char_addy);
+	 
+	 sc : score_check
+		port map (
+		vert_sync=> vert_s,
+		Enable => hold_enable,
+		pipe_x_pos1 => pipes_x_pos,
+		pipe_x_pos2 => pipes_x_pos2,
+		pipe_x_pos3 => pipes_x_pos3,
+		pipe_width => pipe_width,
+		bird_x_pos => bird_x_pos,
+		score => score --std logic vector for use of arithemetic
+	);
 
 	--for death detection use pixel clashes between red and green signals
 		

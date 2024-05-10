@@ -1,0 +1,28 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.all;
+USE  IEEE.STD_LOGIC_ARITH.all;
+USE  IEEE.STD_LOGIC_SIGNED.all;
+
+entity score_check is 
+	port(
+		vert_sync, Enable: in std_logic;
+		pipe_x_pos1,pipe_x_pos2,pipe_x_pos3 : in std_logic_vector (10 downto 0);
+		pipe_width,bird_x_pos : in std_logic_vector (9 downto 0);
+		score: out std_logic_vector (3 downto 0) --std logic vector for use of arithemetic
+	);
+end entity score_check;
+--enable is sync reset is aysnc
+architecture beh of score_check is s
+signal score_s : std_logic_vector(3 downto 0);
+	begin
+		process (vert_sync, Enable)
+		begin 
+			if (rising_edge(vert_sync) then
+				if (enable = '1') then
+					if ((pipe_x_pos1 + pipe_width) <= bird_x_pos) then
+						
+				
+					end if;
+				end if;
+			end if;
+end architecture beh; 

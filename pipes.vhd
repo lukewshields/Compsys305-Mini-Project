@@ -8,10 +8,11 @@ USE  IEEE.STD_LOGIC_UNSIGNED.all;
 entity pipes is 
     port (pixel_row, pixel_col: in std_logic_vector (9 downto 0);
 		  --init_x_pos : in std_logic_vector(10 downto 0);
-        clk, vert_sync, enable: in std_logic;
-        red, green, blue, pipes_on_out: out std_logic
-		  
-    );
+			clk, vert_sync, enable: in std_logic;
+			red, green, blue, pipes_on_out: out std_logic;
+			pipes_x_pos1_out,pipes_x_pos2_out,pipes_x_pos3_out : out std_logic_vector (10 downto 0);
+			pipe_width_out: OUT std_logic_vector (9 downto 0)
+	 );
 end entity pipes;
 
 architecture arc of pipes is 
@@ -28,7 +29,7 @@ architecture arc of pipes is
     signal pipe_x_pos : std_logic_vector (10 downto 0) := conv_std_logic_vector(600, 11);
 	 --signal pipe_x_pos : std_logic_vector (10 downto 0) := init_x_pos;
 	 signal pipe_x_pos2 : std_logic_vector(10 downto 0) := conv_std_logic_vector(360, 11);
-	 signal pipe_x_pos3 : std_logic_vector(10 downto 0) := conv_std_logic_vector(120, 11);
+	 signal pipe_x_pos3 : std_logic_vector(10 downto 0) := conv_std_logic_vector(840, 11);
 	 
 	 signal bottom : std_logic_vector (9 downto 0) := conv_std_logic_vector(479,10);
 	 signal ground : std_logic_vector (9 downto 0) := conv_std_logic_vector(450, 10);
@@ -38,7 +39,10 @@ architecture arc of pipes is
     red <= not pipes_on; --purple bg and green pipes lol
     green <= pipes_on;
     blue <= not pipes_on; 
-	 
+	 pipes_x_pos1_out <= pipe_x_pos;
+	 pipes_x_pos2_out <= pipe_x_pos2;
+	 pipes_x_pos3_out <= pipe_x_pos3;
+	 pipe_width_out <= pipe_width;
 	 pipes_on_out <= pipes_on;
     
 --	 pipes_on <= '1' when ((pixel_row <= pipe_height or pixel_row + pipe_height >= bottom) and 
