@@ -95,8 +95,8 @@ architecture arc of FlappyBird is
 	
 	component text_setter is 
 		port (
-			pixel_row, pixel_col : in std_logic_vector (5 downto 0);
-			clk : in std_logic;
+			pixel_row, pixel_col : in std_logic_vector (9 downto 4);
+			clk,enable : in std_logic;
 			character_address : out std_logic_vector (5 downto 0)
 		);
 	end component text_setter;
@@ -188,8 +188,11 @@ begin
 		
 	
 	red_final <= (red_bird and not collide) or rom_mux_addy;
+--	(red_bird and not collide) or 
 	green_final <= green_pipes or rom_mux_addy;
+--	green_pipes or
 	blue_final <= (blue_pipes and not red_bird) or rom_mux_addy;
+--	 
 		
 	avatar : bird 
 		port map (
@@ -236,20 +239,27 @@ begin
 	ch: char_rom
 		port map(
 			character_address => char_addy,
-		font_row => pixel_row_vga (2 downto 0), 
-		font_col	=> pixel_row_vga (2 downto 0),
+		font_row => pixel_row_vga (3 downto 1), 
+		font_col	=> pixel_col_vga (3 downto 1),
 		clock => clk_25,
 		rom_mux_output => rom_mux_addy
 		);
 	
 	--text_setter port map(pixel_row => pixel_row_vga (5 downto 0), pixel_col => pixel_col_vga (5 downto 0), clk => clk_25, character_address => char_addy);
-	 text_setter
-    port map (
-        pixel_row => pixel_row_vga(5 downto 0),
-        pixel_col => pixel_col_vga(5 downto 0),
-        clk => clk_25,
-        character_address => char_addy
-    );
+--	 text_setter
+--    port map (
+--        pixel_row => pixel_row_vga(5 downto 0),
+--        pixel_col => pixel_col_vga(5 downto 0),
+--        clk => clk_25,
+--        character_address => char_addy
+--    );
+	 t: text_setter
+	 port map(
+	 pixel_row => pixel_row_vga(9 downto 4),
+	 pixel_col => pixel_col_vga (9 downto 4),
+	 clk=>vert_s,
+	 enable=>hold_enable,
+	 character_address=> char_addy);
 
 	--for death detection use pixel clashes between red and green signals
 		

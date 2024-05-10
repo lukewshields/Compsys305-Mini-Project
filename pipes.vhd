@@ -10,6 +10,7 @@ entity pipes is
 		  --init_x_pos : in std_logic_vector(10 downto 0);
         clk, vert_sync, enable: in std_logic;
         red, green, blue, pipes_on_out: out std_logic
+		  
     );
 end entity pipes;
 
