@@ -102,7 +102,7 @@ architecture arc of FlappyBird is
 			pixel_row, pixel_col : in std_logic_vector (9 downto 4);
 			score : in std_logic_vector(5 downto 0);
 			clk,enable : in std_logic;
-			character_address : out std_logic_vector (5 downto 0)
+			character_address,pause_address : out std_logic_vector (5 downto 0)
 		);
 	end component text_setter;
 	
@@ -133,8 +133,8 @@ end component score_check;
 	signal score : std_logic_vector (5 downto 0);
 	
 	
-	signal char_addy : std_logic_vector (5 downto 0);
-	signal rom_mux_addy : std_logic;
+	signal char_addy,pause_addy : std_logic_vector (5 downto 0);
+	signal rom_mux_addy,rom_mux_addy2 : std_logic;
 	
 	
 	signal trash : std_logic_vector (9 downto 0);
@@ -209,11 +209,11 @@ begin
 --		
 		
 	
-	red_final <= (red_bird and not collide) or rom_mux_addy;
+	red_final <= (red_bird and not collide) or rom_mux_addy or rom_mux_addy2;
 --	(red_bird and not collide) or 
-	green_final <= green_pipes or rom_mux_addy;
+	green_final <= green_pipes or rom_mux_addy or rom_mux_addy2;
 --	green_pipes or
-	blue_final <= (blue_pipes and not red_bird) or rom_mux_addy;
+	blue_final <= (blue_pipes and not red_bird) or rom_mux_addy or rom_mux_addy2;
 --	 
 		
 	avatar : bird 
@@ -267,6 +267,15 @@ begin
 		clock => clk_25,
 		rom_mux_output => rom_mux_addy
 		);
+		
+	ch2: char_rom
+		port map(
+		character_address => pause_addy,
+		font_row => pixel_row_vga (4 downto 2), 
+		font_col	=> pixel_col_vga (4 downto 2),
+		clock => clk_25,
+		rom_mux_output => rom_mux_addy2
+		);
 	
 	--text_setter port map(pixel_row => pixel_row_vga (5 downto 0), pixel_col => pixel_col_vga (5 downto 0), clk => clk_25, character_address => char_addy);
 --	 text_setter
@@ -283,7 +292,9 @@ begin
 	 score => score,
 	 clk=>clk_25,
 	 enable=>hold_enable,
-	 character_address=> char_addy);
+	 character_address=> char_addy,
+	 pause_address=>pause_addy
+	 );
 	 
 	 sc : score_check
 		port map (
