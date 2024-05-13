@@ -13,7 +13,7 @@ entity FlappyBird is
 			VGA_HS, VGA_VS : out std_logic;
 			VGA_R, VGA_G, VGA_B : out std_logic_vector (3 downto 0);
 			PS2_DAT, PS2_CLK : inout std_logic;
-			HEX0, HEX1, HEX2 : out std_logic_vector (6 downto 0)			
+			HEX0, HEX1 : out std_logic_vector (6 downto 0)			
 			);
 end entity FlappyBird;
 
@@ -113,7 +113,8 @@ architecture arc of FlappyBird is
 			vert_sync, Enable: in std_logic;
 			pipe_x_pos1,pipe_x_pos2,pipe_x_pos3 : in std_logic_vector (10 downto 0);
 			pipe_width,bird_x_pos : in std_logic_vector (9 downto 0);
-			score: out std_logic_vector (5 downto 0) --std logic vector for use of arithemetic
+			score: out std_logic_vector (5 downto 0); --std logic vector for use of arithemetic
+			tens,ones: out std_logic_vector (3 downto 0)
 		);
 	end component score_check;
 	
@@ -131,12 +132,12 @@ architecture arc of FlappyBird is
 		);
 	end component BCD_to_SevenSeg;
 	
-	component Pad_Input is
-		port (
-			input_value : in std_logic_vector(1 downto 0);
-			output_value : out std_logic_vector(3 downto 0)
-		);
-	end component Pad_Input;
+--	component Pad_Input is
+--		port (
+--			input_value : in std_logic_vector(1 downto 0);
+--			output_value : out std_logic_vector(3 downto 0)
+--		);
+--	end component Pad_Input;
 
 
 	
@@ -157,7 +158,7 @@ architecture arc of FlappyBird is
 	signal score : std_logic_vector (5 downto 0);
 	signal rand_bits : std_logic_vector (7 downto 0);
 	signal tens_score : std_logic_vector (3 downto 0);
-	
+	signal ones_score : std_logic_vector (3 downto 0);
 	
 	signal char_addy : std_logic_vector (5 downto 0);
 	signal rom_mux_addy : std_logic;
@@ -321,7 +322,9 @@ begin
 		pipe_x_pos3 => pipes_x_pos3,
 		pipe_width => pipe_width,
 		bird_x_pos => bird_x_pos,
-		score => score --std logic vector for use of arithemetic
+		score => score, --std logic vector for use of arithemetic
+		tens => tens_score,
+		ones => ones_score
 	);
 	
 	rand_bit_gen : lfsr
@@ -331,11 +334,11 @@ begin
 			rand => rand_bits
 		);
 	
-	pi: Pad_Input
-		port map(
-			input_value => score(5 downto 4),
-			output_value => tens_score
-			);
+--	pi: Pad_Input
+--		port map(
+--			input_value => score(5 downto 4),
+--			output_value => tens_score
+--			);
 				
 		
 	tens_conv: BCD_to_SevenSeg
@@ -346,7 +349,7 @@ begin
 		
 	ones_display: BCD_to_SevenSeg
 		port map (
-			BCD_digit => score(3 downto 0),
+			BCD_digit => ones_score,
 			SevenSeg_out => HEX0
 		);
 

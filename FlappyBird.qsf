@@ -280,4 +280,6 @@ set_global_assignment -name VHDL_FILE text_setter.vhd
 set_global_assignment -name VHDL_FILE output_files/score_check.vhd
 set_global_assignment -name VHDL_FILE output_files/Pad_Input.vhd
 set_global_assignment -name VHDL_FILE BCD_to_7Seg.vhd
+set_global_assignment -name VHDL_FILE Pad_Input.vhd
+set_global_assignment -name VHDL_FILE score_check.vhd
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

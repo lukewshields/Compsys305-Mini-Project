@@ -60,6 +60,10 @@
 					"strict" : false
 				},
 				{
+					"name" : "HEX1[1]",
+					"strict" : false
+				},
+				{
 					"name" : "HEX1[2]",
 					"strict" : false
 				},
@@ -96,7 +100,7 @@
 					"strict" : false
 				},
 				{
-					"name" : "SW[2]",
+					"name" : "SW[7]",
 					"strict" : false
 				},
 				{
@@ -104,19 +108,19 @@
 					"strict" : false
 				},
 				{
+					"name" : "SW[2]",
+					"strict" : false
+				},
+				{
 					"name" : "SW[3]",
 					"strict" : false
 				},
 				{
-					"name" : "SW[7]",
+					"name" : "SW[5]",
 					"strict" : false
 				},
 				{
 					"name" : "SW[6]",
-					"strict" : false
-				},
-				{
-					"name" : "SW[5]",
 					"strict" : false
 				},
 				{

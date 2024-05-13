@@ -102,9 +102,9 @@ architecture arc of pipes is
 							pipe_height_bot <= conv_std_logic_vector(40, 10);
 						else 
 							pipe_height <= rand;
-							pipe_height_bot <= pipe_gap + rand;
+							pipe_height_bot <= conv_std_logic_vector(480, 10) - rand - pipe_gap;
 						end if;
-						
+						 
 					else --add in elsif for the 2nd pipe less than zero and assign its center to the same spot
 						pipe_x_pos <= pipe_x_pos - pipe_x_motion;
 					end if;
@@ -127,7 +127,7 @@ architecture arc of pipes is
 							pipe_height_bot2 <= conv_std_logic_vector(40, 10);
 						else 
 							pipe_height2 <= rand;
-							pipe_height_bot2 <= pipe_gap + rand;
+							pipe_height_bot2 <=  conv_std_logic_vector(480, 10) - rand - pipe_gap;
 						end if;
 						
 					else 
@@ -153,7 +153,7 @@ architecture arc of pipes is
 							pipe_height_bot3 <= conv_std_logic_vector(40, 10);
 						else 
 							pipe_height3 <= rand;
-							pipe_height_bot3 <= pipe_gap + rand;
+							pipe_height_bot3 <=  conv_std_logic_vector(480, 10) - rand - pipe_gap;
 						end if;
 					else 
 						pipe_x_pos3 <= pipe_x_pos3 - pipe_x_motion;
