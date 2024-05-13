@@ -333,12 +333,6 @@ begin
 			reset => '0',
 			rand => rand_bits
 		);
-	
---	pi: Pad_Input
---		port map(
---			input_value => score(5 downto 4),
---			output_value => tens_score
---			);
 				
 		
 	tens_conv: BCD_to_SevenSeg

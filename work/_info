@@ -12,99 +12,199 @@ Z0 dC:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys30
 T_opt
 !s110 1715133597
 VeK;SVBf:cL>0oQUQj4_OI2
-04 12 3 work tb_debouncer arc 1
+Z1 04 12 3 work tb_debouncer arc 1
 =1-cc96e521853a-663adc9d-2e7-5470
-o-quiet -auto_acc_if_foreign -work work
-tCvgOpt 0
+Z2 o-quiet -auto_acc_if_foreign -work work
+Z3 tCvgOpt 0
 n@_opt
-OE;O;2020.2;71
+Z4 OE;O;2020.2;71
+R0
+T_opt1
+!s110 1715643492
+VS3lXiXY?3fPYHT9FCnh9R0
+R1
+=1-cc96e51e14b6-6642a464-6a-4220
+R2
+R3
+n@_opt1
+R4
 Edebouncer
-Z1 w1715133580
-Z2 DPx4 ieee 16 std_logic_signed 0 22 C<aanc0R`<LWPSe[JYRP^3
-Z3 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
-Z4 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
-Z5 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+Z5 w1715133580
+Z6 DPx4 ieee 16 std_logic_signed 0 22 C<aanc0R`<LWPSe[JYRP^3
+Z7 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z8 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z9 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
 !i122 10
 R0
-Z6 8C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/debouncer.vhd
-Z7 FC:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/debouncer.vhd
+Z10 8C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/debouncer.vhd
+Z11 FC:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/debouncer.vhd
 l0
 L7 1
 VMF1[0K[z:cKzI2_KN8X=V3
 !s100 T;]n8z:JXnnZF>U@nVoGz1
-Z8 OE;C;2020.2;71
+Z12 OE;C;2020.2;71
 32
-Z9 !s110 1715133586
+Z13 !s110 1715133586
 !i10b 1
-Z10 !s108 1715133586.000000
-Z11 !s90 -reportprogress|300|-work|work|C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/debouncer.vhd|
-Z12 !s107 C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/debouncer.vhd|
+Z14 !s108 1715133586.000000
+Z15 !s90 -reportprogress|300|-work|work|C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/debouncer.vhd|
+Z16 !s107 C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/debouncer.vhd|
 !i113 0
-Z13 o-work work
-Z14 tExplicit 1 CvgOpt 0
+Z17 o-work work
+Z18 tExplicit 1 CvgOpt 0
 Aarc
-R2
-R3
-R4
-R5
+R6
+R7
+R8
+R9
 DEx4 work 9 debouncer 0 22 MF1[0K[z:cKzI2_KN8X=V3
 !i122 10
 l16
 L13 27
 VcC4lOK=RO1P^FS>BWbcXe0
 !s100 PnL^0L0clV=SKkKgbM9[g3
-R8
-32
-R9
-!i10b 1
-R10
-R11
 R12
-!i113 0
+32
 R13
+!i10b 1
 R14
+R15
+R16
+!i113 0
+R17
+R18
+Elfsr
+Z19 w1715640615
+R7
+Z20 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+R8
+R9
+!i122 12
+R0
+Z21 8C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/LFSR.vhd
+Z22 FC:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/LFSR.vhd
+l0
+L6 1
+VzYLF5hh:;;_iS33UW4@eb1
+!s100 04hY6^GoX2_?D;D5ZEg[g1
+R12
+32
+Z23 !s110 1715643477
+!i10b 1
+Z24 !s108 1715643477.000000
+Z25 !s90 -reportprogress|300|-work|work|C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/LFSR.vhd|
+Z26 !s107 C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/LFSR.vhd|
+!i113 0
+R17
+R18
+Aarc
+R7
+R20
+R8
+R9
+DEx4 work 4 lfsr 0 22 zYLF5hh:;;_iS33UW4@eb1
+!i122 12
+l15
+L13 22
+VS@[Lng^HgKFEo9=OE[D<;2
+!s100 kH30R@=YGUh4LnnNgj<TQ1
+R12
+32
+R23
+!i10b 1
+R24
+R25
+R26
+!i113 0
+R17
+R18
 Etb_debouncer
-Z15 w1715132890
-R2
-R3
-R4
-R5
+Z27 w1715132890
+R6
+R7
+R8
+R9
 !i122 11
 R0
-Z16 8C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/tb_debouncer.vhd
-Z17 FC:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/tb_debouncer.vhd
+Z28 8C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/tb_debouncer.vhd
+Z29 FC:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/tb_debouncer.vhd
 l0
 L7 1
 Voon?bG0gKzjMbcXI[n?Oc1
 !s100 C8RV5JT>VamlYRdi]_[f>1
-R8
+R12
 32
-Z18 !s110 1715133589
+Z30 !s110 1715133589
 !i10b 1
-Z19 !s108 1715133589.000000
-Z20 !s90 -reportprogress|300|-work|work|C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/tb_debouncer.vhd|
-Z21 !s107 C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/tb_debouncer.vhd|
+Z31 !s108 1715133589.000000
+Z32 !s90 -reportprogress|300|-work|work|C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/tb_debouncer.vhd|
+Z33 !s107 C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/tb_debouncer.vhd|
 !i113 0
-R13
-R14
+R17
+R18
 Aarc
-R2
-R3
-R4
-R5
+R6
+R7
+R8
+R9
 DEx4 work 12 tb_debouncer 0 22 oon?bG0gKzjMbcXI[n?Oc1
 !i122 11
 l20
 L11 19
 VmZmObz@QRkIWG@;f:951A2
 !s100 NKf[MeMFgah431QKLiEC<1
-R8
+R12
 32
-R18
+R30
 !i10b 1
-R19
-R20
-R21
+R31
+R32
+R33
 !i113 0
-R13
-R14
+R17
+R18
+Etb_lfsr
+Z34 w1713923114
+R7
+R20
+R8
+R9
+!i122 13
+R0
+Z35 8C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/TB_LFSR.vhd
+Z36 FC:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/TB_LFSR.vhd
+l0
+L6 1
+VzCjbHg=L8eZ=1Y9;zCGHS1
+!s100 kU6Wa9zWceP=4:hETGOdP3
+R12
+32
+Z37 !s110 1715643481
+!i10b 1
+Z38 !s108 1715643481.000000
+Z39 !s90 -reportprogress|300|-work|work|C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/TB_LFSR.vhd|
+Z40 !s107 C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/TB_LFSR.vhd|
+!i113 0
+R17
+R18
+Atest_lfsr
+R7
+R20
+R8
+R9
+DEx4 work 7 tb_lfsr 0 22 zCjbHg=L8eZ=1Y9;zCGHS1
+!i122 13
+l19
+L9 30
+V:c_EgA;OlLPj35;:5h1Cd3
+!s100 lTKl:JA7hFnFK;kne<`H72
+R12
+32
+R37
+!i10b 1
+R38
+R39
+R40
+!i113 0
+R17
+R18
