@@ -25,7 +25,8 @@ architecture arc of LFSR is
 			rand_temp(5) <= rand_temp(4);
 			rand_temp(6) <= rand_temp(5);
 			rand_temp(7) <= rand_temp(6);
-			rand_temp(0) <= rand_temp(7);
+			--rand_temp(8) <= rand_temp(7);
+			rand_temp(0) <= rand_temp(7);	
 		end if;
 		rand <= rand_temp;
 	end process;

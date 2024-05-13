@@ -8,7 +8,8 @@ ENTITY bird IS
 	PORT
 		(clk, vert_sync, click, enable	: IN std_logic;
        pixel_row, pixel_col	: IN std_logic_vector(9 DOWNTO 0);
-		 red, green, blue, bird_on_out : OUT std_logic
+		 red, green, blue, bird_on_out : OUT std_logic;
+		 bird_x_pos_out: out std_logic_vector(9 DOWNTO 0)
 		 );		
 END bird;
 
@@ -26,7 +27,7 @@ signal fall_early : std_logic;
 
 
 BEGIN           
-
+bird_x_pos_out<=bird_x_pos;
 --size <= CONV_STD_LOGIC_VECTOR(8,10);
 -- bird_x_pos and bird_y_pos show the (x,y) for the centre of ball
 

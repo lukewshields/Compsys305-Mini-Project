@@ -1,3 +1,4 @@
+
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.all;
 USE  IEEE.STD_LOGIC_ARITH.all;
@@ -6,7 +7,7 @@ USE  IEEE.STD_LOGIC_UNSIGNED.all;
 
 entity FlappyBird is 
 	port (CLOCK_50: in std_logic;
-			SW : in std_logic_vector (2 downto 0);
+			SW : in std_logic_vector (9 downto 0);
 			KEY : in std_logic_vector (1 downto 0);
 			LEDR : out std_logic_vector (1 downto 0);
 			VGA_HS, VGA_VS : out std_logic;
@@ -23,6 +24,12 @@ architecture arc of FlappyBird is
 				pixel_row, pixel_column: OUT STD_LOGIC_VECTOR(9 DOWNTO 0));
 	end component;
 
+
+	--component clock_divider is 
+	--		port ( 
+	--		Clk, reset: in std_logic;
+	--		clock_25: out std_logic);
+--	end component; 
 	component pll is 
 		port (
 			refclk   : in  std_logic := '0'; --  refclk.clk
@@ -33,17 +40,30 @@ architecture arc of FlappyBird is
 	end component pll;
 	
 	component pipes is 
-		  port (pixel_row, pixel_col: in std_logic_vector (9 downto 0);
+    port (pixel_row, pixel_col: in std_logic_vector (9 downto 0);
+		  --init_x_pos : in std_logic_vector(10 downto 0);
+			rand : in std_logic_vector (9 downto 0);
 			clk, vert_sync, enable: in std_logic;
-			red, green, blue, pipes_on_out: out std_logic
-			);
+			red, green, blue, pipes_on_out: out std_logic;
+			pipes_x_pos1_out,pipes_x_pos2_out,pipes_x_pos3_out : out std_logic_vector (10 downto 0);
+			pipe_width_out: out std_logic_vector (9 downto 0)
+	 );
 	end component pipes;
+	
+--	component pipes is 
+--		  port (pixel_row, pixel_col: in std_logic_vector (9 downto 0);
+--			init_x_pos : in std_logic_vector(10 downto 0);
+--			clk, vert_sync, enable: in std_logic;
+--			red, green, blue, pipes_on_out: out std_logic
+--			);
+--	end component pipes;
 		
 	component bird is 
-		port (clk, vert_sync, click, enable	: IN std_logic;
-			pixel_row, pixel_col	: IN std_logic_vector(9 DOWNTO 0);
-			red, green, blue, bird_on_out : OUT std_logic
-		);		
+    port (clk, vert_sync, click, enable	: IN std_logic;
+       pixel_row, pixel_col	: IN std_logic_vector(9 DOWNTO 0);
+		 red, green, blue, bird_on_out : OUT std_logic;
+		 bird_x_pos_out: out std_logic_vector(9 DOWNTO 0)
+		 );			
 	end component bird;
 	
 	component mouse is
@@ -81,17 +101,34 @@ architecture arc of FlappyBird is
 	
 	component text_setter is 
 		port (
-			pixel_row, pixel_col : in std_logic_vector (5 downto 0);
-			clk : in std_logic;
+			pixel_row, pixel_col : in std_logic_vector (9 downto 4);
+			score : in std_logic_vector(5 downto 0);
+			clk,enable : in std_logic;
 			character_address : out std_logic_vector (5 downto 0)
 		);
 	end component text_setter;
+	
+	component score_check is 
+		port(
+			vert_sync, Enable: in std_logic;
+			pipe_x_pos1,pipe_x_pos2,pipe_x_pos3 : in std_logic_vector (10 downto 0);
+			pipe_width,bird_x_pos : in std_logic_vector (9 downto 0);
+			score: out std_logic_vector (5 downto 0) --std logic vector for use of arithemetic
+		);
+	end component score_check;
+	
+	component LFSR is 
+		port (
+			clk, reset : in std_logic;
+			rand : out std_logic_vector (7 downto 0)
+		);
+	end component LFSR;
+
 
 	
 	signal clk_25, red, green, blue, vert_s : std_logic;
 	signal pixel_row_vga : std_logic_vector (9 downto 0);
 	signal pixel_col_vga : std_logic_vector (9 downto 0);
-	
 	signal trash3 : std_logic;
 	signal red_pipes, green_pipes, blue_pipes : std_logic;
 	signal green_pipes2, blue_pipes2 : std_logic;
@@ -101,6 +138,11 @@ architecture arc of FlappyBird is
 	signal collide : std_logic;
 	signal hold_enable : std_logic;
 	signal pipes_on, bird_on : std_logic;
+	signal pipes_x_pos,pipes_x_pos2,pipes_x_pos3 : std_logic_vector (10 downto 0);
+	signal bird_x_pos, pipe_width: std_logic_vector (9 downto 0);
+	signal score : std_logic_vector (5 downto 0);
+	signal rand_bits : std_logic_vector (7 downto 0);
+	
 	
 	signal char_addy : std_logic_vector (5 downto 0);
 	signal rom_mux_addy : std_logic;
@@ -148,19 +190,43 @@ begin
 			pixel_row => pixel_row_vga,
 			pixel_col => pixel_col_vga,
 			--init_x_pos => conv_std_logic_vector(600, 11),
+			rand => SW,
 			clk => clk_25, 
 			vert_sync => vert_s,
 			enable => hold_enable,
 			red => red_pipes,
 			green => green_pipes,
 			blue => blue_pipes,
-			pipes_on_out => pipes_on
+			pipes_on_out => pipes_on,
+			pipes_x_pos1_out => pipes_x_pos,
+			pipes_x_pos2_out => pipes_x_pos2,
+			pipes_x_pos3_out => pipes_x_pos3,
+			pipe_width_out => pipe_width
 		);
 		
 	
+		
+--	pipe2 : pipes
+--		port map (
+--			pixel_row => pixel_row_vga,
+--			pixel_col => pixel_col_vga,
+			--init_x_pos => conv_std_logic_vector(600, 11),
+--			clk => clk_25, 
+--			vert_sync => vert_s,
+--			enable => hold_enable,
+--			red => red_pipes,
+--			green => green_pipes2,
+--			blue => blue_pipes2
+--		);
+--		
+		
+	
 	red_final <= (red_bird and not collide) or rom_mux_addy;
+--	(red_bird and not collide) or 
 	green_final <= green_pipes or rom_mux_addy;
+--	green_pipes or
 	blue_final <= (blue_pipes and not red_bird) or rom_mux_addy;
+--	 
 		
 	avatar : bird 
 		port map (
@@ -173,7 +239,8 @@ begin
 		   red => red_bird, 
 		   green => green_bird,
 		   blue => blue_bird,
-			bird_on_out => bird_on
+			bird_on_out => bird_on,
+			bird_x_pos_out => bird_x_pos
 		);
 	
 	l : mouse 
@@ -207,20 +274,48 @@ begin
 	ch: char_rom
 		port map(
 			character_address => char_addy,
-			font_row => pixel_row_vga (2 downto 0), 
-			font_col	=> pixel_row_vga (2 downto 0),
-			clock => clk_25,
-			rom_mux_output => rom_mux_addy
+		font_row => pixel_row_vga (3 downto 1), 
+		font_col	=> pixel_col_vga (3 downto 1),
+		clock => clk_25,
+		rom_mux_output => rom_mux_addy
 		);
 	
 	--text_setter port map(pixel_row => pixel_row_vga (5 downto 0), pixel_col => pixel_col_vga (5 downto 0), clk => clk_25, character_address => char_addy);
+--	 text_setter
+--    port map (
+--        pixel_row => pixel_row_vga(5 downto 0),
+--        pixel_col => pixel_col_vga(5 downto 0),
+--        clk => clk_25,
+--        character_address => char_addy
+--    );
 	 t: text_setter
-		 port map (
-			  pixel_row => pixel_row_vga(5 downto 0),
-			  pixel_col => pixel_col_vga(5 downto 0),
-			  clk => clk_25,
-			  character_address => char_addy
-		 );
-	--text_setter port map(pixel_row_vga(5 downto 0), pixel_col_vga(5 downto 0), clk_25, char_addy);
+	 port map(
+	 pixel_row => pixel_row_vga(9 downto 4),
+	 pixel_col => pixel_col_vga (9 downto 4),
+	 score => score,
+	 clk=>clk_25,
+	 enable=>hold_enable,
+	 character_address=> char_addy);
+	 
+	 sc : score_check
+		port map (
+		vert_sync=> vert_s,
+		Enable => hold_enable,
+		pipe_x_pos1 => pipes_x_pos,
+		pipe_x_pos2 => pipes_x_pos2,
+		pipe_x_pos3 => pipes_x_pos3,
+		pipe_width => pipe_width,
+		bird_x_pos => bird_x_pos,
+		score => score --std logic vector for use of arithemetic
+	);
+	
+	rand_bit_gen : lfsr
+		port map (
+			clk => clk_25,
+			reset => '0',
+			rand => rand_bits
+		);
+
+	--for death detection use pixel clashes between red and green signals
 		
 end architecture arc;
