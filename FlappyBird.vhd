@@ -12,8 +12,8 @@ entity FlappyBird is
 			LEDR : out std_logic_vector (1 downto 0);
 			VGA_HS, VGA_VS : out std_logic;
 			VGA_R, VGA_G, VGA_B : out std_logic_vector (3 downto 0);
-			PS2_DAT, PS2_CLK : inout std_logic
-			
+			PS2_DAT, PS2_CLK : inout std_logic;
+			HEX0, HEX1, HEX2 : out std_logic_vector (6 downto 0)			
 			);
 end entity FlappyBird;
 
@@ -123,6 +123,20 @@ architecture arc of FlappyBird is
 			rand : out std_logic_vector (7 downto 0)
 		);
 	end component LFSR;
+	
+	component BCD_to_SevenSeg is
+		port (
+			BCD_digit : in std_logic_vector(3 downto 0);
+			SevenSeg_out : out std_logic_vector(6 downto 0)
+		);
+	end component BCD_to_SevenSeg;
+	
+	component Pad_Input is
+		port (
+			input_value : in std_logic_vector(1 downto 0);
+			output_value : out std_logic_vector(3 downto 0)
+		);
+	end component Pad_Input;
 
 
 	
@@ -142,6 +156,7 @@ architecture arc of FlappyBird is
 	signal bird_x_pos, pipe_width: std_logic_vector (9 downto 0);
 	signal score : std_logic_vector (5 downto 0);
 	signal rand_bits : std_logic_vector (7 downto 0);
+	signal tens_score : std_logic_vector (3 downto 0);
 	
 	
 	signal char_addy : std_logic_vector (5 downto 0);
@@ -314,6 +329,25 @@ begin
 			clk => clk_25,
 			reset => '0',
 			rand => rand_bits
+		);
+	
+	pi: Pad_Input
+		port map(
+			input_value => score(5 downto 4),
+			output_value => tens_score
+			);
+				
+		
+	tens_conv: BCD_to_SevenSeg
+		port map (
+			BCD_digit => tens_score,
+			SevenSeg_out => HEX1
+		);
+		
+	ones_display: BCD_to_SevenSeg
+		port map (
+			BCD_digit => score(3 downto 0),
+			SevenSeg_out => HEX0
 		);
 
 	--for death detection use pixel clashes between red and green signals
