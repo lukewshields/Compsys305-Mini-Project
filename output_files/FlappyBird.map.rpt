@@ -1,5 +1,5 @@
 Analysis & Synthesis report for FlappyBird
-Fri May 10 17:14:19 2024
+Mon May 13 14:45:31 2024
 Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Standard Edition
 
 
@@ -25,14 +25,16 @@ Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Standard Edition
  17. Source assignments for char_rom:ch|altsyncram:altsyncram_component|altsyncram_d5g1:auto_generated
  18. Parameter Settings for User Entity Instance: pll:divider|pll_0002:pll_inst|altera_pll:altera_pll_i
  19. Parameter Settings for User Entity Instance: char_rom:ch|altsyncram:altsyncram_component
- 20. altsyncram Parameter Settings by Entity Instance
- 21. Port Connectivity Checks: "MOUSE:l"
- 22. Port Connectivity Checks: "bird:avatar"
- 23. Port Connectivity Checks: "pipes:pipe1"
- 24. Port Connectivity Checks: "pll:divider"
- 25. Post-Synthesis Netlist Statistics for Top Partition
- 26. Elapsed Time Per Partition
- 27. Analysis & Synthesis Messages
+ 20. Parameter Settings for Inferred Entity Instance: text_setter:t|lpm_divide:Div0
+ 21. Parameter Settings for Inferred Entity Instance: text_setter:t|lpm_divide:Mod0
+ 22. altsyncram Parameter Settings by Entity Instance
+ 23. Port Connectivity Checks: "MOUSE:l"
+ 24. Port Connectivity Checks: "bird:avatar"
+ 25. Port Connectivity Checks: "pipes:pipe1"
+ 26. Port Connectivity Checks: "pll:divider"
+ 27. Post-Synthesis Netlist Statistics for Top Partition
+ 28. Elapsed Time Per Partition
+ 29. Analysis & Synthesis Messages
 
 
 
@@ -59,7 +61,7 @@ https://fpgasoftware.intel.com/eula.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +---------------------------------+----------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Fri May 10 17:14:19 2024              ;
+; Analysis & Synthesis Status     ; Successful - Mon May 13 14:45:31 2024              ;
 ; Quartus Prime Version           ; 23.1std.0 Build 991 11/28/2023 SC Standard Edition ;
 ; Revision Name                   ; FlappyBird                                         ;
 ; Top-level Entity Name           ; FlappyBird                                         ;
@@ -183,36 +185,45 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                                           ;
-+----------------------------------+-----------------+----------------------------------------+----------------------------------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                              ; File Name with Absolute Path                                                                             ; Library ;
-+----------------------------------+-----------------+----------------------------------------+----------------------------------------------------------------------------------------------------------+---------+
-; vga_sync.vhd                     ; yes             ; User VHDL File                         ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/vga_sync.vhd           ;         ;
-; mouse.vhd                        ; yes             ; User VHDL File                         ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/mouse.vhd              ;         ;
-; char_rom.vhd                     ; yes             ; User VHDL File                         ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/char_rom.vhd           ;         ;
-; FlappyBird.vhd                   ; yes             ; User VHDL File                         ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/FlappyBird.vhd         ;         ;
-; pipes.vhd                        ; yes             ; User VHDL File                         ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/pipes.vhd              ;         ;
-; bird.vhd                         ; yes             ; User VHDL File                         ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/bird.vhd               ;         ;
-; pll.vhd                          ; yes             ; User Wizard-Generated File             ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/pll.vhd                ; pll     ;
-; pll/pll_0002.v                   ; yes             ; User Verilog HDL File                  ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/pll/pll_0002.v         ; pll     ;
-; collision.vhd                    ; yes             ; User VHDL File                         ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/collision.vhd          ;         ;
-; enable_handle.vhd                ; yes             ; User VHDL File                         ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/enable_handle.vhd      ;         ;
-; text_setter.vhd                  ; yes             ; User VHDL File                         ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/text_setter.vhd        ;         ;
-; score_check.vhd                  ; yes             ; User VHDL File                         ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/score_check.vhd        ;         ;
-; altera_pll.v                     ; yes             ; Megafunction                           ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v                                        ;         ;
-; altsyncram.tdf                   ; yes             ; Megafunction                           ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/altsyncram.tdf                                      ;         ;
-; stratix_ram_block.inc            ; yes             ; Megafunction                           ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/stratix_ram_block.inc                               ;         ;
-; lpm_mux.inc                      ; yes             ; Megafunction                           ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/lpm_mux.inc                                         ;         ;
-; lpm_decode.inc                   ; yes             ; Megafunction                           ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/lpm_decode.inc                                      ;         ;
-; aglobal231.inc                   ; yes             ; Megafunction                           ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/aglobal231.inc                                      ;         ;
-; a_rdenreg.inc                    ; yes             ; Megafunction                           ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/a_rdenreg.inc                                       ;         ;
-; altrom.inc                       ; yes             ; Megafunction                           ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/altrom.inc                                          ;         ;
-; altram.inc                       ; yes             ; Megafunction                           ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/altram.inc                                          ;         ;
-; altdpram.inc                     ; yes             ; Megafunction                           ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/altdpram.inc                                        ;         ;
-; db/altsyncram_d5g1.tdf           ; yes             ; Auto-Generated Megafunction            ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/db/altsyncram_d5g1.tdf ;         ;
-; tcgrom.mif                       ; yes             ; Auto-Found Memory Initialization File  ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/tcgrom.mif             ;         ;
-+----------------------------------+-----------------+----------------------------------------+----------------------------------------------------------------------------------------------------------+---------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                               ;
++----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                              ; File Name with Absolute Path                                                                                 ; Library ;
++----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------------------------------------------------+---------+
+; vga_sync.vhd                     ; yes             ; User VHDL File                         ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/vga_sync.vhd               ;         ;
+; mouse.vhd                        ; yes             ; User VHDL File                         ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/mouse.vhd                  ;         ;
+; char_rom.vhd                     ; yes             ; User VHDL File                         ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/char_rom.vhd               ;         ;
+; FlappyBird.vhd                   ; yes             ; User VHDL File                         ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/FlappyBird.vhd             ;         ;
+; pipes.vhd                        ; yes             ; User VHDL File                         ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/pipes.vhd                  ;         ;
+; bird.vhd                         ; yes             ; User VHDL File                         ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/bird.vhd                   ;         ;
+; pll.vhd                          ; yes             ; User Wizard-Generated File             ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/pll.vhd                    ; pll     ;
+; pll/pll_0002.v                   ; yes             ; User Verilog HDL File                  ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/pll/pll_0002.v             ; pll     ;
+; collision.vhd                    ; yes             ; User VHDL File                         ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/collision.vhd              ;         ;
+; enable_handle.vhd                ; yes             ; User VHDL File                         ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/enable_handle.vhd          ;         ;
+; text_setter.vhd                  ; yes             ; User VHDL File                         ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/text_setter.vhd            ;         ;
+; score_check.vhd                  ; yes             ; User VHDL File                         ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/score_check.vhd            ;         ;
+; altera_pll.v                     ; yes             ; Megafunction                           ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/altera_pll.v                                            ;         ;
+; altsyncram.tdf                   ; yes             ; Megafunction                           ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/altsyncram.tdf                                          ;         ;
+; stratix_ram_block.inc            ; yes             ; Megafunction                           ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/stratix_ram_block.inc                                   ;         ;
+; lpm_mux.inc                      ; yes             ; Megafunction                           ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/lpm_mux.inc                                             ;         ;
+; lpm_decode.inc                   ; yes             ; Megafunction                           ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/lpm_decode.inc                                          ;         ;
+; aglobal231.inc                   ; yes             ; Megafunction                           ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/aglobal231.inc                                          ;         ;
+; a_rdenreg.inc                    ; yes             ; Megafunction                           ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/a_rdenreg.inc                                           ;         ;
+; altrom.inc                       ; yes             ; Megafunction                           ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/altrom.inc                                              ;         ;
+; altram.inc                       ; yes             ; Megafunction                           ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/altram.inc                                              ;         ;
+; altdpram.inc                     ; yes             ; Megafunction                           ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/altdpram.inc                                            ;         ;
+; db/altsyncram_d5g1.tdf           ; yes             ; Auto-Generated Megafunction            ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/db/altsyncram_d5g1.tdf     ;         ;
+; tcgrom.mif                       ; yes             ; Auto-Found Memory Initialization File  ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/tcgrom.mif                 ;         ;
+; lpm_divide.tdf                   ; yes             ; Megafunction                           ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/lpm_divide.tdf                                          ;         ;
+; abs_divider.inc                  ; yes             ; Megafunction                           ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/abs_divider.inc                                         ;         ;
+; sign_div_unsign.inc              ; yes             ; Megafunction                           ; c:/intelfpga/23.1std/quartus/libraries/megafunctions/sign_div_unsign.inc                                     ;         ;
+; db/lpm_divide_3am.tdf            ; yes             ; Auto-Generated Megafunction            ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/db/lpm_divide_3am.tdf      ;         ;
+; db/sign_div_unsign_9kh.tdf       ; yes             ; Auto-Generated Megafunction            ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/db/sign_div_unsign_9kh.tdf ;         ;
+; db/alt_u_div_ose.tdf             ; yes             ; Auto-Generated Megafunction            ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/db/alt_u_div_ose.tdf       ;         ;
+; db/lpm_divide_82m.tdf            ; yes             ; Auto-Generated Megafunction            ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/db/lpm_divide_82m.tdf      ;         ;
+; db/sign_div_unsign_bkh.tdf       ; yes             ; Auto-Generated Megafunction            ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/db/sign_div_unsign_bkh.tdf ;         ;
+; db/alt_u_div_sse.tdf             ; yes             ; Auto-Generated Megafunction            ; C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/db/alt_u_div_sse.tdf       ;         ;
++----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------------------------------------------------+---------+
 
 
 +--------------------------------------------------------------------------------------------------------------------+
@@ -220,14 +231,14 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+----------------------------------------------------------------------+
 ; Resource                                    ; Usage                                                                ;
 +---------------------------------------------+----------------------------------------------------------------------+
-; Estimate of Logic utilization (ALMs needed) ; 264                                                                  ;
+; Estimate of Logic utilization (ALMs needed) ; 305                                                                  ;
 ;                                             ;                                                                      ;
-; Combinational ALUT usage for logic          ; 430                                                                  ;
-;     -- 7 input functions                    ; 3                                                                    ;
-;     -- 6 input functions                    ; 89                                                                   ;
-;     -- 5 input functions                    ; 60                                                                   ;
-;     -- 4 input functions                    ; 48                                                                   ;
-;     -- <=3 input functions                  ; 230                                                                  ;
+; Combinational ALUT usage for logic          ; 496                                                                  ;
+;     -- 7 input functions                    ; 6                                                                    ;
+;     -- 6 input functions                    ; 101                                                                  ;
+;     -- 5 input functions                    ; 56                                                                   ;
+;     -- 4 input functions                    ; 49                                                                   ;
+;     -- <=3 input functions                  ; 284                                                                  ;
 ;                                             ;                                                                      ;
 ; Dedicated logic registers                   ; 201                                                                  ;
 ;                                             ;                                                                      ;
@@ -242,32 +253,40 @@ https://fpgasoftware.intel.com/eula.
 ;                                             ;                                                                      ;
 ; Maximum fan-out node                        ; pll:divider|pll_0002:pll_inst|altera_pll:altera_pll_i|outclk_wire[0] ;
 ; Maximum fan-out                             ; 91                                                                   ;
-; Total fan-out                               ; 2287                                                                 ;
-; Average fan-out                             ; 3.30                                                                 ;
+; Total fan-out                               ; 2489                                                                 ;
+; Average fan-out                             ; 3.28                                                                 ;
 +---------------------------------------------+----------------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                          ;
-+-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+----------------------------------------------------------------------------------------+-----------------+--------------+
-; Compilation Hierarchy Node                ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                    ; Entity Name     ; Library Name ;
-+-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+----------------------------------------------------------------------------------------+-----------------+--------------+
-; |FlappyBird                               ; 430 (0)             ; 201 (0)                   ; 4096              ; 2          ; 24   ; 0            ; |FlappyBird                                                                            ; FlappyBird      ; work         ;
-;    |MOUSE:l|                              ; 50 (50)             ; 63 (63)                   ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|MOUSE:l                                                                    ; MOUSE           ; work         ;
-;    |VGA_SYNC:vga|                         ; 42 (42)             ; 48 (48)                   ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|VGA_SYNC:vga                                                               ; VGA_SYNC        ; work         ;
-;    |bird:avatar|                          ; 96 (96)             ; 47 (47)                   ; 0                 ; 2          ; 0    ; 0            ; |FlappyBird|bird:avatar                                                                ; bird            ; work         ;
-;    |char_rom:ch|                          ; 2 (2)               ; 0 (0)                     ; 4096              ; 0          ; 0    ; 0            ; |FlappyBird|char_rom:ch                                                                ; char_rom        ; work         ;
-;       |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 4096              ; 0          ; 0    ; 0            ; |FlappyBird|char_rom:ch|altsyncram:altsyncram_component                                ; altsyncram      ; work         ;
-;          |altsyncram_d5g1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 4096              ; 0          ; 0    ; 0            ; |FlappyBird|char_rom:ch|altsyncram:altsyncram_component|altsyncram_d5g1:auto_generated ; altsyncram_d5g1 ; work         ;
-;    |collision:c|                          ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|collision:c                                                                ; collision       ; work         ;
-;    |enable_handle:e|                      ; 1 (1)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|enable_handle:e                                                            ; enable_handle   ; work         ;
-;    |pipes:pipe1|                          ; 160 (160)           ; 27 (27)                   ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|pipes:pipe1                                                                ; pipes           ; work         ;
-;    |pll:divider|                          ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|pll:divider                                                                ; pll             ; pll          ;
-;       |pll_0002:pll_inst|                 ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|pll:divider|pll_0002:pll_inst                                              ; pll_0002        ; pll          ;
-;          |altera_pll:altera_pll_i|        ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|pll:divider|pll_0002:pll_inst|altera_pll:altera_pll_i                      ; altera_pll      ; work         ;
-;    |score_check:sc|                       ; 48 (48)             ; 9 (9)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|score_check:sc                                                             ; score_check     ; work         ;
-;    |text_setter:t|                        ; 30 (30)             ; 6 (6)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|text_setter:t                                                              ; text_setter     ; work         ;
-+-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+----------------------------------------------------------------------------------------+-----------------+--------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                 ;
++-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
+; Compilation Hierarchy Node                ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                       ; Entity Name         ; Library Name ;
++-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
+; |FlappyBird                               ; 496 (0)             ; 201 (0)                   ; 4096              ; 2          ; 24   ; 0            ; |FlappyBird                                                                                                               ; FlappyBird          ; work         ;
+;    |MOUSE:l|                              ; 50 (50)             ; 63 (63)                   ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|MOUSE:l                                                                                                       ; MOUSE               ; work         ;
+;    |VGA_SYNC:vga|                         ; 42 (42)             ; 48 (48)                   ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|VGA_SYNC:vga                                                                                                  ; VGA_SYNC            ; work         ;
+;    |bird:avatar|                          ; 96 (96)             ; 47 (47)                   ; 0                 ; 2          ; 0    ; 0            ; |FlappyBird|bird:avatar                                                                                                   ; bird                ; work         ;
+;    |char_rom:ch|                          ; 2 (2)               ; 0 (0)                     ; 4096              ; 0          ; 0    ; 0            ; |FlappyBird|char_rom:ch                                                                                                   ; char_rom            ; work         ;
+;       |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 4096              ; 0          ; 0    ; 0            ; |FlappyBird|char_rom:ch|altsyncram:altsyncram_component                                                                   ; altsyncram          ; work         ;
+;          |altsyncram_d5g1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 4096              ; 0          ; 0    ; 0            ; |FlappyBird|char_rom:ch|altsyncram:altsyncram_component|altsyncram_d5g1:auto_generated                                    ; altsyncram_d5g1     ; work         ;
+;    |collision:c|                          ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|collision:c                                                                                                   ; collision           ; work         ;
+;    |enable_handle:e|                      ; 1 (1)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|enable_handle:e                                                                                               ; enable_handle       ; work         ;
+;    |pipes:pipe1|                          ; 152 (152)           ; 27 (27)                   ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|pipes:pipe1                                                                                                   ; pipes               ; work         ;
+;    |pll:divider|                          ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|pll:divider                                                                                                   ; pll                 ; pll          ;
+;       |pll_0002:pll_inst|                 ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|pll:divider|pll_0002:pll_inst                                                                                 ; pll_0002            ; pll          ;
+;          |altera_pll:altera_pll_i|        ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|pll:divider|pll_0002:pll_inst|altera_pll:altera_pll_i                                                         ; altera_pll          ; work         ;
+;    |score_check:sc|                       ; 47 (47)             ; 9 (9)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|score_check:sc                                                                                                ; score_check         ; work         ;
+;    |text_setter:t|                        ; 105 (48)            ; 6 (6)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|text_setter:t                                                                                                 ; text_setter         ; work         ;
+;       |lpm_divide:Div0|                   ; 27 (0)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|text_setter:t|lpm_divide:Div0                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_3am:auto_generated|  ; 27 (0)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|text_setter:t|lpm_divide:Div0|lpm_divide_3am:auto_generated                                                   ; lpm_divide_3am      ; work         ;
+;             |sign_div_unsign_9kh:divider| ; 27 (0)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|text_setter:t|lpm_divide:Div0|lpm_divide_3am:auto_generated|sign_div_unsign_9kh:divider                       ; sign_div_unsign_9kh ; work         ;
+;                |alt_u_div_ose:divider|    ; 27 (27)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|text_setter:t|lpm_divide:Div0|lpm_divide_3am:auto_generated|sign_div_unsign_9kh:divider|alt_u_div_ose:divider ; alt_u_div_ose       ; work         ;
+;       |lpm_divide:Mod0|                   ; 30 (0)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|text_setter:t|lpm_divide:Mod0                                                                                 ; lpm_divide          ; work         ;
+;          |lpm_divide_82m:auto_generated|  ; 30 (0)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|text_setter:t|lpm_divide:Mod0|lpm_divide_82m:auto_generated                                                   ; lpm_divide_82m      ; work         ;
+;             |sign_div_unsign_bkh:divider| ; 30 (0)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|text_setter:t|lpm_divide:Mod0|lpm_divide_82m:auto_generated|sign_div_unsign_bkh:divider                       ; sign_div_unsign_bkh ; work         ;
+;                |alt_u_div_sse:divider|    ; 30 (30)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|text_setter:t|lpm_divide:Mod0|lpm_divide_82m:auto_generated|sign_div_unsign_bkh:divider|alt_u_div_sse:divider ; alt_u_div_sse       ; work         ;
++-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
@@ -378,9 +397,9 @@ Encoding Type:  One-Hot
 +-----------------------------------------+---------+
 ; Inverted Register                       ; Fan out ;
 +-----------------------------------------+---------+
-; pipes:pipe1|pipe_x_pos[4]               ; 5       ;
-; pipes:pipe1|pipe_x_pos[3]               ; 5       ;
 ; pipes:pipe1|pipe_x_pos[9]               ; 6       ;
+; pipes:pipe1|pipe_x_pos[4]               ; 6       ;
+; pipes:pipe1|pipe_x_pos[3]               ; 5       ;
 ; pipes:pipe1|pipe_x_pos[6]               ; 6       ;
 ; pipes:pipe1|pipe_x_pos3[3]              ; 5       ;
 ; pipes:pipe1|pipe_x_pos3[9]              ; 6       ;
@@ -404,16 +423,16 @@ Encoding Type:  One-Hot
 +-----------------------------------------+---------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                               ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                     ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------+
-; 3:1                ; 10 bits   ; 20 LEs        ; 0 LEs                ; 20 LEs                 ; Yes        ; |FlappyBird|VGA_SYNC:vga|v_count[8]            ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |FlappyBird|bird:avatar|bird_y_motion[2]       ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; Yes        ; |FlappyBird|text_setter:t|character_address[0] ;
-; 4:1                ; 32 bits   ; 64 LEs        ; 0 LEs                ; 64 LEs                 ; Yes        ; |FlappyBird|bird:avatar|counter[28]            ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                 ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                       ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------+
+; 3:1                ; 10 bits   ; 20 LEs        ; 0 LEs                ; 20 LEs                 ; Yes        ; |FlappyBird|VGA_SYNC:vga|v_count[7]              ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |FlappyBird|bird:avatar|bird_y_motion[2]         ;
+; 4:1                ; 32 bits   ; 64 LEs        ; 0 LEs                ; 64 LEs                 ; Yes        ; |FlappyBird|bird:avatar|counter[1]               ;
+; 7:1                ; 3 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; Yes        ; |FlappyBird|text_setter:t|s_character_address[0] ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------+
 
 
 +---------------------------------------------------------------------------------------------------+
@@ -733,6 +752,52 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
++--------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: text_setter:t|lpm_divide:Div0 ;
++------------------------+----------------+--------------------------------------+
+; Parameter Name         ; Value          ; Type                                 ;
++------------------------+----------------+--------------------------------------+
+; LPM_WIDTHN             ; 6              ; Untyped                              ;
+; LPM_WIDTHD             ; 4              ; Untyped                              ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                              ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                              ;
+; LPM_PIPELINE           ; 0              ; Untyped                              ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                              ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                              ;
+; CBXI_PARAMETER         ; lpm_divide_3am ; Untyped                              ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                              ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                              ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                           ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                         ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                         ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                       ;
++------------------------+----------------+--------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: text_setter:t|lpm_divide:Mod0 ;
++------------------------+----------------+--------------------------------------+
+; Parameter Name         ; Value          ; Type                                 ;
++------------------------+----------------+--------------------------------------+
+; LPM_WIDTHN             ; 6              ; Untyped                              ;
+; LPM_WIDTHD             ; 6              ; Untyped                              ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                              ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                              ;
+; LPM_PIPELINE           ; 0              ; Untyped                              ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                              ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                              ;
+; CBXI_PARAMETER         ; lpm_divide_82m ; Untyped                              ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                              ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                              ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                           ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                         ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                         ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                       ;
++------------------------+----------------+--------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
 +-----------------------------------------------------------------------------------------+
 ; altsyncram Parameter Settings by Entity Instance                                        ;
 +-------------------------------------------+---------------------------------------------+
@@ -807,31 +872,34 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     SCLR              ; 10                          ;
 ;     plain             ; 42                          ;
 ; arriav_io_obuf        ; 2                           ;
-; arriav_lcell_comb     ; 431                         ;
-;     arith             ; 185                         ;
-;         0 data inputs ; 1                           ;
-;         1 data inputs ; 154                         ;
-;         2 data inputs ; 30                          ;
-;     extend            ; 3                           ;
-;         7 data inputs ; 3                           ;
-;     normal            ; 233                         ;
+; arriav_lcell_comb     ; 497                         ;
+;     arith             ; 214                         ;
+;         0 data inputs ; 9                           ;
+;         1 data inputs ; 158                         ;
+;         2 data inputs ; 34                          ;
+;         3 data inputs ; 10                          ;
+;         4 data inputs ; 3                           ;
+;     extend            ; 6                           ;
+;         7 data inputs ; 6                           ;
+;     normal            ; 257                         ;
 ;         0 data inputs ; 1                           ;
 ;         1 data inputs ; 9                           ;
-;         2 data inputs ; 10                          ;
-;         3 data inputs ; 16                          ;
-;         4 data inputs ; 48                          ;
-;         5 data inputs ; 60                          ;
-;         6 data inputs ; 89                          ;
-;     shared            ; 10                          ;
-;         1 data inputs ; 1                           ;
+;         2 data inputs ; 22                          ;
+;         3 data inputs ; 22                          ;
+;         4 data inputs ; 46                          ;
+;         5 data inputs ; 56                          ;
+;         6 data inputs ; 101                         ;
+;     shared            ; 20                          ;
+;         0 data inputs ; 2                           ;
+;         1 data inputs ; 9                           ;
 ;         2 data inputs ; 9                           ;
 ; arriav_mac            ; 2                           ;
 ; boundary_port         ; 24                          ;
 ; generic_pll           ; 1                           ;
 ; stratixv_ram_block    ; 8                           ;
 ;                       ;                             ;
-; Max LUT depth         ; 5.70                        ;
-; Average LUT depth     ; 3.20                        ;
+; Max LUT depth         ; 7.20                        ;
+; Average LUT depth     ; 3.57                        ;
 +-----------------------+-----------------------------+
 
 
@@ -840,7 +908,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:00     ;
+; Top            ; 00:00:01     ;
 +----------------+--------------+
 
 
@@ -850,7 +918,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 23.1std.0 Build 991 11/28/2023 SC Standard Edition
-    Info: Processing started: Fri May 10 17:14:11 2024
+    Info: Processing started: Mon May 13 14:45:21 2024
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off FlappyBird -c FlappyBird
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
@@ -1021,6 +1089,33 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/alts
 Info (12128): Elaborating entity "altsyncram_d5g1" for hierarchy "char_rom:ch|altsyncram:altsyncram_component|altsyncram_d5g1:auto_generated" File: c:/intelfpga/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
 Info (12128): Elaborating entity "text_setter" for hierarchy "text_setter:t" File: C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 279
 Info (12128): Elaborating entity "score_check" for hierarchy "score_check:sc" File: C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 288
+Info (278001): Inferred 2 megafunctions from design logic
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "text_setter:t|Div0" File: C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/text_setter.vhd Line: 44
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "text_setter:t|Mod0" File: C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/text_setter.vhd Line: 45
+Info (12130): Elaborated megafunction instantiation "text_setter:t|lpm_divide:Div0" File: C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/text_setter.vhd Line: 44
+Info (12133): Instantiated megafunction "text_setter:t|lpm_divide:Div0" with the following parameter: File: C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/text_setter.vhd Line: 44
+    Info (12134): Parameter "LPM_WIDTHN" = "6"
+    Info (12134): Parameter "LPM_WIDTHD" = "4"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_3am.tdf
+    Info (12023): Found entity 1: lpm_divide_3am File: C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/db/lpm_divide_3am.tdf Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_9kh.tdf
+    Info (12023): Found entity 1: sign_div_unsign_9kh File: C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/db/sign_div_unsign_9kh.tdf Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_ose.tdf
+    Info (12023): Found entity 1: alt_u_div_ose File: C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/db/alt_u_div_ose.tdf Line: 23
+Info (12130): Elaborated megafunction instantiation "text_setter:t|lpm_divide:Mod0" File: C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/text_setter.vhd Line: 45
+Info (12133): Instantiated megafunction "text_setter:t|lpm_divide:Mod0" with the following parameter: File: C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/text_setter.vhd Line: 45
+    Info (12134): Parameter "LPM_WIDTHN" = "6"
+    Info (12134): Parameter "LPM_WIDTHD" = "6"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_82m.tdf
+    Info (12023): Found entity 1: lpm_divide_82m File: C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/db/lpm_divide_82m.tdf Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_bkh.tdf
+    Info (12023): Found entity 1: sign_div_unsign_bkh File: C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/db/sign_div_unsign_bkh.tdf Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_sse.tdf
+    Info (12023): Found entity 1: alt_u_div_sse File: C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/db/alt_u_div_sse.tdf Line: 23
 Info (13000): Registers with preset signals will power-up high File: C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/mouse.vhd Line: 146
 Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning (13024): Output pins are stuck at VCC or GND
@@ -1069,18 +1164,18 @@ Warning (21074): Design contains 4 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "SW[1]" File: C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 9
     Warning (15610): No output dependent on input pin "SW[2]" File: C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 9
     Warning (15610): No output dependent on input pin "KEY[1]" File: C:/Users/ethan/Desktop/School/2024/Semester 1/COMPSYS 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 10
-Info (21057): Implemented 519 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 585 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 6 input pins
     Info (21059): Implemented 16 output pins
     Info (21060): Implemented 2 bidirectional pins
-    Info (21061): Implemented 484 logic cells
+    Info (21061): Implemented 550 logic cells
     Info (21064): Implemented 8 RAM segments
     Info (21065): Implemented 1 PLLs
     Info (21062): Implemented 2 DSP elements
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 67 warnings
-    Info: Peak virtual memory: 4965 megabytes
-    Info: Processing ended: Fri May 10 17:14:19 2024
-    Info: Elapsed time: 00:00:08
-    Info: Total CPU time (on all processors): 00:00:07
+    Info: Peak virtual memory: 4958 megabytes
+    Info: Processing ended: Mon May 13 14:45:31 2024
+    Info: Elapsed time: 00:00:10
+    Info: Total CPU time (on all processors): 00:00:12
 
 

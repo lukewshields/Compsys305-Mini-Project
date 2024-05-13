@@ -17,54 +17,53 @@ end entity text_setter;
 
 
 architecture arc of text_setter is 
+signal s_character_address : std_logic_vector (5 downto 0);
 begin
 
 
 process(clk)
+variable ones_score,tens_score : std_logic_vector(5 downto 0);
+variable current_score : integer;
 begin
 	if rising_edge(clk) then
-	if(pixel_row = "000010") then
-		case pixel_col is 
-			when "000010" => character_address <= "010011";
-			when "000011" => character_address <= "000011";
-			when "000100" => character_address <= "001111";
-			when "000101" => character_address <= "010010";
-			when "000110" => character_address <= "000101";
-			when others => character_address <= "100000";
-		end case;
-		if (enable='1') then
---		if ((score /= "0000") and (score<"1010"))then
---			if (pixel_col = "000111") then
---				character_address<= score + "011000";
---				else
---				character_address <= "100000";
---			end if;
---			
---			else
---			character_address<=score + "011000";
---		end if;
-			if (pixel_col = "001000") then
-				character_address<= score + "110000";
-			end if;
-		end if;
+		if(pixel_row = "000010") then
+			case pixel_col is 
+			when "000010" => s_character_address <= "010011";
+			when "000011" => s_character_address <= "000011";
+			when "000100" => s_character_address <= "001111";
+			when "000101" => s_character_address <= "010010";
+			when "000110" => s_character_address <= "000101";
+			when others => s_character_address <= "100000";
+			end case;
+							current_score := conv_integer(unsigned(score));		
+				if (current_score<10) then
+					if (pixel_col = "001000") then -- Single digit
+					s_character_address<= CONV_STD_LOGIC_VECTOR(current_score + 48, 6);
+					end if;
+				else
+					tens_score := CONV_STD_LOGIC_VECTOR(current_score/10, 6);  -- Right shift by 4 to get tens digit
+					ones_score := CONV_STD_LOGIC_VECTOR(current_score mod 10,6); 
+					if (pixel_col = "001000") then
+						s_character_address <= tens_score + "110000"; -- Displays single digit
+					elsif (pixel_col = "001001") then
+						s_character_address <= ones_score + "110000"; -- Displays tens digit
+					end if;
+				end if;
+				
 	elsif (pixel_row = conv_std_logic_vector(15,6) and enable = '0')then
 		case pixel_col is
-			when "010010" => character_address <= "010000";
-			when "010011" => character_address <= "000001";
-			when "010100" => character_address <= "010101";
-			when "010101" => character_address <= "010011";
-			when "010110" => character_address <= "000101";
-			when "010111" => character_address <= "000100";
-			when others => character_address <= "100000";
+			when "010010" => s_character_address <= "010000";
+			when "010011" => s_character_address <= "000001";
+			when "010100" => s_character_address <= "010101";
+			when "010101" => s_character_address <= "010011";
+			when "010110" => s_character_address <= "000101";
+			when "010111" => s_character_address <= "000100";
+			when others => s_character_address <= "100000";
 		end case;
 	else
-		character_address <= "100000";
+		s_character_address <= "100000";
 	end if;
 	end if;
 end process;
-
+character_address <= s_character_address;
 end architecture arc;
-
-
-
-
