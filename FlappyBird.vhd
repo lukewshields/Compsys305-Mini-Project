@@ -99,7 +99,7 @@ architecture arc of FlappyBird is
 	
 	component text_setter is 
 		port (
-			pixel_row, pixel_col : in std_logic_vector (9 downto 4);
+			pixel_row, pixel_col : in std_logic_vector (9 downto 0);
 			score : in std_logic_vector(5 downto 0);
 			clk,enable : in std_logic;
 			character_address,pause_address : out std_logic_vector (5 downto 0)
@@ -287,8 +287,8 @@ begin
 --    );
 	 t: text_setter
 	 port map(
-	 pixel_row => pixel_row_vga(9 downto 4),
-	 pixel_col => pixel_col_vga (9 downto 4),
+	 pixel_row => pixel_row_vga(9 downto 0),
+	 pixel_col => pixel_col_vga (9 downto 0),
 	 score => score,
 	 clk=>clk_25,
 	 enable=>hold_enable,
