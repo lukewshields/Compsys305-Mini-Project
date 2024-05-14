@@ -1,0 +1,412 @@
+m255
+K4
+z2
+!s11e vcom 2020.2 2020.04, Apr 19 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project
+T_opt
+!s110 1715133597
+VeK;SVBf:cL>0oQUQj4_OI2
+Z1 04 12 3 work tb_debouncer arc 1
+=1-cc96e521853a-663adc9d-2e7-5470
+Z2 o-quiet -auto_acc_if_foreign -work work
+Z3 tCvgOpt 0
+n@_opt
+Z4 OE;O;2020.2;71
+R0
+T_opt1
+!s110 1715643492
+VS3lXiXY?3fPYHT9FCnh9R0
+R1
+=1-cc96e51e14b6-6642a464-6a-4220
+R2
+R3
+n@_opt1
+R4
+R0
+T_opt2
+!s110 1715644624
+V[Y?zaF?0g:Nfef6RY1j:D3
+04 7 9 work tb_lfsr test_lfsr 1
+=1-cc96e51e14b6-6642a8cf-381-1a90
+R2
+R3
+n@_opt2
+R4
+Edebouncer
+Z5 w1715133580
+Z6 DPx4 ieee 16 std_logic_signed 0 22 C<aanc0R`<LWPSe[JYRP^3
+Z7 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z8 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z9 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 10
+R0
+Z10 8C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/debouncer.vhd
+Z11 FC:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/debouncer.vhd
+l0
+L7 1
+VMF1[0K[z:cKzI2_KN8X=V3
+!s100 T;]n8z:JXnnZF>U@nVoGz1
+Z12 OE;C;2020.2;71
+32
+Z13 !s110 1715133586
+!i10b 1
+Z14 !s108 1715133586.000000
+Z15 !s90 -reportprogress|300|-work|work|C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/debouncer.vhd|
+Z16 !s107 C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/debouncer.vhd|
+!i113 0
+Z17 o-work work
+Z18 tExplicit 1 CvgOpt 0
+Aarc
+R6
+R7
+R8
+R9
+DEx4 work 9 debouncer 0 22 MF1[0K[z:cKzI2_KN8X=V3
+!i122 10
+l16
+L13 27
+VcC4lOK=RO1P^FS>BWbcXe0
+!s100 PnL^0L0clV=SKkKgbM9[g3
+R12
+32
+R13
+!i10b 1
+R14
+R15
+R16
+!i113 0
+R17
+R18
+Elfsr
+Z19 w1715644607
+R7
+Z20 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+R8
+R9
+!i122 25
+R0
+Z21 8C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/LFSR.vhd
+Z22 FC:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/LFSR.vhd
+l0
+L6 1
+VFJ@MK_6cBokg02M4CT`O50
+!s100 EAZ[dV2fD:4;0P9N?0:1]2
+R12
+32
+Z23 !s110 1715644608
+!i10b 1
+Z24 !s108 1715644608.000000
+Z25 !s90 -reportprogress|300|-work|work|C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/LFSR.vhd|
+Z26 !s107 C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/LFSR.vhd|
+!i113 0
+R17
+R18
+Aarc
+R7
+R20
+R8
+R9
+DEx4 work 4 lfsr 0 22 FJ@MK_6cBokg02M4CT`O50
+!i122 25
+l15
+L13 24
+Vj^DmgPWV[la<=EoWWQRLb0
+!s100 N_1nd^n^?C>EN0Am1@T9k1
+R12
+32
+R23
+!i10b 1
+R24
+R25
+R26
+!i113 0
+R17
+R18
+Etb_debouncer
+Z27 w1715132890
+R6
+R7
+R8
+R9
+!i122 11
+R0
+Z28 8C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/tb_debouncer.vhd
+Z29 FC:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/tb_debouncer.vhd
+l0
+L7 1
+Voon?bG0gKzjMbcXI[n?Oc1
+!s100 C8RV5JT>VamlYRdi]_[f>1
+R12
+32
+Z30 !s110 1715133589
+!i10b 1
+Z31 !s108 1715133589.000000
+Z32 !s90 -reportprogress|300|-work|work|C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/tb_debouncer.vhd|
+Z33 !s107 C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/tb_debouncer.vhd|
+!i113 0
+R17
+R18
+Aarc
+R6
+R7
+R8
+R9
+DEx4 work 12 tb_debouncer 0 22 oon?bG0gKzjMbcXI[n?Oc1
+!i122 11
+l20
+L11 19
+VmZmObz@QRkIWG@;f:951A2
+!s100 NKf[MeMFgah431QKLiEC<1
+R12
+32
+R30
+!i10b 1
+R31
+R32
+R33
+!i113 0
+R17
+R18
+Etb_lfsr
+Z34 w1715644545
+R7
+R20
+R8
+R9
+!i122 26
+R0
+Z35 8C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/TB_LFSR.vhd
+Z36 FC:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/TB_LFSR.vhd
+l0
+L6 1
+VzCjbHg=L8eZ=1Y9;zCGHS1
+!s100 kU6Wa9zWceP=4:hETGOdP3
+R12
+32
+Z37 !s110 1715644612
+!i10b 1
+Z38 !s108 1715644612.000000
+Z39 !s90 -reportprogress|300|-work|work|C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/TB_LFSR.vhd|
+Z40 !s107 C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/TB_LFSR.vhd|
+!i113 0
+R17
+R18
+Atest_lfsr
+R7
+R20
+R8
+R9
+DEx4 work 7 tb_lfsr 0 22 zCjbHg=L8eZ=1Y9;zCGHS1
+!i122 26
+l19
+L9 30
+V@iD>ZDbNHURX`cKB6jOkW1
+!s100 co:@7>9RR:4SI<]Ei<odP2
+R12
+32
+R37
+!i10b 1
+R38
+R39
+R40
+!i113 0
+R17
+R18
+src/vital2000/prmtvs_p_2000.vhd
+Fvhdl_src/vital2000/prmtvs_p_2000.vhd
+l0
+L50 1
+VG>kiXP8Q9dRClKfK1Zn7j1
+!s100 G>kiXP8Q9dRClKfK1Zn7j1
+R6
+31
+b1
+R32
+!i10b 1
+R33
+!s90 -debuglib|-suppress|12110|-93|-work|ieee|-novital|-dirpath|$MODEL_TECH/..|vhdl_src/vital2000/prmtvs_p_2000.vhd|
+!s107 vhdl_src/vital2000/prmtvs_p_2000.vhd|
+!i113 1
+R105
+R12
+Bbody
+DPx4 work 16 vital_primitives 0 22 G>kiXP8Q9dRClKfK1Zn7j1
+R104
+R21
+R20
+!i122 22
+8vhdl_src/vital2000/prmtvs_b_2000.vhd
+Fvhdl_src/vital2000/prmtvs_b_2000.vhd
+l0
+L33 1
+VL8@OL8nfVkLF;7TL8_DPa1
+!s100 L8@OL8nfVkLF;7TL8_DPa1
+R6
+31
+R32
+!i10b 1
+R33
+!s90 -debuglib|-suppress|12110|-93|-work|ieee|-novital|-dirpath|$MODEL_TECH/..|vhdl_src/vital2000/prmtvs_b_2000.vhd|
+!s107 vhdl_src/vital2000/prmtvs_b_2000.vhd|
+!i113 1
+R105
+R12
+Pvital_timing
+R21
+R20
+!i122 20
+R2
+R3
+8vhdl_src/vital2000/timing_p_2000.vhd
+Fvhdl_src/vital2000/timing_p_2000.vhd
+l0
+R94
+VJ>EBealN09f8GzldA[z2>3
+!s100 J>EBealN09f8GzldA[z2>3
+R6
+31
+b1
+R7
+!i10b 1
+R76
+!s90 -debuglib|-suppress|12110|-93|-work|ieee|-novital|-dirpath|$MODEL_TECH/..|vhdl_src/vital2000/timing_p_2000.vhd|
+!s107 vhdl_src/vital2000/timing_p_2000.vhd|
+!i113 1
+R105
+R12
+Bbody
+DPx4 work 12 vital_timing 0 22 J>EBealN09f8GzldA[z2>3
+R21
+R20
+!i122 21
+8vhdl_src/vital2000/timing_b_2000.vhd
+Fvhdl_src/vital2000/timing_b_2000.vhd
+l0
+R22
+VKEim8d[eJ5dE^:mEG0P3S0
+!s100 KEim8d[eJ5dE^:mEG0P3S0
+R6
+31
+R7
+!i10b 1
+R76
+!s90 -debuglib|-suppress|12110|-93|-work|ieee|-novital|-dirpath|$MODEL_TECH/..|vhdl_src/vital2000/timing_b_2000.vhd|
+!s107 vhdl_src/vital2000/timing_b_2000.vhd|
+!i113 1
+R105
+R12
+m255
+K4
+z2
+!s8c locked
+!s11e vcom 2020.2 2020.04, Apr 19 2020
+!s95 MTI
+cModel Technology Builtin Library
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+dC:/cygwin/pc_home/rhino/buildsites/2020.p/builds/win32/modeltech
+Penv
+!i122 1
+Z0 w1587353418
+Z1 d$MODEL_TECH/..
+Z2 8vhdl_src/std/env.vhd
+Z3 Fvhdl_src/std/env.vhd
+l0
+L1 1
+Vd?`1ck@NdeD@H3RZG7FgZ2
+!s100 d?`1ck@NdeD@H3RZG7FgZ2
+Z4 OE;C;2020.2;71
+32
+b1
+Z5 !s110 1587353550
+!i10b 1
+Z6 !s108 1587353550.000000
+Z7 !s90 -debuglib|-suppress|12110|-work|std|-dirpath|$MODEL_TECH/..|vhdl_src/std/env.vhd|
+Z8 !s107 vhdl_src/std/env.vhd|
+!i113 1
+Z9 o-suppress 12110 -debuglib -work std -dirpath {$MODEL_TECH/..}
+Z10 tExplicit 1 CvgOpt 0
+Bbody
+DPx4 work 3 env 0 22 d?`1ck@NdeD@H3RZG7FgZ2
+!i122 1
+l0
+L15 1
+VGO=IeNa]6JLe2BRN4G<kA2
+!s100 GO=IeNa]6JLe2BRN4G<kA2
+R4
+32
+R5
+!i10b 1
+R6
+R7
+R8
+!i113 1
+R9
+R10
+Pstandard
+!i122 0
+R0
+R1
+8vhdl_src/std/standard.vhd
+Fvhdl_src/std/standard.vhd
+l0
+L8 1
+VofRa6alAEoSE^5WcJ^O]C2
+!s100 ofRa6alAEoSE^5WcJ^O]C2
+R4
+33
+R5
+!i10b 1
+R6
+!s90 -debuglib|-suppress|12110|-s|-2008|-work|std|-dirpath|$MODEL_TECH/..|vhdl_src/std/standard.vhd|
+!s107 vhdl_src/std/standard.vhd|
+!i113 1
+o-suppress 12110 -debuglib -s -2008 -work std -dirpath {$MODEL_TECH/..}
+R10
+Ptextio
+!i122 2
+Z11 w1578762055
+R1
+Z12 8vhdl_src/std/textio.vhd
+Z13 Fvhdl_src/std/textio.vhd
+l0
+L1 1
+VzE1`LPoLg^DX3Oz^4Fj1K3
+!s100 zE1`LPoLg^DX3Oz^4Fj1K3
+R4
+33
+b1
+R5
+!i10b 1
+R6
+Z14 !s90 -debuglib|-suppress|12110|-2008|-work|std|-dirpath|$MODEL_TECH/..|vhdl_src/std/textio.vhd|
+Z15 !s107 vhdl_src/std/textio.vhd|
+!i113 1
+Z16 o-suppress 12110 -debuglib -2008 -work std -dirpath {$MODEL_TECH/..}
+R10
+Bbody
+DPx4 work 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+!i122 2
+l0
+L186 1
+VOBFf4Pj<FG4ZXfzD:k]VN1
+!s100 OBFf4Pj<FG4ZXfzD:k]VN1
+R4
+33
+R5
+!i10b 1
+R6
+R14
+R15
+!i113 1
+R16
+R10

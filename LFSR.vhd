@@ -6,7 +6,7 @@ use IEEE.std_logic_unsigned.all;
 entity LFSR is 
 	port (
 		clk, reset : in std_logic;
-		rand : out std_logic_vector (7 downto 0)
+		rand : out std_logic_vector (9 downto 0)
 	);
 end entity LFSR;
 
@@ -26,9 +26,11 @@ architecture arc of LFSR is
 			rand_temp(5) <= rand_temp(4);
 			rand_temp(6) <= rand_temp(5);
 			rand_temp(7) <= rand_temp(6);
+			rand_temp(0) <= rand_temp(7);
 			--rand_temp(8) <= rand_temp(7);
-			rand_temp(0) <= rand_temp(7);	
+			--rand_temp(9) <= rand_temp(8);
+			--rand_temp(0) <= rand_temp(9);	
 		end if;
-		rand <= rand_temp;
+		rand <= '0' & '0' & rand_temp;
 	end process;
 end architecture arc;

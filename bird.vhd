@@ -72,7 +72,7 @@ begin
 				counter <= 0;
 				fall_early <= '1';
 			else  
-				bird_y_motion <= CONV_STD_LOGIC_VECTOR(2,10);
+				bird_y_motion <= CONV_STD_LOGIC_VECTOR(3,10);
 			end if;
 			--Compute next ball Y position
 			bird_y_pos <= bird_y_pos + bird_y_motion;

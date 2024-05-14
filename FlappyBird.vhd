@@ -121,7 +121,7 @@ architecture arc of FlappyBird is
 	component LFSR is 
 		port (
 			clk, reset : in std_logic;
-			rand : out std_logic_vector (7 downto 0)
+			rand : out std_logic_vector (9 downto 0)
 		);
 	end component LFSR;
 	
@@ -132,12 +132,6 @@ architecture arc of FlappyBird is
 		);
 	end component BCD_to_SevenSeg;
 	
---	component Pad_Input is
---		port (
---			input_value : in std_logic_vector(1 downto 0);
---			output_value : out std_logic_vector(3 downto 0)
---		);
---	end component Pad_Input;
 
 
 	
@@ -156,7 +150,7 @@ architecture arc of FlappyBird is
 	signal pipes_x_pos,pipes_x_pos2,pipes_x_pos3 : std_logic_vector (10 downto 0);
 	signal bird_x_pos, pipe_width: std_logic_vector (9 downto 0);
 	signal score : std_logic_vector (5 downto 0);
-	signal rand_bits : std_logic_vector (7 downto 0);
+	signal rand_bits : std_logic_vector (9 downto 0);
 	signal tens_score : std_logic_vector (3 downto 0);
 	signal ones_score : std_logic_vector (3 downto 0);
 	
@@ -191,6 +185,7 @@ begin
 	
 			
 	LEDR(1) <= collide;
+	LEDR(0) <= hold_enable;
 	--LEDR(0) <= collide;
 	
 	divider : pll 
@@ -206,7 +201,8 @@ begin
 			pixel_row => pixel_row_vga,
 			pixel_col => pixel_col_vga,
 			--init_x_pos => conv_std_logic_vector(600, 11),
-			rand => SW,
+			--rand => SW,
+			rand => rand_bits,
 			clk => clk_25, 
 			vert_sync => vert_s,
 			enable => hold_enable,
@@ -329,8 +325,8 @@ begin
 	
 	rand_bit_gen : lfsr
 		port map (
-			clk => clk_25,
-			reset => '0',
+			clk => vert_s,
+			reset => not hold_enable,
 			rand => rand_bits
 		);
 				

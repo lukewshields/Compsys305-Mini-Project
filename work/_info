@@ -28,6 +28,16 @@ R2
 R3
 n@_opt1
 R4
+R0
+T_opt2
+!s110 1715644624
+V[Y?zaF?0g:Nfef6RY1j:D3
+04 7 9 work tb_lfsr test_lfsr 1
+=1-cc96e51e14b6-6642a8cf-381-1a90
+R2
+R3
+n@_opt2
+R4
 Edebouncer
 Z5 w1715133580
 Z6 DPx4 ieee 16 std_logic_signed 0 22 C<aanc0R`<LWPSe[JYRP^3
@@ -74,24 +84,24 @@ R16
 R17
 R18
 Elfsr
-Z19 w1715640615
+Z19 w1715644607
 R7
 Z20 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
 R8
 R9
-!i122 12
+!i122 25
 R0
 Z21 8C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/LFSR.vhd
 Z22 FC:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/LFSR.vhd
 l0
 L6 1
-VzYLF5hh:;;_iS33UW4@eb1
-!s100 04hY6^GoX2_?D;D5ZEg[g1
+VFJ@MK_6cBokg02M4CT`O50
+!s100 EAZ[dV2fD:4;0P9N?0:1]2
 R12
 32
-Z23 !s110 1715643477
+Z23 !s110 1715644608
 !i10b 1
-Z24 !s108 1715643477.000000
+Z24 !s108 1715644608.000000
 Z25 !s90 -reportprogress|300|-work|work|C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/LFSR.vhd|
 Z26 !s107 C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/LFSR.vhd|
 !i113 0
@@ -102,12 +112,12 @@ R7
 R20
 R8
 R9
-DEx4 work 4 lfsr 0 22 zYLF5hh:;;_iS33UW4@eb1
-!i122 12
+DEx4 work 4 lfsr 0 22 FJ@MK_6cBokg02M4CT`O50
+!i122 25
 l15
-L13 22
-VS@[Lng^HgKFEo9=OE[D<;2
-!s100 kH30R@=YGUh4LnnNgj<TQ1
+L13 24
+Vj^DmgPWV[la<=EoWWQRLb0
+!s100 N_1nd^n^?C>EN0Am1@T9k1
 R12
 32
 R23
@@ -164,12 +174,12 @@ R33
 R17
 R18
 Etb_lfsr
-Z34 w1713923114
+Z34 w1715644545
 R7
 R20
 R8
 R9
-!i122 13
+!i122 26
 R0
 Z35 8C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/TB_LFSR.vhd
 Z36 FC:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/TB_LFSR.vhd
@@ -179,9 +189,9 @@ VzCjbHg=L8eZ=1Y9;zCGHS1
 !s100 kU6Wa9zWceP=4:hETGOdP3
 R12
 32
-Z37 !s110 1715643481
+Z37 !s110 1715644612
 !i10b 1
-Z38 !s108 1715643481.000000
+Z38 !s108 1715644612.000000
 Z39 !s90 -reportprogress|300|-work|work|C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/TB_LFSR.vhd|
 Z40 !s107 C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/TB_LFSR.vhd|
 !i113 0
@@ -193,11 +203,11 @@ R20
 R8
 R9
 DEx4 work 7 tb_lfsr 0 22 zCjbHg=L8eZ=1Y9;zCGHS1
-!i122 13
+!i122 26
 l19
 L9 30
-V:c_EgA;OlLPj35;:5h1Cd3
-!s100 lTKl:JA7hFnFK;kne<`H72
+V@iD>ZDbNHURX`cKB6jOkW1
+!s100 co:@7>9RR:4SI<]Ei<odP2
 R12
 32
 R37
