@@ -11,6 +11,7 @@ entity pipes is
 		  --init_x_pos : in std_logic_vector(10 downto 0);
 			rand : in std_logic_vector (9 downto 0);
 			clk, vert_sync, enable: in std_logic;
+			--mode : in std_logic_vector(1 downto 0);
 			red, green, blue, pipes_on_out: out std_logic;
 			pipes_x_pos1_out,pipes_x_pos2_out,pipes_x_pos3_out : out std_logic_vector (10 downto 0); -- for determining score
 			pipe_width_out: OUT std_logic_vector (9 downto 0)
@@ -67,7 +68,7 @@ architecture arc of pipes is
 	)
 
 	 or (pixel_row >= conv_std_logic_vector(450, 10))
-	) else '0';
+	) else '0'; --later add an and mode is in one of the states where we need pipes
 	
 	
 	

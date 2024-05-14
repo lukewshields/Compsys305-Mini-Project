@@ -25,7 +25,7 @@ process(clk)
 variable ones_score,tens_score : std_logic_vector(5 downto 0);
 variable current_score : integer;
 begin
-	if rising_edge(clk) then
+	if rising_edge(clk) then -- later add an and we are in one of the states where we want the nomral text?
 		if(pixel_row = "000010") then
 			case pixel_col is 
 			when "000010" => s_character_address <= "010011";

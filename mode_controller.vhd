@@ -1,10 +1,11 @@
-Library IEEE;
+ Library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.std_logic_unsigned.all;
 
 entity mode_controller is 
     port (
-        key1, key0, clk, reset : in std_logic;
+        clk, reset : in std_logic;
+		  switches : in std_logic_vector (1 downto 0);
         mode : out std_logic_vector (1 downto 0)
     );
 end entity mode_controller;
@@ -38,20 +39,20 @@ begin
             end case; 
     end process;
 
-    NEXT_STATE_DECODE : process(state, next_state, key1, key0)
+    NEXT_STATE_DECODE : process(state, next_state, switches)
         begin
         next_state <= menu;
         case (state) is 
             when (menu) => 
-                if (key1 = '0' and key0 = '1') then
+                if (switches = "01") then
                     next_state <= train;
-                elsif (key1 = '1' and key0 = '0') then
+                elsif (switches = "10") then
                     next_state <= game;
                 else    
                     next_state <= menu;
                 end if;
             when (train) => 
-               if (key1 = '1' and key0 = '0') then
+               if (switches = "10") then
                     next_state <= game;
                 elsif (reset = '1') then
                     next_state <= menu;
@@ -59,7 +60,7 @@ begin
                     next_state <= train;
                 end if;
             when (game) => 
-                if (key1 = '0' and key0 = '1') then
+                if (switches = "01") then
                     next_state <= train;
                 elsif (reset = '1') then
                     next_state <= menu;

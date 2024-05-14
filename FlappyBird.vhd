@@ -110,7 +110,7 @@ architecture arc of FlappyBird is
 	
 	component score_check is 
 		port(
-			vert_sync, Enable: in std_logic;
+			vert_sync, Enable, collision: in std_logic;
 			pipe_x_pos1,pipe_x_pos2,pipe_x_pos3 : in std_logic_vector (10 downto 0);
 			pipe_width,bird_x_pos : in std_logic_vector (9 downto 0);
 			score: out std_logic_vector (5 downto 0); --std logic vector for use of arithemetic
@@ -133,7 +133,13 @@ architecture arc of FlappyBird is
 	end component BCD_to_SevenSeg;
 	
 
-
+	component mode_controller is 
+		port (
+			clk, reset : in std_logic;
+			switches : in std_logic_vector (1 downto 0);
+			mode : out std_logic_vector (1 downto 0)
+		);
+	end component mode_controller;
 	
 	signal clk_25, red, green, blue, vert_s : std_logic;
 	signal pixel_row_vga : std_logic_vector (9 downto 0);
@@ -156,6 +162,8 @@ architecture arc of FlappyBird is
 	
 	signal char_addy : std_logic_vector (5 downto 0);
 	signal rom_mux_addy : std_logic;
+	
+	signal mode : std_logic_vector (1 downto 0);
 	
 	
 	signal trash : std_logic_vector (9 downto 0);
@@ -185,7 +193,7 @@ begin
 	
 			
 	LEDR(1) <= collide;
-	LEDR(0) <= hold_enable;
+	--LEDR(0) <= hold_enable;
 	--LEDR(0) <= collide;
 	
 	divider : pll 
@@ -233,11 +241,11 @@ begin
 --		
 		
 	
-	red_final <= (red_bird and not collide) or rom_mux_addy;
+	red_final <= ((red_bird and not collide) or rom_mux_addy) and not mode(1) and mode(0);
 --	(red_bird and not collide) or 
-	green_final <= green_pipes or rom_mux_addy;
+	green_final <= (green_pipes or rom_mux_addy) and not mode(1) and mode(0);
 --	green_pipes or
-	blue_final <= (blue_pipes and not red_bird) or rom_mux_addy;
+	blue_final <= ((blue_pipes and not red_bird) or rom_mux_addy) and not mode(1) and mode(0);
 --	 
 		
 	avatar : bird 
@@ -313,6 +321,7 @@ begin
 		port map (
 		vert_sync=> vert_s,
 		Enable => hold_enable,
+		collision => collide,
 		pipe_x_pos1 => pipes_x_pos,
 		pipe_x_pos2 => pipes_x_pos2,
 		pipe_x_pos3 => pipes_x_pos3,
@@ -342,7 +351,16 @@ begin
 			BCD_digit => ones_score,
 			SevenSeg_out => HEX0
 		);
-
+	controller : mode_controller 
+		port map (
+			clk => clk_25,
+			reset => '0',
+			switches => SW (1 downto 0),
+			mode => mode
+		);
+	
+	
+	
 	--for death detection use pixel clashes between red and green signals
 		
 end architecture arc;
