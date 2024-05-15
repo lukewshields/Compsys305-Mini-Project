@@ -35,6 +35,16 @@ begin
 				when "000100" => s_character_address <= "001111";
 				when "000101" => s_character_address <= "010010";
 				when "000110" => s_character_address <= "000101";
+				
+				when conv_std_logic_vector(29, 6)  => s_character_address <=  conv_std_logic_vector(12, 6);
+				when conv_std_logic_vector(30, 6)  => s_character_address <=  conv_std_logic_vector(9, 6);
+				when conv_std_logic_vector(31, 6)  => s_character_address <=  conv_std_logic_vector(22, 6);
+				when conv_std_logic_vector(32, 6)  => s_character_address <=  conv_std_logic_vector(5, 6);
+				when conv_std_logic_vector(33, 6)  => s_character_address <=  conv_std_logic_vector(19, 6);
+				
+				when conv_std_logic_vector(35, 6)  => s_character_address <=  conv_std_logic_vector(48, 6);
+				
+				
 				when others => s_character_address <= "100000";
 				end case;
 					current_score := conv_integer(unsigned(score));		
@@ -68,14 +78,43 @@ begin
 		elsif (mode = "00" or mode = "11") then
 			if (pixel_row = "001100") then
 				case pixel_col is
-					when "010000" => s_character_address <= "010011";
-					when "010001" => s_character_address <= "010011";
-					when "010010" => s_character_address <= "010011";
-					when "010011" => s_character_address <= "010011";
-					when "010100" => s_character_address <= "010011";
-					when "010101" => s_character_address <= "010011";
+--					when "010000" => s_character_address <= "000110";
+--					when "010001" => s_character_address <= "001100";
+--					when "010010" => s_character_address <= "000001";
+--					when "010011" => s_character_address <= "010000";
+--					when "010100" => s_character_address <= "010000";
+--					when "010101" => s_character_address <= "011001";
+
+					when conv_std_logic_vector(14, 6) => s_character_address <= "000110"; --flappy 
+					when conv_std_logic_vector(15, 6) => s_character_address <= "001100";
+					when conv_std_logic_vector(16, 6)  => s_character_address <= "000001";
+					when conv_std_logic_vector(17, 6)  => s_character_address <= "010000";
+					when conv_std_logic_vector(18, 6)  => s_character_address <= "010000";
+					when conv_std_logic_vector(19, 6)  => s_character_address <= "011001";
+					
+					when conv_std_logic_vector(21, 6)  => s_character_address <=  conv_std_logic_vector(2, 6); --bird
+					when conv_std_logic_vector(22, 6)  => s_character_address <=  conv_std_logic_vector(9, 6);
+					when conv_std_logic_vector(23, 6)  => s_character_address <=  conv_std_logic_vector(18, 6);
+					when conv_std_logic_vector(24, 6)  => s_character_address <=  conv_std_logic_vector(4, 6);
+					
+
+			
 					when others => s_character_address <= "100000";
 				end case;
+			elsif (pixel_row = "001110") then
+				case pixel_col is 
+						when conv_std_logic_vector(15, 6)  => s_character_address <=  conv_std_logic_vector(7, 6); --group
+						when conv_std_logic_vector(16, 6)  => s_character_address <=  conv_std_logic_vector(18, 6);
+						when conv_std_logic_vector(17, 6)  => s_character_address <=  conv_std_logic_vector(15, 6);
+						when conv_std_logic_vector(18, 6)  => s_character_address <=  conv_std_logic_vector(21, 6);
+						when conv_std_logic_vector(19, 6)  => s_character_address <=  conv_std_logic_vector(16, 6);
+						
+						when conv_std_logic_vector(21, 6)  => s_character_address <=  conv_std_logic_vector(51, 6);
+						when conv_std_logic_vector(22, 6)  => s_character_address <=  conv_std_logic_vector(48, 6);
+						
+						when others => s_character_address <= "100000";
+				end case;
+				
 			end if;
 		end if;
 	end if;

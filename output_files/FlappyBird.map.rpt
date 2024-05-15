@@ -1,5 +1,5 @@
 Analysis & Synthesis report for FlappyBird
-Wed May 15 13:55:33 2024
+Wed May 15 18:37:01 2024
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
 
 
@@ -63,13 +63,13 @@ refer to the applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +---------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Wed May 15 13:55:33 2024           ;
+; Analysis & Synthesis Status     ; Successful - Wed May 15 18:37:01 2024           ;
 ; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Standard Edition ;
 ; Revision Name                   ; FlappyBird                                      ;
 ; Top-level Entity Name           ; FlappyBird                                      ;
 ; Family                          ; Cyclone V                                       ;
 ; Logic utilization (in ALMs)     ; N/A                                             ;
-; Total registers                 ; 265                                             ;
+; Total registers                 ; 266                                             ;
 ; Total pins                      ; 47                                              ;
 ; Total virtual pins              ; 0                                               ;
 ; Total block memory bits         ; 4,096                                           ;
@@ -185,7 +185,10 @@ refer to the applicable agreement for further details.
 ;     Processor 1            ; 100.0%      ;
 ;     Processor 2            ;   0.0%      ;
 ;     Processor 3            ;   0.0%      ;
-;     Processors 4-16        ;   0.0%      ;
+;     Processor 4            ;   0.0%      ;
+;     Processor 5            ;   0.0%      ;
+;     Processor 6            ;   0.0%      ;
+;     Processors 7-16        ;   0.0%      ;
 +----------------------------+-------------+
 
 
@@ -209,6 +212,7 @@ refer to the applicable agreement for further details.
 ; text_setter.vhd                  ; yes             ; User VHDL File                         ; C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/text_setter.vhd            ;         ;
 ; BCD_to_7Seg.vhd                  ; yes             ; User VHDL File                         ; C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/BCD_to_7Seg.vhd            ;         ;
 ; score_check.vhd                  ; yes             ; User VHDL File                         ; C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/score_check.vhd            ;         ;
+; reset_handle.vhd                 ; yes             ; User VHDL File                         ; C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/reset_handle.vhd           ;         ;
 ; altera_pll.v                     ; yes             ; Megafunction                           ; c:/intelfpga/18.1/quartus/libraries/megafunctions/altera_pll.v                                                        ;         ;
 ; altsyncram.tdf                   ; yes             ; Megafunction                           ; c:/intelfpga/18.1/quartus/libraries/megafunctions/altsyncram.tdf                                                      ;         ;
 ; stratix_ram_block.inc            ; yes             ; Megafunction                           ; c:/intelfpga/18.1/quartus/libraries/megafunctions/stratix_ram_block.inc                                               ;         ;
@@ -246,16 +250,16 @@ refer to the applicable agreement for further details.
 +---------------------------------------------+----------------------------+
 ; Resource                                    ; Usage                      ;
 +---------------------------------------------+----------------------------+
-; Estimate of Logic utilization (ALMs needed) ; 531                        ;
+; Estimate of Logic utilization (ALMs needed) ; 544                        ;
 ;                                             ;                            ;
-; Combinational ALUT usage for logic          ; 921                        ;
-;     -- 7 input functions                    ; 8                          ;
-;     -- 6 input functions                    ; 123                        ;
-;     -- 5 input functions                    ; 55                         ;
-;     -- 4 input functions                    ; 126                        ;
-;     -- <=3 input functions                  ; 609                        ;
+; Combinational ALUT usage for logic          ; 936                        ;
+;     -- 7 input functions                    ; 7                          ;
+;     -- 6 input functions                    ; 134                        ;
+;     -- 5 input functions                    ; 57                         ;
+;     -- 4 input functions                    ; 127                        ;
+;     -- <=3 input functions                  ; 611                        ;
 ;                                             ;                            ;
-; Dedicated logic registers                   ; 265                        ;
+; Dedicated logic registers                   ; 266                        ;
 ;                                             ;                            ;
 ; I/O pins                                    ; 47                         ;
 ; Total MLAB memory bits                      ; 0                          ;
@@ -268,8 +272,8 @@ refer to the applicable agreement for further details.
 ;                                             ;                            ;
 ; Maximum fan-out node                        ; VGA_SYNC:vga|vert_sync_out ;
 ; Maximum fan-out                             ; 147                        ;
-; Total fan-out                               ; 4004                       ;
-; Average fan-out                             ; 3.10                       ;
+; Total fan-out                               ; 4082                       ;
+; Average fan-out                             ; 3.12                       ;
 +---------------------------------------------+----------------------------+
 
 
@@ -278,7 +282,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
 ; Compilation Hierarchy Node                ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                       ; Entity Name         ; Library Name ;
 +-------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------------------------------+---------------------+--------------+
-; |FlappyBird                               ; 921 (0)             ; 265 (0)                   ; 4096              ; 2          ; 47   ; 0            ; |FlappyBird                                                                                                               ; FlappyBird          ; work         ;
+; |FlappyBird                               ; 936 (0)             ; 266 (0)                   ; 4096              ; 2          ; 47   ; 0            ; |FlappyBird                                                                                                               ; FlappyBird          ; work         ;
 ;    |BCD_to_SevenSeg:ones_display|         ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|BCD_to_SevenSeg:ones_display                                                                                  ; BCD_to_SevenSeg     ; work         ;
 ;    |BCD_to_SevenSeg:tens_conv|            ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|BCD_to_SevenSeg:tens_conv                                                                                     ; BCD_to_SevenSeg     ; work         ;
 ;    |LFSR:rand_bit_gen|                    ; 6 (6)               ; 8 (8)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|LFSR:rand_bit_gen                                                                                             ; LFSR                ; work         ;
@@ -295,6 +299,7 @@ refer to the applicable agreement for further details.
 ;    |pll:divider|                          ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|pll:divider                                                                                                   ; pll                 ; pll          ;
 ;       |pll_0002:pll_inst|                 ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|pll:divider|pll_0002:pll_inst                                                                                 ; pll_0002            ; pll          ;
 ;          |altera_pll:altera_pll_i|        ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|pll:divider|pll_0002:pll_inst|altera_pll:altera_pll_i                                                         ; altera_pll          ; work         ;
+;    |reset_handle:e2|                      ; 1 (1)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|reset_handle:e2                                                                                               ; reset_handle        ; work         ;
 ;    |score_check:sc|                       ; 326 (40)            ; 10 (10)                   ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|score_check:sc                                                                                                ; score_check         ; work         ;
 ;       |lpm_divide:Div0|                   ; 68 (0)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|score_check:sc|lpm_divide:Div0                                                                                ; lpm_divide          ; work         ;
 ;          |lpm_divide_bpo:auto_generated|  ; 68 (0)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|score_check:sc|lpm_divide:Div0|lpm_divide_bpo:auto_generated                                                  ; lpm_divide_bpo      ; work         ;
@@ -304,7 +309,7 @@ refer to the applicable agreement for further details.
 ;          |lpm_divide_uio:auto_generated|  ; 218 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|score_check:sc|lpm_divide:Mod0|lpm_divide_uio:auto_generated                                                  ; lpm_divide_uio      ; work         ;
 ;             |abs_divider_4dg:divider|     ; 218 (0)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|score_check:sc|lpm_divide:Mod0|lpm_divide_uio:auto_generated|abs_divider_4dg:divider                          ; abs_divider_4dg     ; work         ;
 ;                |alt_u_div_o2f:divider|    ; 218 (218)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|score_check:sc|lpm_divide:Mod0|lpm_divide_uio:auto_generated|abs_divider_4dg:divider|alt_u_div_o2f:divider    ; alt_u_div_o2f       ; work         ;
-;    |text_setter:t|                        ; 132 (46)            ; 6 (6)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|text_setter:t                                                                                                 ; text_setter         ; work         ;
+;    |text_setter:t|                        ; 146 (60)            ; 6 (6)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|text_setter:t                                                                                                 ; text_setter         ; work         ;
 ;       |lpm_divide:Div0|                   ; 38 (0)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|text_setter:t|lpm_divide:Div0                                                                                 ; lpm_divide          ; work         ;
 ;          |lpm_divide_4am:auto_generated|  ; 38 (0)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|text_setter:t|lpm_divide:Div0|lpm_divide_4am:auto_generated                                                   ; lpm_divide_4am      ; work         ;
 ;             |sign_div_unsign_akh:divider| ; 38 (0)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |FlappyBird|text_setter:t|lpm_divide:Div0|lpm_divide_4am:auto_generated|sign_div_unsign_akh:divider                       ; sign_div_unsign_akh ; work         ;
@@ -390,6 +395,7 @@ Encoding Type:  One-Hot
 ; pipes:pipe1|pipe_x_pos2[0,1]            ; Stuck at GND due to stuck port data_in     ;
 ; pipes:pipe1|pipe_height[9]              ; Stuck at GND due to stuck port data_in     ;
 ; pipes:pipe1|pipe_x_pos[0,1]             ; Stuck at GND due to stuck port data_in     ;
+; reset_handle:e2|hold_reset              ; Merged with reset_handle:e2|count          ;
 ; enable_handle:e|hold_enable             ; Merged with enable_handle:e|count          ;
 ; score_check:sc|pipe_count1[1..9,11..31] ; Merged with score_check:sc|pipe_count1[10] ;
 ; bird:avatar|bird_y_motion[4..9]         ; Merged with bird:avatar|bird_y_motion[1]   ;
@@ -405,7 +411,7 @@ Encoding Type:  One-Hot
 ; VGA_SYNC:vga|pixel_row[9]               ; Stuck at GND due to stuck port data_in     ;
 ; mode_controller:controller|state.game   ; Lost fanout                                ;
 ; mode_controller:controller|state.train  ; Lost fanout                                ;
-; Total Number of Removed Registers = 125 ;                                            ;
+; Total Number of Removed Registers = 126 ;                                            ;
 +-----------------------------------------+--------------------------------------------+
 
 
@@ -424,12 +430,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 265   ;
+; Total registers                              ; 266   ;
 ; Number of registers using Synchronous Clear  ; 59    ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 24    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 215   ;
+; Number of registers using Clock Enable       ; 214   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -490,8 +496,8 @@ Encoding Type:  One-Hot
 ; 3:1                ; 10 bits   ; 20 LEs        ; 0 LEs                ; 20 LEs                 ; Yes        ; |FlappyBird|VGA_SYNC:vga|v_count[1]                      ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |FlappyBird|bird:avatar|bird_y_motion[1]                 ;
 ; 4:1                ; 32 bits   ; 64 LEs        ; 0 LEs                ; 64 LEs                 ; Yes        ; |FlappyBird|bird:avatar|counter[23]                      ;
-; 9:1                ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |FlappyBird|text_setter:t|s_character_address[4]         ;
-; 9:1                ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |FlappyBird|text_setter:t|s_character_address[0]         ;
+; 11:1               ; 2 bits    ; 14 LEs        ; 10 LEs               ; 4 LEs                  ; Yes        ; |FlappyBird|text_setter:t|s_character_address[4]         ;
+; 11:1               ; 3 bits    ; 21 LEs        ; 15 LEs               ; 6 LEs                  ; Yes        ; |FlappyBird|text_setter:t|s_character_address[0]         ;
 ; 5:1                ; 4 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |FlappyBird|BCD_to_SevenSeg:ones_display|SevenSeg_out[5] ;
 ; 5:1                ; 4 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |FlappyBird|BCD_to_SevenSeg:tens_conv|SevenSeg_out[5]    ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------+
@@ -972,31 +978,31 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_ff             ; 265                         ;
+; arriav_ff             ; 266                         ;
 ;     CLR               ; 9                           ;
-;     ENA               ; 151                         ;
+;     ENA               ; 150                         ;
 ;     ENA CLR           ; 15                          ;
 ;     ENA SCLR          ; 49                          ;
 ;     SCLR              ; 10                          ;
-;     plain             ; 31                          ;
+;     plain             ; 33                          ;
 ; arriav_io_obuf        ; 2                           ;
-; arriav_lcell_comb     ; 922                         ;
+; arriav_lcell_comb     ; 937                         ;
 ;     arith             ; 447                         ;
 ;         0 data inputs ; 56                          ;
 ;         1 data inputs ; 182                         ;
 ;         2 data inputs ; 91                          ;
 ;         3 data inputs ; 58                          ;
 ;         4 data inputs ; 60                          ;
-;     extend            ; 8                           ;
-;         7 data inputs ; 8                           ;
-;     normal            ; 435                         ;
+;     extend            ; 7                           ;
+;         7 data inputs ; 7                           ;
+;     normal            ; 451                         ;
 ;         0 data inputs ; 1                           ;
 ;         1 data inputs ; 18                          ;
-;         2 data inputs ; 109                         ;
+;         2 data inputs ; 111                         ;
 ;         3 data inputs ; 63                          ;
-;         4 data inputs ; 66                          ;
-;         5 data inputs ; 55                          ;
-;         6 data inputs ; 123                         ;
+;         4 data inputs ; 67                          ;
+;         5 data inputs ; 57                          ;
+;         6 data inputs ; 134                         ;
 ;     shared            ; 32                          ;
 ;         0 data inputs ; 10                          ;
 ;         1 data inputs ; 13                          ;
@@ -1007,7 +1013,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; stratixv_ram_block    ; 8                           ;
 ;                       ;                             ;
 ; Max LUT depth         ; 22.80                       ;
-; Average LUT depth     ; 7.92                        ;
+; Average LUT depth     ; 7.88                        ;
 +-----------------------+-----------------------------+
 
 
@@ -1026,7 +1032,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
-    Info: Processing started: Wed May 15 13:55:26 2024
+    Info: Processing started: Wed May 15 18:36:53 2024
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off FlappyBird -c FlappyBird
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
@@ -1069,7 +1075,7 @@ Info (12021): Found 2 design units, including 1 entities, in source file collisi
     Info (12022): Found design unit 1: collision-arc File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/collision.vhd Line: 12
     Info (12023): Found entity 1: collision File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/collision.vhd Line: 6
 Info (12021): Found 2 design units, including 1 entities, in source file enable_handle.vhd
-    Info (12022): Found design unit 1: enable_handle-arc File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/enable_handle.vhd Line: 14
+    Info (12022): Found design unit 1: enable_handle-arc File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/enable_handle.vhd Line: 15
     Info (12023): Found entity 1: enable_handle File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/enable_handle.vhd Line: 7
 Info (12021): Found 2 design units, including 1 entities, in source file text_setter.vhd
     Info (12022): Found design unit 1: text_setter-arc File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/text_setter.vhd Line: 20
@@ -1080,20 +1086,23 @@ Info (12021): Found 2 design units, including 1 entities, in source file bcd_to_
 Info (12021): Found 2 design units, including 1 entities, in source file score_check.vhd
     Info (12022): Found design unit 1: score_check-beh File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/score_check.vhd Line: 17
     Info (12023): Found entity 1: score_check File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/score_check.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file reset_handle.vhd
+    Info (12022): Found design unit 1: reset_handle-arc File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/reset_handle.vhd Line: 15
+    Info (12023): Found entity 1: reset_handle File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/reset_handle.vhd Line: 7
 Info (12127): Elaborating entity "FlappyBird" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at FlappyBird.vhd(150): object "trash3" assigned a value but never read File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 150
-Warning (10036): Verilog HDL or VHDL warning at FlappyBird.vhd(151): object "red_pipes" assigned a value but never read File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 151
-Warning (10036): Verilog HDL or VHDL warning at FlappyBird.vhd(153): object "green_bird" assigned a value but never read File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 153
-Warning (10036): Verilog HDL or VHDL warning at FlappyBird.vhd(153): object "blue_bird" assigned a value but never read File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 153
-Warning (10036): Verilog HDL or VHDL warning at FlappyBird.vhd(172): object "trash" assigned a value but never read File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 172
-Warning (10036): Verilog HDL or VHDL warning at FlappyBird.vhd(173): object "trash2" assigned a value but never read File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 173
-Warning (10036): Verilog HDL or VHDL warning at FlappyBird.vhd(174): object "trash4" assigned a value but never read File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 174
+Warning (10036): Verilog HDL or VHDL warning at FlappyBird.vhd(158): object "trash3" assigned a value but never read File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 158
+Warning (10036): Verilog HDL or VHDL warning at FlappyBird.vhd(159): object "red_pipes" assigned a value but never read File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 159
+Warning (10036): Verilog HDL or VHDL warning at FlappyBird.vhd(161): object "green_bird" assigned a value but never read File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 161
+Warning (10036): Verilog HDL or VHDL warning at FlappyBird.vhd(161): object "blue_bird" assigned a value but never read File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 161
+Warning (10036): Verilog HDL or VHDL warning at FlappyBird.vhd(180): object "trash" assigned a value but never read File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 180
+Warning (10036): Verilog HDL or VHDL warning at FlappyBird.vhd(181): object "trash2" assigned a value but never read File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 181
+Warning (10036): Verilog HDL or VHDL warning at FlappyBird.vhd(182): object "trash4" assigned a value but never read File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 182
 Warning (10873): Using initial value X (don't care) for net "LEDR[0]" at FlappyBird.vhd(12) File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 12
 Warning (10873): Using initial value X (don't care) for net "VGA_R[2..0]" at FlappyBird.vhd(14) File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 14
 Warning (10873): Using initial value X (don't care) for net "VGA_G[2..0]" at FlappyBird.vhd(14) File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 14
 Warning (10873): Using initial value X (don't care) for net "VGA_B[2..0]" at FlappyBird.vhd(14) File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 14
-Info (12128): Elaborating entity "VGA_SYNC" for hierarchy "VGA_SYNC:vga" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 178
-Info (12128): Elaborating entity "pll" for hierarchy "pll:divider" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 202
+Info (12128): Elaborating entity "VGA_SYNC" for hierarchy "VGA_SYNC:vga" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 186
+Info (12128): Elaborating entity "pll" for hierarchy "pll:divider" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 210
 Info (12128): Elaborating entity "pll_0002" for hierarchy "pll:divider|pll_0002:pll_inst" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/pll.vhd Line: 32
 Info (12128): Elaborating entity "altera_pll" for hierarchy "pll:divider|pll_0002:pll_inst|altera_pll:altera_pll_i" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/pll/pll_0002.v Line: 85
 Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "wire_to_nowhere_64" into its bus
@@ -1159,25 +1168,28 @@ Info (12133): Instantiated megafunction "pll:divider|pll_0002:pll_inst|altera_pl
     Info (12134): Parameter "duty_cycle17" = "50"
     Info (12134): Parameter "pll_type" = "General"
     Info (12134): Parameter "pll_subtype" = "General"
-Info (12128): Elaborating entity "pipes" for hierarchy "pipes:pipe1" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 210
+Info (12128): Elaborating entity "pipes" for hierarchy "pipes:pipe1" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 218
 Warning (10540): VHDL Signal Declaration warning at pipes.vhd(22): used explicit default value for signal "pipe_gap" because signal was never assigned a value File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/pipes.vhd Line: 22
 Warning (10540): VHDL Signal Declaration warning at pipes.vhd(34): used explicit default value for signal "pipe_width" because signal was never assigned a value File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/pipes.vhd Line: 34
 Warning (10540): VHDL Signal Declaration warning at pipes.vhd(37): used explicit default value for signal "pipe_x_motion" because signal was never assigned a value File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/pipes.vhd Line: 37
 Warning (10540): VHDL Signal Declaration warning at pipes.vhd(43): used explicit default value for signal "bottom" because signal was never assigned a value File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/pipes.vhd Line: 43
-Info (12128): Elaborating entity "bird" for hierarchy "bird:avatar" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 255
+Info (12128): Elaborating entity "bird" for hierarchy "bird:avatar" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 263
 Warning (10540): VHDL Signal Declaration warning at bird.vhd(21): used explicit default value for signal "size" because signal was never assigned a value File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/bird.vhd Line: 21
 Warning (10540): VHDL Signal Declaration warning at bird.vhd(23): used explicit default value for signal "bird_x_pos" because signal was never assigned a value File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/bird.vhd Line: 23
-Info (12128): Elaborating entity "MOUSE" for hierarchy "MOUSE:l" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 271
+Info (12128): Elaborating entity "MOUSE" for hierarchy "MOUSE:l" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 279
 Warning (10036): Verilog HDL or VHDL warning at mouse.vhd(25): object "CHARIN" assigned a value but never read File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/mouse.vhd Line: 25
 Warning (10492): VHDL Process Statement warning at mouse.vhd(151): signal "CHAROUT" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/mouse.vhd Line: 151
 Warning (10492): VHDL Process Statement warning at mouse.vhd(155): signal "CHAROUT" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/mouse.vhd Line: 155
 Warning (10492): VHDL Process Statement warning at mouse.vhd(156): signal "CHAROUT" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/mouse.vhd Line: 156
 Warning (10492): VHDL Process Statement warning at mouse.vhd(157): signal "CHAROUT" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/mouse.vhd Line: 157
-Info (12128): Elaborating entity "collision" for hierarchy "collision:c" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 283
-Info (12128): Elaborating entity "enable_handle" for hierarchy "enable_handle:e" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 292
-Warning (10492): VHDL Process Statement warning at enable_handle.vhd(21): signal "count" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/enable_handle.vhd Line: 21
-Warning (10492): VHDL Process Statement warning at enable_handle.vhd(24): signal "count" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/enable_handle.vhd Line: 24
-Info (12128): Elaborating entity "char_rom" for hierarchy "char_rom:ch" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 299
+Info (12128): Elaborating entity "collision" for hierarchy "collision:c" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 291
+Info (12128): Elaborating entity "enable_handle" for hierarchy "enable_handle:e" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 300
+Warning (10492): VHDL Process Statement warning at enable_handle.vhd(23): signal "count" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/enable_handle.vhd Line: 23
+Warning (10492): VHDL Process Statement warning at enable_handle.vhd(26): signal "count" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/enable_handle.vhd Line: 26
+Info (12128): Elaborating entity "reset_handle" for hierarchy "reset_handle:e2" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 308
+Warning (10492): VHDL Process Statement warning at reset_handle.vhd(22): signal "count" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/reset_handle.vhd Line: 22
+Warning (10492): VHDL Process Statement warning at reset_handle.vhd(25): signal "count" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/reset_handle.vhd Line: 25
+Info (12128): Elaborating entity "char_rom" for hierarchy "char_rom:ch" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 314
 Info (12128): Elaborating entity "altsyncram" for hierarchy "char_rom:ch|altsyncram:altsyncram_component" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/char_rom.vhd Line: 51
 Info (12130): Elaborated megafunction instantiation "char_rom:ch|altsyncram:altsyncram_component" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/char_rom.vhd Line: 51
 Info (12133): Instantiated megafunction "char_rom:ch|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/char_rom.vhd Line: 51
@@ -1198,19 +1210,19 @@ Info (12133): Instantiated megafunction "char_rom:ch|altsyncram:altsyncram_compo
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_d5g1.tdf
     Info (12023): Found entity 1: altsyncram_d5g1 File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/db/altsyncram_d5g1.tdf Line: 27
 Info (12128): Elaborating entity "altsyncram_d5g1" for hierarchy "char_rom:ch|altsyncram:altsyncram_component|altsyncram_d5g1:auto_generated" File: c:/intelfpga/18.1/quartus/libraries/megafunctions/altsyncram.tdf Line: 791
-Info (12128): Elaborating entity "text_setter" for hierarchy "text_setter:t" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 326
-Info (12128): Elaborating entity "score_check" for hierarchy "score_check:sc" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 337
-Info (12128): Elaborating entity "LFSR" for hierarchy "LFSR:rand_bit_gen" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 353
+Info (12128): Elaborating entity "text_setter" for hierarchy "text_setter:t" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 341
+Info (12128): Elaborating entity "score_check" for hierarchy "score_check:sc" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 352
+Info (12128): Elaborating entity "LFSR" for hierarchy "LFSR:rand_bit_gen" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 368
 Warning (10492): VHDL Process Statement warning at LFSR.vhd(34): signal "rand_temp" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/LFSR.vhd Line: 34
-Info (12128): Elaborating entity "BCD_to_SevenSeg" for hierarchy "BCD_to_SevenSeg:tens_conv" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 361
-Info (12128): Elaborating entity "mode_controller" for hierarchy "mode_controller:controller" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 372
+Info (12128): Elaborating entity "BCD_to_SevenSeg" for hierarchy "BCD_to_SevenSeg:tens_conv" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 376
+Info (12128): Elaborating entity "mode_controller" for hierarchy "mode_controller:controller" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 387
 Warning (10492): VHDL Process Statement warning at mode_controller.vhd(57): signal "reset" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/mode_controller.vhd Line: 57
 Warning (10492): VHDL Process Statement warning at mode_controller.vhd(65): signal "reset" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/mode_controller.vhd Line: 65
 Info (278001): Inferred 4 megafunctions from design logic
     Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "score_check:sc|Mod0" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/score_check.vhd Line: 57
     Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "score_check:sc|Div0" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/score_check.vhd Line: 56
-    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "text_setter:t|Div0" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/text_setter.vhd Line: 46
-    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "text_setter:t|Mod0" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/text_setter.vhd Line: 47
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "text_setter:t|Div0" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/text_setter.vhd Line: 56
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "text_setter:t|Mod0" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/text_setter.vhd Line: 57
 Info (12130): Elaborated megafunction instantiation "score_check:sc|lpm_divide:Mod0" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/score_check.vhd Line: 57
 Info (12133): Instantiated megafunction "score_check:sc|lpm_divide:Mod0" with the following parameter: File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/score_check.vhd Line: 57
     Info (12134): Parameter "LPM_WIDTHN" = "32"
@@ -1241,8 +1253,8 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/alt_
     Info (12023): Found entity 1: alt_u_div_ove File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/db/alt_u_div_ove.tdf Line: 22
 Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_abs_kn9.tdf
     Info (12023): Found entity 1: lpm_abs_kn9 File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/db/lpm_abs_kn9.tdf Line: 22
-Info (12130): Elaborated megafunction instantiation "text_setter:t|lpm_divide:Div0" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/text_setter.vhd Line: 46
-Info (12133): Instantiated megafunction "text_setter:t|lpm_divide:Div0" with the following parameter: File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/text_setter.vhd Line: 46
+Info (12130): Elaborated megafunction instantiation "text_setter:t|lpm_divide:Div0" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/text_setter.vhd Line: 56
+Info (12133): Instantiated megafunction "text_setter:t|lpm_divide:Div0" with the following parameter: File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/text_setter.vhd Line: 56
     Info (12134): Parameter "LPM_WIDTHN" = "7"
     Info (12134): Parameter "LPM_WIDTHD" = "4"
     Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
@@ -1253,8 +1265,8 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/sign
     Info (12023): Found entity 1: sign_div_unsign_akh File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/db/sign_div_unsign_akh.tdf Line: 24
 Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_qse.tdf
     Info (12023): Found entity 1: alt_u_div_qse File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/db/alt_u_div_qse.tdf Line: 22
-Info (12130): Elaborated megafunction instantiation "text_setter:t|lpm_divide:Mod0" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/text_setter.vhd Line: 47
-Info (12133): Instantiated megafunction "text_setter:t|lpm_divide:Mod0" with the following parameter: File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/text_setter.vhd Line: 47
+Info (12130): Elaborated megafunction instantiation "text_setter:t|lpm_divide:Mod0" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/text_setter.vhd Line: 57
+Info (12133): Instantiated megafunction "text_setter:t|lpm_divide:Mod0" with the following parameter: File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/text_setter.vhd Line: 57
     Info (12134): Parameter "LPM_WIDTHN" = "7"
     Info (12134): Parameter "LPM_WIDTHD" = "7"
     Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
@@ -1320,18 +1332,18 @@ Warning (21074): Design contains 10 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "SW[9]" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 10
     Warning (15610): No output dependent on input pin "KEY[1]" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 11
     Warning (15610): No output dependent on input pin "KEY[2]" File: C:/Users/lshi790/OneDrive - The University of Auckland/Compsys 305/Compsys305-Mini-Project/FlappyBird.vhd Line: 11
-Info (21057): Implemented 1083 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 1098 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 15 input pins
     Info (21059): Implemented 30 output pins
     Info (21060): Implemented 2 bidirectional pins
-    Info (21061): Implemented 1025 logic cells
+    Info (21061): Implemented 1040 logic cells
     Info (21064): Implemented 8 RAM segments
     Info (21065): Implemented 1 PLLs
     Info (21062): Implemented 2 DSP elements
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 76 warnings
-    Info: Peak virtual memory: 5018 megabytes
-    Info: Processing ended: Wed May 15 13:55:33 2024
-    Info: Elapsed time: 00:00:07
-    Info: Total CPU time (on all processors): 00:00:05
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 78 warnings
+    Info: Peak virtual memory: 5013 megabytes
+    Info: Processing ended: Wed May 15 18:37:01 2024
+    Info: Elapsed time: 00:00:08
+    Info: Total CPU time (on all processors): 00:00:04
 
 

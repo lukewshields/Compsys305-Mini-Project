@@ -54,7 +54,7 @@ begin
             when (train) => 
                if (switches = "10") then
                     next_state <= game;
-                elsif (reset = '1' or switches = "11" or switches ="00") then
+                elsif (reset ='1' or switches = "11" or switches ="00") then --ONE BUG HERE IS RESET only works for however long the key is held
                     next_state <= menu;
                 else 
                     next_state <= train;

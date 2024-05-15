@@ -85,7 +85,8 @@ architecture arc of FlappyBird is
 	end component collision;
 	
 	component enable_handle is 
-		port (enable, collision: in std_logic;
+		port (mode : in std_logic_vector (1 downto 0);
+			enable, collision: in std_logic;
 			hold_enable : out std_logic
 		);
 	end component enable_handle;
@@ -144,6 +145,13 @@ architecture arc of FlappyBird is
 		);
 	end component mode_controller;
 	
+	component reset_handle is 
+			port (
+			reset: in std_logic;
+			hold_reset : out std_logic
+		);
+	end component reset_handle;
+	
 	signal clk_25, red, green, blue, vert_s : std_logic;
 	signal pixel_row_vga : std_logic_vector (9 downto 0);
 	signal pixel_col_vga : std_logic_vector (9 downto 0);
@@ -167,7 +175,7 @@ architecture arc of FlappyBird is
 	signal rom_mux_addy : std_logic;
 	
 	signal mode : std_logic_vector (1 downto 0);
-	
+	signal hold_reset : std_logic;
 	
 	signal trash : std_logic_vector (9 downto 0);
 	signal trash2 : std_logic_vector (9 downto 0);
@@ -291,9 +299,16 @@ begin
 		
 	e : enable_handle 
 		port map (
+			mode => mode,
 			enable => not KEY(0),
 			collision => collide,
 			hold_enable => hold_enable
+		);
+		
+	e2 : reset_handle 
+		port map (
+			reset => not KEY(3),
+			hold_reset => hold_reset
 		);
 		
 	ch: char_rom
@@ -372,7 +387,7 @@ begin
 	controller : mode_controller 
 		port map (
 			clk => clk_25,
-			reset => not KEY(3),
+			reset => hold_reset,
 			switches => SW (1 downto 0),
 			mode => mode 
 		);
