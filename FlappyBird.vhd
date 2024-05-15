@@ -304,6 +304,16 @@ begin
 			clock => clk_25,
 			rom_mux_output => rom_mux_addy
 		);
+		
+--	ch2: char_rom
+--		port map(
+--			character_address => char_addy,
+--			font_row => pixel_row_vga (3 downto 1), 
+--			font_col	=> pixel_col_vga (3 downto 1),
+--			clock => clk_25,
+--			rom_mux_output => menu_text
+--		);
+--	
 	
 	--text_setter port map(pixel_row => pixel_row_vga (5 downto 0), pixel_col => pixel_col_vga (5 downto 0), clk => clk_25, character_address => char_addy);
 --	 text_setter
@@ -364,7 +374,7 @@ begin
 			clk => clk_25,
 			reset => not KEY(3),
 			switches => SW (1 downto 0),
-			mode => mode
+			mode => mode 
 		);
 	
 	
