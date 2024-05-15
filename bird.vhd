@@ -21,13 +21,44 @@ SIGNAL size 					: std_logic_vector(9 DOWNTO 0) := conv_std_logic_vector(8, 10);
 SIGNAL bird_y_pos				: std_logic_vector(9 DOWNTO 0) := conv_std_logic_vector(200, 10);
 SiGNAL bird_x_pos				: std_logic_vector(9 DOWNTO 0) := conv_std_logic_vector(300, 10);
 SIGNAL bird_y_motion			: std_logic_vector(9 DOWNTO 0) := conv_std_logic_vector(1, 10);
-signal prev_clicked : std_logic;
-signal counter : integer := 0; 
-signal fall_early : std_logic;
+signal prev_clicked 			: std_logic;
+signal counter 				: integer := 0; 
+signal fall_early 			: std_logic;
+	
+constant bird_scale 			: STD_LOGIC_VECTOR 				:= CONV_STD_LOGIC_VECTOR(1, 10);
+SIGNAL character_address 	: std_logic_vector(12 DOWNTO 0);
+signal character_select		: STD_LOGIC_VECTOR(1 downto 0) := "00";
+
+component sprite32 
+	generic ( 
+			scale : std_logic_vector
+		);
+	port (
+			clk, reset, vert_sync : IN STD_LOGIC;
+			character_address : IN STD_LOGIC_VECTOR(12 downto 0);
+			sprite_row, sprite_col,pixel_row, pixel_col : IN STD_LOGIC_VECTOR(9 downto 0);
+			rgb : OUT STD_LOGIC_VECTOR(11 downto 0);
+			sprite_on: OUT STD_LOGIC
+		 );
+end component sprite32;
+
+BEGIN
+
+with character_select select character_address <=
+	CONV_STD_LOGIC_VECTOR(0, 13) when "00",
+	CONV_STD_LOGIC_VECTOR(1024, 13) when "01",
+	CONV_STD_LOGIC_VECTOR(2048, 13) when "10",
+	CONV_STD_LOGIC_VECTOR(3072, 13) when others;
 
 
+sprites : sprite32
+generic map(
+					bird_scale
+				) 
+port map(clk, '0', vert_sync, character_address, bird_y_pos, bird_x_pos, pixel_row, pixel_col, bird_on
+			);
 
-BEGIN           
+			
 bird_x_pos_out<=bird_x_pos;
 --size <= CONV_STD_LOGIC_VECTOR(8,10);
 -- bird_x_pos and bird_y_pos show the (x,y) for the centre of ball
