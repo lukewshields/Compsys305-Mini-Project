@@ -7,6 +7,7 @@ USE  IEEE.STD_LOGIC_SIGNED.all;
 ENTITY bird IS
 	PORT
 		(clk, vert_sync, click, enable	: IN std_logic;
+		 mode : in std_logic_vector (1 downto 0);
        pixel_row, pixel_col	: IN std_logic_vector(9 DOWNTO 0);
 		 --mode : in std_logic_vector(1 downto 0);
 		 red, green, blue, bird_on_out : OUT std_logic;
@@ -33,7 +34,7 @@ bird_x_pos_out<=bird_x_pos;
 -- bird_x_pos and bird_y_pos show the (x,y) for the centre of ball
 
 --how to get a bird shape instead of a ball shape?
-bird_on <= '1' when (((pixel_col - bird_x_pos) * (pixel_col - bird_x_pos) + (pixel_row - bird_y_pos) * (pixel_row - bird_y_pos) <= size * size)) else	-- y_pos - size <= pixel_row <= y_pos + size
+bird_on <= '1' when ((((pixel_col - bird_x_pos) * (pixel_col - bird_x_pos) + (pixel_row - bird_y_pos) * (pixel_row - bird_y_pos) <= size * size)) and (mode = "10" or mode = "01")) else	-- y_pos - size <= pixel_row <= y_pos + size
 			'0'; -- later add an and mode is in one of the states where we want the ball
 
 
@@ -58,7 +59,7 @@ Move_Ball: process (vert_sync, click)
 begin
 	--Move ball once every vertical sync
 	if (rising_edge(vert_sync)) then		
-		if (enable = '1') then
+		if (enable = '1' and (mode = "10" or mode = "01")) then
 		--Bounce off top or bottom of the screen
 			prev_clicked <= click;
 			if (click /= '0' and prev_clicked = '0') then
