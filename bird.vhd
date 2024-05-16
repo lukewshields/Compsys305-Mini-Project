@@ -19,7 +19,7 @@ architecture behavior of bird is
 
 SIGNAL bird_on					: std_logic;
 SIGNAL size 					: std_logic_vector(9 DOWNTO 0) := conv_std_logic_vector(8, 10);  
-SIGNAL bird_y_pos				: std_logic_vector(9 DOWNTO 0) := conv_std_logic_vector(200, 10);
+SIGNAL bird_y_pos				: std_logic_vector(9 DOWNTO 0) := conv_std_logic_vector(400, 10);
 SiGNAL bird_x_pos				: std_logic_vector(9 DOWNTO 0) := conv_std_logic_vector(300, 10);
 SIGNAL bird_y_motion			: std_logic_vector(9 DOWNTO 0) := conv_std_logic_vector(1, 10);
 signal prev_clicked : std_logic;
@@ -60,14 +60,13 @@ begin
 	--Move ball once every vertical sync
 	if (rising_edge(vert_sync)) then		
 		if (enable = '1' and (mode = "10" or mode = "01")) then
-		--Bounce off top or bottom of the screen
 			prev_clicked <= click;
 			if (click /= '0' and prev_clicked = '0') then
 				counter <= 0;
 				fall_early <= '0';
 			end if;
 		
-			if (counter < 8 and fall_early = '0') then
+			if (counter < 8 and fall_early = '0') then --need to do the similar thing with the collide previous collision and collision
 				bird_y_motion <= - conv_std_logic_vector(10,10);
 				counter <= counter + 1;
 			elsif (counter >= 8 or (click /= '1' and prev_clicked = '1')) then

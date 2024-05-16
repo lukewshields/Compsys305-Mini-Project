@@ -13,7 +13,7 @@ entity FlappyBird is
 			VGA_HS, VGA_VS : out std_logic;
 			VGA_R, VGA_G, VGA_B : out std_logic_vector (3 downto 0);
 			PS2_DAT, PS2_CLK : inout std_logic;
-			HEX0, HEX1 : out std_logic_vector (6 downto 0)			
+			HEX0, HEX1, HEX3, HEX4 : out std_logic_vector (6 downto 0)			
 			);
 end entity FlappyBird;
 
@@ -80,6 +80,7 @@ architecture arc of FlappyBird is
 	
 	component collision is 
 		port (bird_on, pipes_on, enable, vert_sync : in std_logic;
+			mode : in std_logic_vector (1 downto 0);
 			collide : out std_logic
 		);
 	end component collision;
@@ -103,11 +104,12 @@ architecture arc of FlappyBird is
 	
 	component text_setter is 
 		port (
-			pixel_row, pixel_col : in std_logic_vector (9 downto 4);
+			pixel_row, pixel_col : in std_logic_vector (5 downto 0);
+			pixel_row2, pixel_col2 : in std_logic_vector (9 downto 0);
 			mode : in std_logic_vector (1 downto 0);
 			score : in std_logic_vector(6 downto 0);
 			clk,enable : in std_logic;
-			character_address : out std_logic_vector (5 downto 0)
+			character_address, pause_address : out std_logic_vector (5 downto 0)
 		);
 	end component text_setter;
 	
@@ -152,6 +154,19 @@ architecture arc of FlappyBird is
 		);
 	end component reset_handle;
 	
+	component test_collison is 
+		port (BCD_digit : in std_logic;
+			SevenSeg_out : out std_logic_vector(6 downto 0)
+		);
+	end component test_collison;
+	
+	component hold_collision is 
+		port (
+			collide, clk, vert_sync : in std_logic; -- need vert_sync?
+			collide_stable : out std_logic
+		);
+	end component hold_collision;
+	
 	signal clk_25, red, green, blue, vert_s : std_logic;
 	signal pixel_row_vga : std_logic_vector (9 downto 0);
 	signal pixel_col_vga : std_logic_vector (9 downto 0);
@@ -161,7 +176,9 @@ architecture arc of FlappyBird is
 	signal red_bird, green_bird, blue_bird : std_logic;
 	signal red_final, green_final, blue_final : std_logic;
 	signal leftclick : std_logic;
-	signal collide : std_logic;
+	
+	signal collide, collide_stable : std_logic;
+	
 	signal hold_enable : std_logic;
 	signal pipes_on, bird_on : std_logic;
 	signal pipes_x_pos,pipes_x_pos2,pipes_x_pos3 : std_logic_vector (10 downto 0);
@@ -171,8 +188,9 @@ architecture arc of FlappyBird is
 	signal tens_score : std_logic_vector (3 downto 0);
 	signal ones_score : std_logic_vector (3 downto 0);
 	
-	signal char_addy : std_logic_vector (5 downto 0);
-	signal rom_mux_addy : std_logic;
+
+	signal char_addy,pause_addy : std_logic_vector (5 downto 0);
+	signal rom_mux_addy,rom_mux_addy2 : std_logic;
 	
 	signal mode : std_logic_vector (1 downto 0);
 	signal hold_reset : std_logic;
@@ -203,8 +221,8 @@ begin
 	VGA_VS <= vert_s;
 	
 			
-	LEDR(1) <= collide;
-	--LEDR(0) <= hold_enable;
+	LEDR(1) <= collide_stable;
+	LEDR(0) <= collide;
 	--LEDR(0) <= collide;
 	
 	divider : pll 
@@ -253,11 +271,11 @@ begin
 --		
 		
 	
-	red_final <= ((red_bird and not collide) or rom_mux_addy); --and (not mode(1) and mode(0))  and (not SW(1) and SW(0))
+	red_final <= ((red_bird and not collide) or rom_mux_addy or rom_mux_addy2); --and (not mode(1) and mode(0))  and (not SW(1) and SW(0))
 --	(red_bird and not collide) or 
-	green_final <= (green_pipes or rom_mux_addy);
+	green_final <= (green_pipes or rom_mux_addy or rom_mux_addy2);
 --	green_pipes or
-	blue_final <= ((blue_pipes and not red_bird) or rom_mux_addy);
+	blue_final <= ((blue_pipes and not red_bird) or rom_mux_addy or rom_mux_addy2);
 --	 
 		
 	avatar : bird 
@@ -294,6 +312,7 @@ begin
 			pipes_on => pipes_on,
 			enable => hold_enable,
 			vert_sync => vert_s,
+			mode => mode,
 			collide => collide
 		);
 		
@@ -320,15 +339,15 @@ begin
 			rom_mux_output => rom_mux_addy
 		);
 		
---	ch2: char_rom
---		port map(
---			character_address => char_addy,
---			font_row => pixel_row_vga (3 downto 1), 
---			font_col	=> pixel_col_vga (3 downto 1),
---			clock => clk_25,
---			rom_mux_output => menu_text
---		);
---	
+	
+	ch2: char_rom
+		port map(
+			character_address => pause_addy,
+			font_row => pixel_row_vga (4 downto 2), 
+			font_col	=> pixel_col_vga (4 downto 2),
+			clock => clk_25,
+			rom_mux_output => rom_mux_addy2
+	);
 	
 	--text_setter port map(pixel_row => pixel_row_vga (5 downto 0), pixel_col => pixel_col_vga (5 downto 0), clk => clk_25, character_address => char_addy);
 --	 text_setter
@@ -342,11 +361,14 @@ begin
 		 port map(
 			 pixel_row => pixel_row_vga(9 downto 4),
 			 pixel_col => pixel_col_vga (9 downto 4),
+			 pixel_row2 => pixel_row_vga,
+			 pixel_col2 => pixel_col_vga,
 			 mode => mode,
 			 score => score,
 			 clk=>clk_25,
 			 enable=>hold_enable,
-			 character_address=> char_addy
+			 character_address=> char_addy,
+			 pause_address => pause_addy
 	 );
 	 
 	 sc : score_check
@@ -384,6 +406,7 @@ begin
 			BCD_digit => ones_score,
 			SevenSeg_out => HEX0
 		);
+	
 	controller : mode_controller 
 		port map (
 			clk => clk_25,
@@ -393,6 +416,26 @@ begin
 		);
 	
 	
+	collision_count_display: test_collison
+		port map (
+			BCD_digit => collide_stable, --replace this with outout of a moudle that counts the colision signal rising edges
+			SevenSeg_out => HEX4
+		);
+		
+		
+	collision_count_display2: test_collison
+		port map (
+			BCD_digit => SW(9), --replace this with outout of a moudle that counts the colision signal rising edges
+			SevenSeg_out => HEX3
+		);
+--		
+	collision_handle : hold_collision
+		port map (
+			collide => collide,
+			clk => clk_25,
+			vert_sync => clk_25,
+			collide_stable => collide_stable
+		);
 	
 	--for death detection use pixel clashes between red and green signals
 		
