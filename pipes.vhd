@@ -169,7 +169,7 @@ architecture arc of pipes is
 		
 		begin
 			if (rising_edge(vert_sync)) then
-				if (collision = '1') then
+				if (collision = '1') then -- still unstable signal wolnt compile with rising edge
 					has_collided <= '1';
 					pipe_x_motion_prev <= pipe_x_motion;
 					pipe_x_motion <= conv_std_logic_vector(0, 10);
