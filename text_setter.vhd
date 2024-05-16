@@ -9,6 +9,7 @@ entity text_setter is
 		pixel_row2, pixel_col2 : in std_logic_vector (9 downto 0);
 		mode : in std_logic_vector (1 downto 0);
 		score : in std_logic_vector(6 downto 0);
+		lives : in std_logic_vector(5 downto 0);
 		clk,enable : in std_logic;
 		character_address, pause_address : out std_logic_vector (5 downto 0)
 	);
@@ -25,12 +26,18 @@ begin
 
 
 process(clk)
-variable ones_score,tens_score : std_logic_vector(5 downto 0);
-variable current_score : integer;
+variable ones_score,tens_score, ones_lives, tens_lives : std_logic_vector(5 downto 0);
+variable current_score, current_lives : integer;
+
 begin
 	if (rising_edge(clk))  then -- later add an and we are in one of the states where we want the nomral text?
 		if (mode = "10" or mode = "01") then
 			if(pixel_row = "000010") then
+				current_lives := conv_integer(unsigned(lives));
+				
+				tens_lives := CONV_STD_LOGIC_VECTOR(current_lives/10, 6);  -- Right shift by 4 to get tens digit
+				ones_lives := CONV_STD_LOGIC_VECTOR(current_lives mod 10,6); 
+				
 				case pixel_col is 
 				when "000010" => s_character_address <= "010011"; --Score
 				when "000011" => s_character_address <= "000011";
@@ -44,7 +51,8 @@ begin
 				when conv_std_logic_vector(32, 6)  => s_character_address <=  conv_std_logic_vector(5, 6);
 				when conv_std_logic_vector(33, 6)  => s_character_address <=  conv_std_logic_vector(19, 6);
 				
-				when conv_std_logic_vector(35, 6)  => s_character_address <=  conv_std_logic_vector(48, 6); --0
+				when conv_std_logic_vector(35, 6)  => s_character_address <= "110000" + tens_lives; --tens digit
+				when conv_std_logic_vector(36, 6)  => s_character_address <=  "110000" + ones_lives; --ones digit lives
 				
 				
 				when others => s_character_address <= "100000";

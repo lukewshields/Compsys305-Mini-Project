@@ -10,7 +10,7 @@ entity pipes is
     port (pixel_row, pixel_col, rand: in std_logic_vector (9 downto 0);
 			mode : in std_logic_vector (1 downto 0);
 		  --init_x_pos : in std_logic_vector(10 downto 0);
-			clk, vert_sync, enable: in std_logic;
+			clk, vert_sync, enable, click, collision: in std_logic;
 			red, green, blue, pipes_on_out: out std_logic;
 			pipes_x_pos1_out,pipes_x_pos2_out,pipes_x_pos3_out : out std_logic_vector (10 downto 0); -- for determining score
 			pipe_width_out: OUT std_logic_vector (9 downto 0)
@@ -35,6 +35,9 @@ architecture arc of pipes is
 
     signal pipe_separation : std_logic_vector (9 downto 0);
     signal pipe_x_motion : std_logic_vector (9 downto 0) := conv_std_logic_vector(4, 10);
+	 
+	 signal pipe_x_motion_prev : std_logic_vector (9 downto 0);
+	 signal has_collided : std_logic;
 	 
     signal pipe_x_pos : std_logic_vector (10 downto 0) := conv_std_logic_vector(600, 11);
 	 signal pipe_x_pos2 : std_logic_vector(10 downto 0) := conv_std_logic_vector(360, 11);
@@ -161,5 +164,20 @@ architecture arc of pipes is
 				end if;
 			end if;
 	end process move_pipe3;
+	
+	pipe_motion : process(vert_sync)
+		
+		begin
+			if (rising_edge(vert_sync)) then
+				if (collision = '1') then
+					has_collided <= '1';
+					pipe_x_motion_prev <= pipe_x_motion;
+					pipe_x_motion <= conv_std_logic_vector(0, 10);
+				elsif (click = '1' and has_collided = '1') then
+					pipe_x_motion <= pipe_x_motion_prev;
+					has_collided <= '0';
+				end if;
+			end if;
+	end process pipe_motion;
 	
 end architecture arc;

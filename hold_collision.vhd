@@ -26,7 +26,7 @@ process (clk, vert_sync, collide)
 --			end if;
 			prev_collide <= collide;
 			
-			if ((collide = '1' or collide2 = '1') and count < 1000000) then
+			if ((collide = '1' or collide2 = '1') and count < 500000) then
 				count <= count + 1;
 				collide2 <= '1';
 			else

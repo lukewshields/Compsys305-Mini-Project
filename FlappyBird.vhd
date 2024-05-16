@@ -43,7 +43,7 @@ architecture arc of FlappyBird is
     port (pixel_row, pixel_col, rand: in std_logic_vector (9 downto 0);
 			mode : in std_logic_vector (1 downto 0);
 		  --init_x_pos : in std_logic_vector(10 downto 0);
-			clk, vert_sync, enable: in std_logic;
+			clk, vert_sync, enable, click, collision: in std_logic;
 			red, green, blue, pipes_on_out: out std_logic;
 			pipes_x_pos1_out,pipes_x_pos2_out,pipes_x_pos3_out : out std_logic_vector (10 downto 0);
 			pipe_width_out: out std_logic_vector (9 downto 0)
@@ -108,6 +108,7 @@ architecture arc of FlappyBird is
 			pixel_row2, pixel_col2 : in std_logic_vector (9 downto 0);
 			mode : in std_logic_vector (1 downto 0);
 			score : in std_logic_vector(6 downto 0);
+			lives : in std_logic_vector (5 downto 0);
 			clk,enable : in std_logic;
 			character_address, pause_address : out std_logic_vector (5 downto 0)
 		);
@@ -154,18 +155,22 @@ architecture arc of FlappyBird is
 		);
 	end component reset_handle;
 	
-	component test_collison is 
-		port (BCD_digit : in std_logic;
-			SevenSeg_out : out std_logic_vector(6 downto 0)
-		);
-	end component test_collison;
-	
 	component hold_collision is 
 		port (
 			collide, clk, vert_sync : in std_logic; -- need vert_sync?
 			collide_stable : out std_logic
 		);
 	end component hold_collision;
+	
+	
+	component lives is 
+		port (
+			collision : in std_logic;
+			num_lives : in std_logic_vector(5 downto 0);-- up to 16 lives
+			lives_out : out std_logic_vector(5 downto 0);
+			death : out std_logic
+		);
+	end component lives;
 	
 	signal clk_25, red, green, blue, vert_s : std_logic;
 	signal pixel_row_vga : std_logic_vector (9 downto 0);
@@ -193,7 +198,10 @@ architecture arc of FlappyBird is
 	signal rom_mux_addy,rom_mux_addy2 : std_logic;
 	
 	signal mode : std_logic_vector (1 downto 0);
-	signal hold_reset : std_logic;
+	signal hold_reset, death : std_logic;
+	
+	signal lives_out : std_logic_vector (5 downto 0);
+	
 	
 	signal trash : std_logic_vector (9 downto 0);
 	signal trash2 : std_logic_vector (9 downto 0);
@@ -244,6 +252,8 @@ begin
 			clk => clk_25, 
 			vert_sync => vert_s,
 			enable => hold_enable,
+			click => leftclick,
+			collision => collide,
 			red => red_pipes,
 			green => green_pipes,
 			blue => blue_pipes,
@@ -365,6 +375,7 @@ begin
 			 pixel_col2 => pixel_col_vga,
 			 mode => mode,
 			 score => score,
+			 lives => lives_out,
 			 clk=>clk_25,
 			 enable=>hold_enable,
 			 character_address=> char_addy,
@@ -414,20 +425,6 @@ begin
 			switches => SW (1 downto 0),
 			mode => mode 
 		);
-	
-	
-	collision_count_display: test_collison
-		port map (
-			BCD_digit => collide_stable, --replace this with outout of a moudle that counts the colision signal rising edges
-			SevenSeg_out => HEX4
-		);
-		
-		
-	collision_count_display2: test_collison
-		port map (
-			BCD_digit => SW(9), --replace this with outout of a moudle that counts the colision signal rising edges
-			SevenSeg_out => HEX3
-		);
 --		
 	collision_handle : hold_collision
 		port map (
@@ -437,6 +434,15 @@ begin
 			collide_stable => collide_stable
 		);
 	
+	lives_count : lives 
+		port map (
+			collision => collide_stable,
+			num_lives => "001000",
+			lives_out => lives_out,
+			death => death
+		);
+	
+
 	--for death detection use pixel clashes between red and green signals
 		
 end architecture arc;

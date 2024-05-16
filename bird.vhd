@@ -59,7 +59,7 @@ Move_Ball: process (vert_sync, click)
 begin
 	--Move ball once every vertical sync
 	if (rising_edge(vert_sync)) then		
-		if (enable = '1' and (mode = "10" or mode = "01")) then
+		if (enable = '1' and (mode = "10" or mode = "01") ) then 
 			prev_clicked <= click;
 			if (click /= '0' and prev_clicked = '0') then
 				counter <= 0;
@@ -72,6 +72,9 @@ begin
 			elsif (counter >= 8 or (click /= '1' and prev_clicked = '1')) then
 				counter <= 0;
 				fall_early <= '1';
+--			elsif (collision = '1') then
+--				bird_y_pos = CONV_STD_LOGIC_VECTOR(300,10);
+--				bird_y_motion <= CONV_STD_LOGIC_VECTOR(0,10);
 			else  
 				bird_y_motion <= CONV_STD_LOGIC_VECTOR(4,10);
 			end if;

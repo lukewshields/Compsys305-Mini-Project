@@ -88,47 +88,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "HEX3[0]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX3[3]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX3[4]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX3[5]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX4[0]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX4[3]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX4[4]",
-					"strict" : false
-				},
-				{
-					"name" : "HEX4[5]",
-					"strict" : false
-				},
-				{
 					"name" : "PS2_DAT",
 					"strict" : false
 				},
 				{
 					"name" : "PS2_CLK",
-					"strict" : false
-				},
-				{
-					"name" : "SW[9]",
 					"strict" : false
 				},
 				{
