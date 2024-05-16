@@ -375,7 +375,7 @@ begin
 		port map (
 			vert_sync=> vert_s,
 			Enable => hold_enable,
-			collision => collide,
+			collision => collide_stable,
 			mode => mode,
 			pipe_x_pos1 => pipes_x_pos,
 			pipe_x_pos2 => pipes_x_pos2,

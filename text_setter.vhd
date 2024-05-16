@@ -52,7 +52,7 @@ begin
 					current_score := conv_integer(unsigned(score));		
 					if (current_score < 10) then
 						if (pixel_col = "001000") then -- Single digit
-							s_character_address<= CONV_STD_LOGIC_VECTOR(current_score + 48, 6);
+							s_character_address <= CONV_STD_LOGIC_VECTOR(current_score + 48, 6);
 						end if;
 					else
 						tens_score := CONV_STD_LOGIC_VECTOR(current_score/10, 6);  -- Right shift by 4 to get tens digit
