@@ -40,9 +40,9 @@ architecture arc of pipes is
 	 signal pipe_x_motion_prev : std_logic_vector (9 downto 0);
 	 signal has_collided : std_logic;
 	 
-    signal pipe_x_pos : std_logic_vector (10 downto 0) := conv_std_logic_vector(600, 11);
-	 signal pipe_x_pos2 : std_logic_vector(10 downto 0) := conv_std_logic_vector(360, 11);
-	 signal pipe_x_pos3 : std_logic_vector(10 downto 0) := conv_std_logic_vector(840, 11);
+    signal pipe_x_pos : std_logic_vector (10 downto 0) := conv_std_logic_vector(960, 11);
+	 signal pipe_x_pos2 : std_logic_vector(10 downto 0) := conv_std_logic_vector(720, 11);
+	 signal pipe_x_pos3 : std_logic_vector(10 downto 0) := conv_std_logic_vector(1200, 11);
 	 
 	 signal bottom : std_logic_vector (9 downto 0) := conv_std_logic_vector(479,10);
 	 signal ground : std_logic_vector (9 downto 0) := conv_std_logic_vector(460, 10);
@@ -108,7 +108,7 @@ architecture arc of pipes is
 							pipe_height_bot <= conv_std_logic_vector(480, 10) - rand - pipe_gap;
 						end if;
 					elsif (has_collided = '1') then
-						pipe_x_pos <= conv_std_logic_vector(600, 11);
+						pipe_x_pos <= conv_std_logic_vector(960, 11);
 					else 
 						pipe_x_pos <= pipe_x_pos - pipe_x_motion;
 					end if;
@@ -135,7 +135,7 @@ architecture arc of pipes is
 						end if;
 						
 					elsif (has_collided = '1') then
-						pipe_x_pos2 <= conv_std_logic_vector(360, 11);
+						pipe_x_pos2 <= conv_std_logic_vector(720, 11);
 					else 
 						pipe_x_pos2 <= pipe_x_pos2 - pipe_x_motion;
 					end if;
@@ -161,7 +161,7 @@ architecture arc of pipes is
 							pipe_height_bot3 <=  conv_std_logic_vector(480, 10) - rand - pipe_gap;
 						end if;
 					elsif (has_collided = '1') then
-						pipe_x_pos3 <= conv_std_logic_vector(840, 11);
+						pipe_x_pos3 <= conv_std_logic_vector(1200, 11);
 					else 
 						pipe_x_pos3 <= pipe_x_pos3 - pipe_x_motion;
 					end if;
