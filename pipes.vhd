@@ -1,5 +1,6 @@
 
 
+
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.all;
 --use ieee.numeric_std.all;
@@ -94,9 +95,8 @@ architecture arc of pipes is
 		  --pipe_x_pos <= conv_std_logic_vector(400, 11);
         if rising_edge(vert_sync) then
 				if (enable = '1' and (mode = "10" or mode = "01")) then
-					if (pipe_x_pos + pipe_width <= conv_std_logic_vector(1, 11)) then --something about this is wrong maybe size of vectors idk adding the pipe_x_pos + ('0' & pipe_width) does nothing to where we reset but makes sure that we are always resetting??
+					if ((pipe_x_pos + pipe_width <= conv_std_logic_vector(1, 11)) and has_collided = '0') then --something about this is wrong maybe size of vectors idk adding the pipe_x_pos + ('0' & pipe_width) does nothing to where we reset but makes sure that we are always resetting??
 						pipe_x_pos <= conv_std_logic_vector(700, 11);
-						
 						if (rand < conv_std_logic_vector(20, 10)) then
 							pipe_height <= conv_std_logic_vector(20, 10);
 							pipe_height_bot <= conv_std_logic_vector(300, 10);
@@ -107,7 +107,8 @@ architecture arc of pipes is
 							pipe_height <= rand;
 							pipe_height_bot <= conv_std_logic_vector(480, 10) - rand - pipe_gap;
 						end if;
-						 
+					elsif (has_collided = '1') then
+						pipe_x_pos <= conv_std_logic_vector(600, 11);
 					else 
 						pipe_x_pos <= pipe_x_pos - pipe_x_motion;
 					end if;
@@ -119,9 +120,9 @@ architecture arc of pipes is
 		begin
 			if (rising_edge(vert_sync)) then
 				if (enable = '1' and (mode = "10" or mode = "01")) then
-					if (pipe_x_pos2 + pipe_width <= conv_std_logic_vector(1,11)) then
+					if ((pipe_x_pos2 + pipe_width <= conv_std_logic_vector(1,11)) and has_collided = '0') then
 						pipe_x_pos2 <= conv_std_logic_vector(700, 11);
-						
+				
 						if (rand < conv_std_logic_vector(20, 10)) then
 							pipe_height2 <= conv_std_logic_vector(20, 10);
 							pipe_height_bot2 <= conv_std_logic_vector(300, 10);
@@ -133,6 +134,8 @@ architecture arc of pipes is
 							pipe_height_bot2 <=  conv_std_logic_vector(480, 10) - rand - pipe_gap;
 						end if;
 						
+					elsif (has_collided = '1') then
+						pipe_x_pos2 <= conv_std_logic_vector(360, 11);
 					else 
 						pipe_x_pos2 <= pipe_x_pos2 - pipe_x_motion;
 					end if;
@@ -145,9 +148,8 @@ architecture arc of pipes is
 		begin
 			if (rising_edge(vert_sync)) then
 				if (enable = '1' and (mode = "10" or mode = "01")) then
-					if (pipe_x_pos3 + pipe_width <= conv_std_logic_vector(1,11)) then
+					if ((pipe_x_pos3 + pipe_width <= conv_std_logic_vector(1,11)) and has_collided = '0') then
 						pipe_x_pos3 <= conv_std_logic_vector(700, 11);
-						
 						if (rand < conv_std_logic_vector(20, 10)) then
 							pipe_height3 <= conv_std_logic_vector(20, 10);
 							pipe_height_bot3 <= conv_std_logic_vector(300, 10);
@@ -158,6 +160,8 @@ architecture arc of pipes is
 							pipe_height3 <= rand;
 							pipe_height_bot3 <=  conv_std_logic_vector(480, 10) - rand - pipe_gap;
 						end if;
+					elsif (has_collided = '1') then
+						pipe_x_pos3 <= conv_std_logic_vector(840, 11);
 					else 
 						pipe_x_pos3 <= pipe_x_pos3 - pipe_x_motion;
 					end if;
@@ -166,15 +170,14 @@ architecture arc of pipes is
 	end process move_pipe3;
 	
 	pipe_motion : process(vert_sync)
-		
 		begin
 			if (rising_edge(vert_sync)) then
 				if (collision = '1') then -- still unstable signal wolnt compile with rising edge
 					has_collided <= '1';
-					pipe_x_motion_prev <= pipe_x_motion;
-					pipe_x_motion <= conv_std_logic_vector(0, 10);
+--					pipe_x_pos <= conv_std_logic_vector(600, 11);
+--					pipe_x_pos2 <= conv_std_logic_vector(360, 11);
+--					pipe_x_pos3 <= conv_std_logic_vector(840, 11);
 				elsif (click = '1' and has_collided = '1') then
-					pipe_x_motion <= pipe_x_motion_prev;
 					has_collided <= '0';
 				end if;
 			end if;

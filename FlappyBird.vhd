@@ -254,7 +254,7 @@ begin
 			vert_sync => vert_s,
 			enable => hold_enable,
 			click => leftclick,
-			collision => collide,
+			collision => collide_stable,
 			red => red_pipes,
 			green => green_pipes,
 			blue => blue_pipes,
