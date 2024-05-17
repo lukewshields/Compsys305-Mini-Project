@@ -1,3 +1,4 @@
+
 --takes in the collision and a number of lives and decrements a signal intialized to that input until it is 0 then outputs a death
 
 LIBRARY IEEE;
