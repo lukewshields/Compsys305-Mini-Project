@@ -10,7 +10,7 @@ entity text_setter is
 		mode : in std_logic_vector (1 downto 0);
 		score : in std_logic_vector(6 downto 0);
 		lives : in std_logic_vector(5 downto 0);
-		clk,enable : in std_logic;
+		clk,enable, game_on : in std_logic;
 		character_address, pause_address : out std_logic_vector (5 downto 0)
 	);
 	
@@ -85,6 +85,30 @@ begin
 			else
 				s_character_address <= "100000";
 				p_character_address <= "100000";
+			end if;
+			
+			if (game_on = '0') then
+				if (pixel_row = conv_std_logic_vector(8, 6)) then
+					case pixel_col is 
+						when conv_std_logic_vector(13, 6)  => s_character_address <=  conv_std_logic_vector(3, 6); --Click
+						when conv_std_logic_vector(14, 6)  => s_character_address <=  conv_std_logic_vector(12, 6);
+						when conv_std_logic_vector(15, 6)  => s_character_address <=  conv_std_logic_vector(9, 6);
+						when conv_std_logic_vector(16, 6)  => s_character_address <=  conv_std_logic_vector(3, 6);
+						when conv_std_logic_vector(17, 6)  => s_character_address <=  conv_std_logic_vector(11, 6);
+						
+						when conv_std_logic_vector(19, 6)  => s_character_address <=  conv_std_logic_vector(20, 6); --to 
+						when conv_std_logic_vector(20, 6)  => s_character_address <=  conv_std_logic_vector(15, 6); --start
+						
+						when conv_std_logic_vector(22, 6)  => s_character_address <=  conv_std_logic_vector(19, 6); --Click
+						when conv_std_logic_vector(23, 6)  => s_character_address <=  conv_std_logic_vector(20, 6);
+						when conv_std_logic_vector(24, 6)  => s_character_address <=  conv_std_logic_vector(1, 6);
+						when conv_std_logic_vector(25, 6)  => s_character_address <=  conv_std_logic_vector(18, 6);
+						when conv_std_logic_vector(26, 6)  => s_character_address <=  conv_std_logic_vector(20, 6);
+				
+						
+						when others => s_character_address <= "100000";
+					end case;
+				end if;
 			end if;
 		elsif (mode = "00" or mode = "11") then
 			if (pixel_row = conv_std_logic_vector(8, 6)) then

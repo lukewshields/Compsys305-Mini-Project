@@ -9,11 +9,11 @@ entity FlappyBird is
 	port (CLOCK_50: in std_logic;
 			SW : in std_logic_vector (9 downto 0);
 			KEY : in std_logic_vector (3 downto 0);
-			LEDR : out std_logic_vector (1 downto 0);
+			LEDR : out std_logic_vector (9 downto 0);
 			VGA_HS, VGA_VS : out std_logic;
 			VGA_R, VGA_G, VGA_B : out std_logic_vector (3 downto 0);
 			PS2_DAT, PS2_CLK : inout std_logic;
-			HEX0, HEX1, HEX3, HEX4 : out std_logic_vector (6 downto 0)			
+			HEX0, HEX1 : out std_logic_vector (6 downto 0)			
 			);
 end entity FlappyBird;
 
@@ -44,7 +44,7 @@ architecture arc of FlappyBird is
 			mode : in std_logic_vector (1 downto 0);
 		  --init_x_pos : in std_logic_vector(10 downto 0);
 			clk, vert_sync, enable, click, collision: in std_logic;
-			red, green, blue, pipes_on_out: out std_logic;
+			red, green, blue, pipes_on_out, game_on : out std_logic;
 			pipes_x_pos1_out,pipes_x_pos2_out,pipes_x_pos3_out : out std_logic_vector (10 downto 0);
 			pipe_width_out: out std_logic_vector (9 downto 0)
 	 );
@@ -110,14 +110,14 @@ architecture arc of FlappyBird is
 			mode : in std_logic_vector (1 downto 0);
 			score : in std_logic_vector(6 downto 0);
 			lives : in std_logic_vector (5 downto 0);
-			clk,enable : in std_logic;
+			clk,enable, game_on : in std_logic;
 			character_address, pause_address : out std_logic_vector (5 downto 0)
 		);
 	end component text_setter;
 	
 	component score_check is 
 		port(
-			vert_sync, Enable, collision: in std_logic;
+			vert_sync, Enable, collision, game_on: in std_logic;
 			mode : in std_logic_vector (1 downto 0);
 			pipe_x_pos1, pipe_x_pos2, pipe_x_pos3 : in std_logic_vector (10 downto 0);
 			pipe_width, bird_x_pos : in std_logic_vector (9 downto 0);
@@ -194,6 +194,7 @@ architecture arc of FlappyBird is
 	signal tens_score : std_logic_vector (3 downto 0);
 	signal ones_score : std_logic_vector (3 downto 0);
 	
+	
 
 	signal char_addy,pause_addy : std_logic_vector (5 downto 0);
 	signal rom_mux_addy,rom_mux_addy2 : std_logic;
@@ -203,6 +204,7 @@ architecture arc of FlappyBird is
 	
 	signal lives_out : std_logic_vector (5 downto 0);
 	
+	signal game_on : std_logic; --from pipes sent to score check to fix initial score of 1 whenever having a collision
 	
 	signal trash : std_logic_vector (9 downto 0);
 	signal trash2 : std_logic_vector (9 downto 0);
@@ -231,8 +233,9 @@ begin
 	
 			
 	LEDR(1) <= collide_stable;
-	LEDR(0) <= collide;
+	LEDR(0) <= death;
 	--LEDR(0) <= collide;
+	LEDR(9) <= game_on;
 	
 	divider : pll 
 		port map (
@@ -259,6 +262,7 @@ begin
 			green => green_pipes,
 			blue => blue_pipes,
 			pipes_on_out => pipes_on,
+			game_on => game_on,
 			pipes_x_pos1_out => pipes_x_pos,
 			pipes_x_pos2_out => pipes_x_pos2,
 			pipes_x_pos3_out => pipes_x_pos3,
@@ -380,6 +384,7 @@ begin
 			 lives => lives_out,
 			 clk=>clk_25,
 			 enable=>hold_enable,
+			 game_on => game_on,
 			 character_address=> char_addy,
 			 pause_address => pause_addy
 	 );
@@ -389,6 +394,7 @@ begin
 			vert_sync=> vert_s,
 			Enable => hold_enable,
 			collision => collide_stable,
+			game_on => game_on,
 			mode => mode,
 			pipe_x_pos1 => pipes_x_pos,
 			pipe_x_pos2 => pipes_x_pos2,

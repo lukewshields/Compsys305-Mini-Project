@@ -5,7 +5,7 @@ USE  IEEE.STD_LOGIC_SIGNED.all;
 
 entity score_check is 
 	port(
-		vert_sync, Enable, collision : in std_logic;
+		vert_sync, Enable, collision, game_on : in std_logic;
 		mode : in std_logic_vector (1 downto 0);
 		pipe_x_pos1,pipe_x_pos2,pipe_x_pos3 : in std_logic_vector (10 downto 0);
 		pipe_width,bird_x_pos : in std_logic_vector (9 downto 0);
@@ -25,8 +25,7 @@ signal current_score : integer;
 				if (enable = '1') then
 					if (collision = '1') then
 						score_s <= "0000000";
-					else 
-						
+					elsif (game_on = '1') then --need logic for that we are actually playing the game i.e. elsif game_on then
 						if ((pipe_x_pos1 + pipe_width) <= bird_x_pos and pipe_count1 = 0) then
 							score_s <= score_s + "0000001";
 							pipe_count1 <= 1;

@@ -28,8 +28,10 @@ process (collision)
 		--prev_collision <= collision;
 		if (rising_edge(collision)) then
 			lives_count <= lives_count - "000001";
-			if (lives_count = "000000") then
+			if (lives_count <= "000001") then
 				death <= '1';
+			else 
+				death <= '0';
 			end if;
 		end if;
 end process;
