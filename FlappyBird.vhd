@@ -61,6 +61,7 @@ architecture arc of FlappyBird is
 	component bird is 
     port (clk, vert_sync, click, enable	: IN std_logic;
 		 mode : in std_logic_vector (1 downto 0);
+		 collision : in std_logic;
        pixel_row, pixel_col	: IN std_logic_vector(9 DOWNTO 0);
 		 red, green, blue, bird_on_out : OUT std_logic;
 		 bird_x_pos_out: out std_logic_vector(9 DOWNTO 0)
@@ -295,6 +296,7 @@ begin
 			click => leftclick,
 			enable => hold_enable,
 			mode => mode,
+			collision => collide_stable,
 		   pixel_row => pixel_row_vga, 
 		   pixel_col => pixel_col_vga,
 		   red => red_bird, 
