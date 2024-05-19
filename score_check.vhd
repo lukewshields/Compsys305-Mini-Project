@@ -16,7 +16,7 @@ end entity score_check;
 --enable is sync reset is aysnc
 architecture beh of score_check is 
 signal score_s : std_logic_vector(6 downto 0);
-signal pipe_count1,pipe_count2,pipe_count3 : integer:=0;
+signal pipe_count1,pipe_count2,pipe_count3 : integer:= 1; --changed this to 1 from 0 and now score sometimes works
 signal current_score : integer;
 	begin
 		process (vert_sync, Enable)
@@ -25,7 +25,7 @@ signal current_score : integer;
 				if (enable = '1') then
 					if (collision = '1') then
 						score_s <= "0000000";
-					elsif (game_on = '1') then --need logic for that we are actually playing the game i.e. elsif game_on then
+					elsif (game_on = '1') then --need logic for that we are actually playing the game i.e. elsif game_on then, this doe not fix problem somehow pipe is still behind the bird when we init the game
 						if ((pipe_x_pos1 + pipe_width) <= bird_x_pos and pipe_count1 = 0) then
 							score_s <= score_s + "0000001";
 							pipe_count1 <= 1;

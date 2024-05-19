@@ -69,7 +69,7 @@ begin
 				fall_early <= '0';
 			end if;
 		
-			if (counter < 8 and fall_early = '0') then --need to do the similar thing with the collide previous collision and collision
+			if (counter < 8 and fall_early = '0' and bird_y_pos >= conv_std_logic_vector(10,10)) then --need to do the similar thing with the collide previous collision and collision
 				bird_y_motion <= - conv_std_logic_vector(10,10);
 				counter <= counter + 1;
 			elsif ((counter >= 8 or (click /= '1' and prev_clicked = '1')) and has_collided = '0') then

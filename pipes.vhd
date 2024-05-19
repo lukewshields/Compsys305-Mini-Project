@@ -53,7 +53,7 @@ architecture arc of pipes is
 	 
     begin
 
-    red <= not pipes_on; --purple bg and green pipes lol
+    red <= not pipes_on; 
     green <= pipes_on;
     blue <= not pipes_on; 
 	 pipes_x_pos1_out <= pipe_x_pos;
@@ -182,7 +182,7 @@ architecture arc of pipes is
 --					pipe_x_pos <= conv_std_logic_vector(600, 11);
 --					pipe_x_pos2 <= conv_std_logic_vector(360, 11);
 --					pipe_x_pos3 <= conv_std_logic_vector(840, 11);
-				elsif (click = '1' and has_collided = '1') then
+				elsif (click = '1' and has_collided = '1') then -- from here to the reset of the pipes takes time 
 					has_collided <= '0';
 				end if;
 			end if;

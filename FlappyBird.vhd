@@ -24,12 +24,6 @@ architecture arc of FlappyBird is
 				pixel_row, pixel_column: OUT STD_LOGIC_VECTOR(9 DOWNTO 0));
 	end component;
 
-
-	--component clock_divider is 
-	--		port ( 
-	--		Clk, reset: in std_logic;
-	--		clock_25: out std_logic);
---	end component; 
 	component pll is 
 		port (
 			refclk   : in  std_logic := '0'; --  refclk.clk
@@ -49,14 +43,6 @@ architecture arc of FlappyBird is
 			pipe_width_out: out std_logic_vector (9 downto 0)
 	 );
 	end component pipes;
-	
---	component pipes is 
---		  port (pixel_row, pixel_col: in std_logic_vector (9 downto 0);
---			init_x_pos : in std_logic_vector(10 downto 0);
---			clk, vert_sync, enable: in std_logic;
---			red, green, blue, pipes_on_out: out std_logic
---			);
---	end component pipes;
 		
 	component bird is 
     port (clk, vert_sync, click, enable	: IN std_logic;
@@ -110,7 +96,7 @@ architecture arc of FlappyBird is
 			mode : in std_logic_vector (1 downto 0);
 			score : in std_logic_vector(6 downto 0);
 			lives : in std_logic_vector (5 downto 0);
-			clk,enable, game_on : in std_logic;
+			clk,enable, game_on, death : in std_logic;
 			character_address, pause_address : out std_logic_vector (5 downto 0)
 		);
 	end component text_setter;
@@ -385,6 +371,7 @@ begin
 			 clk=>clk_25,
 			 enable=>hold_enable,
 			 game_on => game_on,
+			 death => death,
 			 character_address=> char_addy,
 			 pause_address => pause_addy
 	 );
