@@ -12,6 +12,7 @@ entity pipes is
 			mode : in std_logic_vector (1 downto 0);
 		  --init_x_pos : in std_logic_vector(10 downto 0);
 			clk, vert_sync, enable, click, collision: in std_logic;
+			diff : in std_logic_vector(2 downto 0);
 			red, green, blue, pipes_on_out, game_on: out std_logic;
 			pipes_x_pos1_out,pipes_x_pos2_out,pipes_x_pos3_out : out std_logic_vector (10 downto 0); -- for determining score
 			pipe_width_out: OUT std_logic_vector (9 downto 0)
@@ -20,7 +21,8 @@ end entity pipes;
 
 architecture arc of pipes is 
     --could get rid of all the pipe before the variable names maybe
-	 signal pipe_gap : std_logic_vector (9 downto 0) := conv_std_logic_vector(160, 10); -- can later be shrunk based on the level/difficulty of the game
+	 signal pipe_gap : std_logic_vector (9 downto 0); --:= conv_std_logic_vector(120, 10); -- can later be shrunk based on the level/difficulty of the game 
+	 --note 120 will be used for hard mode, 160 for medium and 200 for easy
 	 
     signal pipes_on : std_logic;
     signal pipe_height : std_logic_vector (9 downto 0) := conv_std_logic_vector(160, 10); --without any other _ , then pipe_height is equal to the top one
@@ -34,7 +36,6 @@ architecture arc of pipes is
 	 
     signal pipe_width : std_logic_vector (9 downto 0) := conv_std_logic_vector(40, 10);
 
-    signal pipe_separation : std_logic_vector (9 downto 0);
     signal pipe_x_motion : std_logic_vector (9 downto 0) := conv_std_logic_vector(4, 10);
 	 
 	 signal pipe_x_motion_prev : std_logic_vector (9 downto 0);
@@ -188,6 +189,21 @@ architecture arc of pipes is
 			end if;
 	end process pipe_motion;
 	
+	gap_width : process(vert_sync)
+	
+		begin
+			if (rising_edge(vert_sync)) then
+				if (diff(0) = '1' and mode = "10") then
+					pipe_gap <= conv_std_logic_vector(200, 10);
+				elsif(diff(1) = '1' and mode = "10") then
+					pipe_gap <= conv_std_logic_vector(160, 10);
+				elsif(diff(2) = '1' and mode = "10") then
+					pipe_gap <= conv_std_logic_vector(120, 10);
+				else 
+					pipe_gap <= conv_std_logic_vector(200, 10);
+				end if;
+			end if;		
+	end process gap_width;
 	
 	
 end architecture arc;

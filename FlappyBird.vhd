@@ -38,6 +38,7 @@ architecture arc of FlappyBird is
 			mode : in std_logic_vector (1 downto 0);
 		  --init_x_pos : in std_logic_vector(10 downto 0);
 			clk, vert_sync, enable, click, collision: in std_logic;
+			diff : in std_logic_vector (2 downto 0);
 			red, green, blue, pipes_on_out, game_on : out std_logic;
 			pipes_x_pos1_out,pipes_x_pos2_out,pipes_x_pos3_out : out std_logic_vector (10 downto 0);
 			pipe_width_out: out std_logic_vector (9 downto 0)
@@ -249,6 +250,7 @@ begin
 			blue => blue_pipes,
 			pipes_on_out => pipes_on,
 			game_on => game_on,
+			diff => SW(9 downto 7),
 			pipes_x_pos1_out => pipes_x_pos,
 			pipes_x_pos2_out => pipes_x_pos2,
 			pipes_x_pos3_out => pipes_x_pos3,
