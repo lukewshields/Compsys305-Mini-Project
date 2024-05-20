@@ -14,6 +14,7 @@ entity pipes is
 			clk, vert_sync, enable, click, collision, reset: in std_logic;
 			diff : in std_logic_vector(2 downto 0);
 			red, green, blue, pipes_on_out, game_on: out std_logic;
+			difficulty : out std_logic_vector (1 downto 0); --00 CORRESPONDS TO EASY 01 corresponds to MEDIUM, 11 corresponds to HARD
 			pipes_x_pos1_out,pipes_x_pos2_out,pipes_x_pos3_out : out std_logic_vector (10 downto 0); -- for determining score
 			pipe_width_out: OUT std_logic_vector (9 downto 0)
 	 );
@@ -202,15 +203,19 @@ architecture arc of pipes is
 	gap_width : process(vert_sync)
 	
 		begin
-			if (rising_edge(vert_sync)) then
+			if (rising_edge(vert_sync)) then --maybe later move this logic out of the pipes module, and move it to its own difficulty module, so many diff things can be set by it?
 				if (diff(0) = '1' and mode = "10") then
 					pipe_gap <= conv_std_logic_vector(200, 10);
+					difficulty <= "00";
 				elsif(diff(1) = '1' and mode = "10") then
 					pipe_gap <= conv_std_logic_vector(160, 10);
+					difficulty <= "01";
 				elsif(diff(2) = '1' and mode = "10") then
 					pipe_gap <= conv_std_logic_vector(120, 10);
+					difficulty <= "11";
 				else 
 					pipe_gap <= conv_std_logic_vector(200, 10);
+					difficulty <= "00";
 				end if;
 			end if;		
 	end process gap_width;

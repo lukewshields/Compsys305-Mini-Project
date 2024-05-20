@@ -40,6 +40,7 @@ architecture arc of FlappyBird is
 			clk, vert_sync, enable, click, collision, reset: in std_logic;
 			diff : in std_logic_vector (2 downto 0);
 			red, green, blue, pipes_on_out, game_on : out std_logic;
+			difficulty : out std_logic_vector (1 downto 0);
 			pipes_x_pos1_out,pipes_x_pos2_out,pipes_x_pos3_out : out std_logic_vector (10 downto 0);
 			pipe_width_out: out std_logic_vector (9 downto 0)
 	 );
@@ -94,7 +95,7 @@ architecture arc of FlappyBird is
 		port (
 			pixel_row, pixel_col : in std_logic_vector (5 downto 0);
 			pixel_row2, pixel_col2 : in std_logic_vector (9 downto 0);
-			mode : in std_logic_vector (1 downto 0);
+			mode, difficulty : in std_logic_vector (1 downto 0);
 			score : in std_logic_vector(6 downto 0);
 			lives : in std_logic_vector (5 downto 0);
 			clk,enable, game_on, death : in std_logic;
@@ -187,7 +188,7 @@ architecture arc of FlappyBird is
 	signal char_addy,pause_addy : std_logic_vector (5 downto 0);
 	signal rom_mux_addy,rom_mux_addy2 : std_logic;
 	
-	signal mode : std_logic_vector (1 downto 0);
+	signal mode, difficulty : std_logic_vector (1 downto 0);
 	signal hold_reset, death : std_logic;
 	
 	signal lives_out : std_logic_vector (5 downto 0);
@@ -257,6 +258,7 @@ begin
 			blue => blue_pipes,
 			pipes_on_out => pipes_on,
 			game_on => game_on,
+			difficulty => difficulty,
 			diff => SW(9 downto 7),
 			pipes_x_pos1_out => pipes_x_pos,
 			pipes_x_pos2_out => pipes_x_pos2,
@@ -376,6 +378,7 @@ begin
 			 pixel_row2 => pixel_row_vga,
 			 pixel_col2 => pixel_col_vga,
 			 mode => mode,
+			 difficulty => difficulty,
 			 score => score,
 			 lives => lives_out,
 			 clk=>clk_25,

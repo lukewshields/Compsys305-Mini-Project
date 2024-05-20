@@ -10,19 +10,18 @@ entity reset_states is
 end entity reset_states;
 
 architecture arc of reset_states is 
-signal prev_mode : std_logic_vector (1 downto 0);
+
 
 begin
 
 process(mode) 
-	begin
-		prev_mode <= mode;
-		
-		if (mode /= prev_mode) then
-			reseted <= '1';
-		else 
-			reseted <= '0';
-		end if;
+	prev_mode <= mode;
+	
+	if (mode /= prev_mode) then
+		reseted <= '1';
+	else 
+		reseted <= '0';
+	end if;
 end process;
 
 end architecture arc;
