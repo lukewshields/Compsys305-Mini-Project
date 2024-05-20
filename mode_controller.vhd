@@ -6,6 +6,7 @@ entity mode_controller is
     port (
         clk, reset : in std_logic;
 		  switches : in std_logic_vector (1 downto 0);
+		  reset_state : out std_logic; -- output to high whenever we switch states
         mode : out std_logic_vector (1 downto 0)
     );
 end entity mode_controller;
@@ -46,30 +47,48 @@ begin
             when (menu) => 
                 if (switches = "01") then
                     next_state <= train;
+						  --reset_state <= '1';
                 elsif (switches = "10") then
                     next_state <= game;
+						  --reset_state <= '1';
                 else    
                     next_state <= menu;
+						  --reset_state <= '0';
                 end if;
             when (train) => 
                if (switches = "10") then
                     next_state <= game;
-                elsif (reset ='1' or switches = "11" or switches ="00") then --ONE BUG HERE IS RESET only works for however long the key is held
+						  --reset_state <= '1';
+                elsif (reset ='1' or switches = "11" or switches ="00") then --ONE BUG HERE IS reset_state only works for however long the key is held:  FIXED I BELIEVE
                     next_state <= menu;
+						  --reset_state <= '1';
                 else 
                     next_state <= train;
+						  --reset_state <= '0';
                 end if;
             when (game) => 
                 if (switches = "01") then
                     next_state <= train;
+						  --reset_state <= '1';
                 elsif (reset = '1' or switches = "11" or switches = "00") then
                     next_state <= menu;
+						  --reset_state <= '1';
                 else 
                     next_state <= game;
+						  --reset_state <= '0';
                 end if;
             when others => next_state <= menu;
         end case;
     end process;
+	 
+	 output_resetstate : process(state, next_state) 
+		begin
+			if (state /= next_state) then
+				reset_state <= '1';
+			else 
+				reset_state <= '0';
+			end if;
+	 end process;
         
     --mode <= mode1;
 

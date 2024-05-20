@@ -11,7 +11,7 @@ entity pipes is
     port (pixel_row, pixel_col, rand: in std_logic_vector (9 downto 0);
 			mode : in std_logic_vector (1 downto 0);
 		  --init_x_pos : in std_logic_vector(10 downto 0);
-			clk, vert_sync, enable, click, collision: in std_logic;
+			clk, vert_sync, enable, click, collision, reset: in std_logic;
 			diff : in std_logic_vector(2 downto 0);
 			red, green, blue, pipes_on_out, game_on: out std_logic;
 			pipes_x_pos1_out,pipes_x_pos2_out,pipes_x_pos3_out : out std_logic_vector (10 downto 0); -- for determining score
@@ -97,6 +97,10 @@ architecture arc of pipes is
     begin
 		  --pipe_x_pos <= conv_std_logic_vector(400, 11);
         if rising_edge(vert_sync) then
+--				if (reset = '1') then
+--					pipe_x_pos <= conv_std_logic_vector(960, 11); --CANT ASSIGN MULTIPLE DRIVERS
+--					
+--				--end if;
 				if (enable = '1' and (mode = "10" or mode = "01")) then
 					if ((pipe_x_pos + pipe_width <= conv_std_logic_vector(1, 11)) and has_collided = '0') then --something about this is wrong maybe size of vectors idk adding the pipe_x_pos + ('0' & pipe_width) does nothing to where we reset but makes sure that we are always resetting??
 						game_on_s <= '1';
@@ -125,6 +129,9 @@ architecture arc of pipes is
 	 move_pipe2 : process(vert_sync)
 		begin
 			if (rising_edge(vert_sync)) then
+--				if (reset = '1') then
+--					pipe_x_pos <= conv_std_logic_vector(720, 11);
+--				--end if;
 				if (enable = '1' and (mode = "10" or mode = "01")) then
 					if ((pipe_x_pos2 + pipe_width <= conv_std_logic_vector(1,11)) and has_collided = '0') then
 						pipe_x_pos2 <= conv_std_logic_vector(700, 11);
@@ -153,6 +160,9 @@ architecture arc of pipes is
 	move_pipe3 : process(vert_sync)
 		begin
 			if (rising_edge(vert_sync)) then
+--				if (reset = '1') then
+--					pipe_x_pos <= conv_std_logic_vector(1200, 11);
+--				--end if;
 				if (enable = '1' and (mode = "10" or mode = "01")) then
 					if ((pipe_x_pos3 + pipe_width <= conv_std_logic_vector(1,11)) and has_collided = '0') then
 						pipe_x_pos3 <= conv_std_logic_vector(700, 11);
@@ -178,7 +188,7 @@ architecture arc of pipes is
 	pipe_motion : process(vert_sync)
 		begin
 			if (rising_edge(vert_sync)) then
-				if (collision = '1') then -- still unstable signal wolnt compile with rising edge
+				if (collision = '1' or reset = '1') then -- still unstable signal wolnt compile with rising edge
 					has_collided <= '1';
 --					pipe_x_pos <= conv_std_logic_vector(600, 11);
 --					pipe_x_pos2 <= conv_std_logic_vector(360, 11);

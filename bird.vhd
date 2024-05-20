@@ -7,7 +7,7 @@ USE  IEEE.STD_LOGIC_SIGNED.all;
 
 ENTITY bird IS
 	PORT
-		(clk, vert_sync, click, enable	: IN std_logic;
+		(clk, vert_sync, click, enable, reset	: IN std_logic;
 		 mode : in std_logic_vector (1 downto 0);
 		 collision : in std_logic;
        pixel_row, pixel_col	: IN std_logic_vector(9 DOWNTO 0);
@@ -62,6 +62,11 @@ Move_Ball: process (vert_sync, click)
 begin
 	--Move ball once every vertical sync
 	if (rising_edge(vert_sync)) then		
+		if (reset = '1') then
+			bird_y_pos <= conv_std_logic_vector(200, 10);
+			bird_y_motion <= conv_std_logic_vector(0, 10);
+		end if;
+		
 		if (enable = '1' and (mode = "10" or mode = "01") ) then 
 			prev_clicked <= click;
 			if (click /= '0' and prev_clicked = '0' and has_collided = '0') then
@@ -83,7 +88,7 @@ begin
 			end if;
 			bird_y_pos <= bird_y_pos + bird_y_motion;
 
-			if(collision = '1') then
+			if(collision = '1' or reset = '1') then
 				bird_y_pos <= conv_std_logic_vector(200, 10);
 				bird_y_motion <= conv_std_logic_vector(0, 10);
 				has_collided <= '1';

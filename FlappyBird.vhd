@@ -37,7 +37,7 @@ architecture arc of FlappyBird is
     port (pixel_row, pixel_col, rand: in std_logic_vector (9 downto 0);
 			mode : in std_logic_vector (1 downto 0);
 		  --init_x_pos : in std_logic_vector(10 downto 0);
-			clk, vert_sync, enable, click, collision: in std_logic;
+			clk, vert_sync, enable, click, collision, reset: in std_logic;
 			diff : in std_logic_vector (2 downto 0);
 			red, green, blue, pipes_on_out, game_on : out std_logic;
 			pipes_x_pos1_out,pipes_x_pos2_out,pipes_x_pos3_out : out std_logic_vector (10 downto 0);
@@ -46,7 +46,7 @@ architecture arc of FlappyBird is
 	end component pipes;
 		
 	component bird is 
-    port (clk, vert_sync, click, enable	: IN std_logic;
+    port (clk, vert_sync, click, enable, reset	: IN std_logic;
 		 mode : in std_logic_vector (1 downto 0);
 		 collision : in std_logic;
        pixel_row, pixel_col	: IN std_logic_vector(9 DOWNTO 0);
@@ -104,7 +104,7 @@ architecture arc of FlappyBird is
 	
 	component score_check is 
 		port(
-			vert_sync, Enable, collision, game_on: in std_logic;
+			vert_sync, Enable, collision, game_on, reset: in std_logic;
 			mode : in std_logic_vector (1 downto 0);
 			pipe_x_pos1, pipe_x_pos2, pipe_x_pos3 : in std_logic_vector (10 downto 0);
 			pipe_width, bird_x_pos : in std_logic_vector (9 downto 0);
@@ -132,6 +132,7 @@ architecture arc of FlappyBird is
 		port (
 			clk, reset : in std_logic;
 			switches : in std_logic_vector (1 downto 0);
+			reset_state : out std_logic;
 			mode : out std_logic_vector (1 downto 0)
 		);
 	end component mode_controller;
@@ -153,7 +154,7 @@ architecture arc of FlappyBird is
 	
 	component lives is 
 		port (
-			collision : in std_logic;
+			collision, reset: in std_logic;
 			num_lives : in std_logic_vector(5 downto 0);-- up to 16 lives
 			lives_out : out std_logic_vector(5 downto 0);
 			death : out std_logic
@@ -192,10 +193,13 @@ architecture arc of FlappyBird is
 	signal lives_out : std_logic_vector (5 downto 0);
 	
 	signal game_on : std_logic; --from pipes sent to score check to fix initial score of 1 whenever having a collision
+	signal reset_state : std_logic; -- from the mode controller and it resets the score and lives when switching modes
 	
 	signal trash : std_logic_vector (9 downto 0);
 	signal trash2 : std_logic_vector (9 downto 0);
 	signal trash4 : std_logic;
+	
+	signal reseted : std_logic;
 	
 begin
 
@@ -223,6 +227,8 @@ begin
 	LEDR(0) <= death;
 	--LEDR(0) <= collide;
 	LEDR(9) <= game_on;
+	LEDR(6) <= reset_state;
+
 	
 	divider : pll 
 		port map (
@@ -245,6 +251,7 @@ begin
 			enable => hold_enable,
 			click => leftclick,
 			collision => collide_stable,
+			reset => reset_state,
 			red => red_pipes,
 			green => green_pipes,
 			blue => blue_pipes,
@@ -287,6 +294,7 @@ begin
 		   vert_sync => vert_s,
 			click => leftclick,
 			enable => hold_enable,
+			reset => reset_state,
 			mode => mode,
 			collision => collide_stable,
 		   pixel_row => pixel_row_vga, 
@@ -384,6 +392,7 @@ begin
 			Enable => hold_enable,
 			collision => collide_stable,
 			game_on => game_on,
+			reset => reset_state,
 			mode => mode,
 			pipe_x_pos1 => pipes_x_pos,
 			pipe_x_pos2 => pipes_x_pos2,
@@ -417,9 +426,10 @@ begin
 	
 	controller : mode_controller 
 		port map (
-			clk => clk_25,
+			clk => vert_s,
 			reset => hold_reset,
 			switches => SW (1 downto 0),
+			reset_state => reset_state,
 			mode => mode 
 		);
 --		
@@ -434,11 +444,11 @@ begin
 	lives_count : lives 
 		port map (
 			collision => collide_stable,
+			reset => reset_state,
 			num_lives => "001000",
 			lives_out => lives_out,
 			death => death
 		);
-	
 
 	--for death detection use pixel clashes between red and green signals
 		
