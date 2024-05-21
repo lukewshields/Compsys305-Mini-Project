@@ -212,10 +212,10 @@ architecture arc of pipes is
 			if (level = "00") then
 				pipe_gap <= conv_std_logic_vector(200, 10);
 				pipe_x_motion <= conv_std_logic_vector(4, 10);
-			elsif (level = "01") then
+			elsif (level = "01" and mode = "01") then
 				pipe_gap <= conv_std_logic_vector(160, 10);
 				pipe_x_motion <= conv_std_logic_vector(4, 10);
-			elsif (level = "11") then
+			elsif (level = "11" and mode = "10") then
 				pipe_gap <= conv_std_logic_vector(160, 10);
 				pipe_x_motion <= conv_std_logic_vector(5, 10);
 			end if;

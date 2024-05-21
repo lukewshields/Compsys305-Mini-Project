@@ -29,7 +29,7 @@ level_set : process(vert_sync)
 		 level <= "11";
 		elsif((difficulty(1) = '1' or score > "001010") and mode = "10") then
 			level <= "01";
-		elsif(mode = "10") then
+		else
 			level <= "00";
 		end if;
 		

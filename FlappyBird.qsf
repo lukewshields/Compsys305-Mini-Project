@@ -53,7 +53,6 @@ set_global_assignment -name VHDL_FILE clock_divider.vhd
 set_global_assignment -name VHDL_FILE vga_sync.vhd
 set_global_assignment -name VHDL_FILE mouse.vhd
 set_global_assignment -name VHDL_FILE char_rom.vhd
-set_global_assignment -name VHDL_FILE bouncy_ball.vhd
 set_global_assignment -name VHDL_FILE mode_controller.vhd
 set_global_assignment -name VHDL_FILE LFSR.vhd
 set_global_assignment -name VHDL_FILE FlappyBird.vhd
@@ -279,7 +278,6 @@ set_global_assignment -name VHDL_FILE enable_handle.vhd
 set_global_assignment -name VHDL_FILE text_setter.vhd
 set_global_assignment -name VHDL_FILE BCD_to_7Seg.vhd
 set_global_assignment -name VHDL_FILE score_check.vhd
-set_global_assignment -name VHDL_FILE reset_handle.vhd
 set_global_assignment -name VHDL_FILE test_collison.vhd
 set_global_assignment -name VHDL_FILE hold_collision.vhd
 set_global_assignment -name VHDL_FILE lives.vhd

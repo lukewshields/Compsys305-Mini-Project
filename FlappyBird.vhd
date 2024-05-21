@@ -37,7 +37,6 @@ architecture arc of FlappyBird is
     port (pixel_row, pixel_col, rand: in std_logic_vector (9 downto 0);
 			mode, level : in std_logic_vector (1 downto 0);
 			score : in std_logic_vector (6 downto 0);
-		  --init_x_pos : in std_logic_vector(10 downto 0);
 			clk, vert_sync, enable, click, collision, reset, death: in std_logic;
 			red, green, blue, pipes_on_out, game_on : out std_logic;
 			pipes_x_pos1_out,pipes_x_pos2_out,pipes_x_pos3_out : out std_logic_vector (10 downto 0);
@@ -109,7 +108,7 @@ architecture arc of FlappyBird is
 			mode : in std_logic_vector (1 downto 0);
 			pipe_x_pos1, pipe_x_pos2, pipe_x_pos3 : in std_logic_vector (10 downto 0);
 			pipe_width, bird_x_pos : in std_logic_vector (9 downto 0);
-			score: out std_logic_vector (6 downto 0); --std logic vector for use of arithemetic
+			score: out std_logic_vector (6 downto 0); 
 			tens,ones: out std_logic_vector (3 downto 0)
 		);
 	end component score_check;
@@ -131,19 +130,11 @@ architecture arc of FlappyBird is
 
 	component mode_controller is 
 		port (
-			clk, reset : in std_logic;
-			switches : in std_logic_vector (1 downto 0);
+			clk, pb3, pb2, pb1 : in std_logic;
 			reset_state : out std_logic;
 			mode : out std_logic_vector (1 downto 0)
 		);
 	end component mode_controller;
-	
-	component reset_handle is 
-			port (
-			reset: in std_logic;
-			hold_reset : out std_logic
-		);
-	end component reset_handle;
 	
 	component hold_collision is 
 		port (
@@ -200,7 +191,7 @@ architecture arc of FlappyBird is
 	signal rom_mux_addy,rom_mux_addy2 : std_logic;
 	
 	signal mode : std_logic_vector (1 downto 0);
-	signal hold_reset, death : std_logic;
+	signal death : std_logic;
 	
 	signal level : std_logic_vector(1 downto 0);
 	
@@ -232,14 +223,12 @@ begin
 			pixel_row => pixel_row_vga,
 			pixel_column => pixel_col_vga
 		);
-		
-	--vert_s <= VGA_VS;
+
 	VGA_VS <= vert_s;
 	
 			
 	LEDR(1) <= collide_stable;
 	LEDR(0) <= death;
-	--LEDR(0) <= collide;
 	LEDR(9) <= game_on;
 	LEDR(6) <= reset_state;
 
@@ -355,11 +344,6 @@ begin
 			hold_enable => hold_enable
 		);
 		
-	e2 : reset_handle 
-		port map (
-			reset => not KEY(3),
-			hold_reset => hold_reset
-		);
 		
 	ch: char_rom
 		port map(
@@ -448,8 +432,10 @@ begin
 	controller : mode_controller 
 		port map (
 			clk => vert_s,
-			reset => hold_reset,
-			switches => SW (1 downto 0),
+			--reset => hold_reset,
+			pb3 => not KEy(3),
+			pb2 => not KEY(2),
+			pb1 => not KEY(1),
 			reset_state => reset_state,
 			mode => mode 
 		);

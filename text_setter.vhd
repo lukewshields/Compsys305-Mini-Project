@@ -330,9 +330,9 @@ begin
 				end case;
 			elsif (pixel_row = conv_std_logic_vector(13, 6)) then
 				case pixel_col is 
-						when conv_std_logic_vector(13, 6)  => s_character_address <=  "010011"; --sw
-						when conv_std_logic_vector(14, 6)  => s_character_address <=  conv_std_logic_vector(23, 6);
-						when conv_std_logic_vector(15, 6) => s_character_address <= conv_std_logic_vector(48, 6);
+						when conv_std_logic_vector(13, 6)  => s_character_address <=  conv_std_logic_vector(16, 6); --sw
+						when conv_std_logic_vector(14, 6)  => s_character_address <=  conv_std_logic_vector(2, 6);
+						when conv_std_logic_vector(15, 6) => s_character_address <= conv_std_logic_vector(49, 6);
 						--when conv_std_logic_vector(18, 6) => s_character_address <= conv_std_logic_vector(
 						
 						when conv_std_logic_vector(17, 6)  => s_character_address <=  conv_std_logic_vector(20, 6);--training
@@ -349,9 +349,9 @@ begin
 				end case;
 			elsif (pixel_row = conv_std_logic_vector(15, 6)) then
 				case pixel_col is 
-						when conv_std_logic_vector(15, 6)  => s_character_address <=  "010011"; --sw
-						when conv_std_logic_vector(16, 6)  => s_character_address <=  conv_std_logic_vector(23, 6);
-						when conv_std_logic_vector(17, 6) => s_character_address <= conv_std_logic_vector(49, 6);--1
+						when conv_std_logic_vector(15, 6)  => s_character_address <=  conv_std_logic_vector(16, 6); --sw
+						when conv_std_logic_vector(16, 6)  => s_character_address <=  conv_std_logic_vector(2, 6);
+						when conv_std_logic_vector(17, 6) => s_character_address <= conv_std_logic_vector(50, 6);--1
 						
 						when conv_std_logic_vector(19, 6)  => s_character_address <=  conv_std_logic_vector(7, 6);--game
 						when conv_std_logic_vector(20, 6)  => s_character_address <=  conv_std_logic_vector(1, 6);

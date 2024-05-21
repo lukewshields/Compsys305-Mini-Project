@@ -4,8 +4,7 @@ use IEEE.std_logic_unsigned.all;
 
 entity mode_controller is 
     port (
-        clk, reset : in std_logic;
-		  switches : in std_logic_vector (1 downto 0);
+        clk, pb3, pb2, pb1 : in std_logic; --PB1 = 1 is samw as switches = 01, PB2 is same as switches = 10
 		  reset_state : out std_logic; -- output to high whenever we switch states
         mode : out std_logic_vector (1 downto 0)
     );
@@ -22,7 +21,7 @@ begin
     SYNC_PROCESS: process(clk)
         begin  
             if (rising_edge(clk)) then   
-                if (reset = '1') then
+                if (pb3 = '1') then
                     state <= menu;
                 else 
                     state <= next_state;
@@ -40,48 +39,39 @@ begin
             end case; 
     end process;
 
-    NEXT_STATE_DECODE : process(state, next_state, switches)
+    NEXT_STATE_DECODE : process(state, next_state)
         begin
         next_state <= menu;
         case (state) is 
             when (menu) => 
-                if (switches = "01") then
+                if (pb1 = '1') then
                     next_state <= train;
-						  --reset_state <= '1';
-                elsif (switches = "10") then
+                elsif (pb2 = '1') then
                     next_state <= game;
-						  --reset_state <= '1';
                 else    
                     next_state <= menu;
-						  --reset_state <= '0';
                 end if;
             when (train) => 
-               if (switches = "10") then
+               if (pb2 = '1') then
                     next_state <= game;
-						  --reset_state <= '1';
-                elsif (reset ='1' or switches = "11" or switches ="00") then --ONE BUG HERE IS reset_state only works for however long the key is held:  FIXED I BELIEVE
+                elsif (pb3 = '1') then 
                     next_state <= menu;
-						  --reset_state <= '1';
                 else 
                     next_state <= train;
-						  --reset_state <= '0';
                 end if;
             when (game) => 
-                if (switches = "01") then
+                if (pb1 = '1') then
                     next_state <= train;
-						  --reset_state <= '1';
-                elsif (reset = '1' or switches = "11" or switches = "00") then
+                elsif (pb3 = '1') then
                     next_state <= menu;
-						  --reset_state <= '1';
                 else 
                     next_state <= game;
-						  --reset_state <= '0';
                 end if;
             when others => next_state <= menu;
         end case;
     end process;
 	 
-	 output_resetstate : process(state, next_state) 
+	 output_pb3state : process(state, next_state) 
 		begin
 			if (state /= next_state) then
 				reset_state <= '1';
