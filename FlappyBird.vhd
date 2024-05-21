@@ -38,7 +38,7 @@ architecture arc of FlappyBird is
 			mode, level : in std_logic_vector (1 downto 0);
 			score : in std_logic_vector (6 downto 0);
 		  --init_x_pos : in std_logic_vector(10 downto 0);
-			clk, vert_sync, enable, click, collision, reset: in std_logic;
+			clk, vert_sync, enable, click, collision, reset, death: in std_logic;
 			red, green, blue, pipes_on_out, game_on : out std_logic;
 			pipes_x_pos1_out,pipes_x_pos2_out,pipes_x_pos3_out : out std_logic_vector (10 downto 0);
 			pipe_width_out: out std_logic_vector (9 downto 0)
@@ -50,7 +50,8 @@ architecture arc of FlappyBird is
 		 mode : in std_logic_vector (1 downto 0);
 		 collision : in std_logic;
        pixel_row, pixel_col	: IN std_logic_vector(9 DOWNTO 0);
-		 red, green, blue, bird_on_out : OUT std_logic;
+		 lives : in std_logic_vector(5 downto 0);
+		 red, green, blue, bird_on_out, death : OUT std_logic;
 		 bird_x_pos_out: out std_logic_vector(9 DOWNTO 0)
 		 );			
 	end component bird;
@@ -154,10 +155,10 @@ architecture arc of FlappyBird is
 	
 	component lives is 
 		port (
-			collision, reset: in std_logic;
-			num_lives : in std_logic_vector(5 downto 0);-- up to 16 lives
-			lives_out : out std_logic_vector(5 downto 0);
-			death : out std_logic
+			collision, reset, death: in std_logic;
+			mode : in std_logic_vector (1 downto 0);
+			lives_out : out std_logic_vector(5 downto 0)
+			--death : out std_logic
 		);
 	end component lives;
 	
@@ -267,6 +268,7 @@ begin
 			click => leftclick,
 			collision => collide_stable,
 			reset => reset_state,
+			death => death,
 			red => red_pipes,
 			green => green_pipes,
 			blue => blue_pipes,
@@ -314,10 +316,12 @@ begin
 			collision => collide_stable,
 		   pixel_row => pixel_row_vga, 
 		   pixel_col => pixel_col_vga,
+			lives => lives_out,
 		   red => red_bird, 
 		   green => green_bird,
 		   blue => blue_bird,
 			bird_on_out => bird_on,
+			death => death,
 			bird_x_pos_out => bird_x_pos
 		);
 	
@@ -462,9 +466,10 @@ begin
 		port map (
 			collision => collide_stable,
 			reset => reset_state,
-			num_lives => "001000",
-			lives_out => lives_out,
-			death => death
+			death => death,
+			mode => mode,
+			lives_out => lives_out
+			--death => death
 		);
 	level_set : levels 
 		port map (

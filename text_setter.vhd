@@ -86,7 +86,29 @@ begin
 					end if;
 				end if;
 				
-				
+--				if (pixel_row = conv_std_logic_vector(2, 6)) then
+--					current_lives := conv_integer(unsigned(lives));
+--				
+--					tens_lives := CONV_STD_LOGIC_VECTOR(current_lives/10, 6);  -- Right shift by 4 to get tens digit
+--					ones_lives := CONV_STD_LOGIC_VECTOR(current_lives mod 10,6); 
+--				
+--					case pixel_col is 
+--						when conv_std_logic_vector(29, 6)  => s_character_address <=  conv_std_logic_vector(12, 6); --Lives
+--						when conv_std_logic_vector(30, 6)  => s_character_address <=  conv_std_logic_vector(9, 6);
+--						when conv_std_logic_vector(31, 6)  => s_character_address <=  conv_std_logic_vector(22, 6);
+--						when conv_std_logic_vector(32, 6)  => s_character_address <=  conv_std_logic_vector(5, 6);
+--						when conv_std_logic_vector(33, 6)  => s_character_address <=  conv_std_logic_vector(19, 6);
+--						
+--						when conv_std_logic_vector(35, 6)  => s_character_address <= "110000" + tens_lives; --tens digit
+--						when conv_std_logic_vector(36, 6)  => s_character_address <=  "110000" + ones_lives; --ones digit lives
+--						
+--						
+--						when others => s_character_address <= "100000";
+--					end case;
+--					
+--					
+--				end if;
+--					
 				
 				if (game_on = '0') then
 					if (pixel_row = conv_std_logic_vector(5, 6)) then
@@ -166,41 +188,49 @@ begin
 				
 				tens_lives := CONV_STD_LOGIC_VECTOR(current_lives/10, 6);  -- Right shift by 4 to get tens digit
 				ones_lives := CONV_STD_LOGIC_VECTOR(current_lives mod 10,6); 
-				
-				case pixel_col is 
-				when "000010" => s_character_address <= "010011"; --Score
-				when "000011" => s_character_address <= "000011";
-				when "000100" => s_character_address <= "001111";
-				when "000101" => s_character_address <= "010010";
-				when "000110" => s_character_address <= "000101";
-				
-				when conv_std_logic_vector(29, 6)  => s_character_address <=  conv_std_logic_vector(12, 6); --Lives
-				when conv_std_logic_vector(30, 6)  => s_character_address <=  conv_std_logic_vector(9, 6);
-				when conv_std_logic_vector(31, 6)  => s_character_address <=  conv_std_logic_vector(22, 6);
-				when conv_std_logic_vector(32, 6)  => s_character_address <=  conv_std_logic_vector(5, 6);
-				when conv_std_logic_vector(33, 6)  => s_character_address <=  conv_std_logic_vector(19, 6);
-				
-				when conv_std_logic_vector(35, 6)  => s_character_address <= "110000" + tens_lives; --tens digit
-				when conv_std_logic_vector(36, 6)  => s_character_address <=  "110000" + ones_lives; --ones digit lives
-				
-				
-				when others => s_character_address <= "100000";
-				end case;
-					current_score := conv_integer(unsigned(score));		
-					if (current_score < 10) then
-						if (pixel_col = "001000") then -- Single digit
-							s_character_address <= CONV_STD_LOGIC_VECTOR(current_score + 48, 6);
-						end if;
-					else
-						tens_score := CONV_STD_LOGIC_VECTOR(current_score/10, 6);  -- Right shift by 4 to get tens digit
-						ones_score := CONV_STD_LOGIC_VECTOR(current_score mod 10,6); 
-						if (pixel_col = "001000") then
-							s_character_address <= tens_score + "110000"; -- Displays single digit
-						elsif (pixel_col = "001001") then
-							s_character_address <= ones_score + "110000"; -- Displays tens digit
-						end if;
+
+
+				if pixel_col = "000010" then
+						s_character_address <= "010011"; -- Score
+				elsif pixel_col = "000011" then
+					 s_character_address <= "000011";
+				elsif pixel_col = "000100" then
+					 s_character_address <= "001111";
+				elsif pixel_col = "000101" then
+					 s_character_address <= "010010";
+				elsif pixel_col = "000110" then
+					 s_character_address <= "000101";
+				elsif (pixel_col = conv_std_logic_vector(29, 6) and mode = "10") then
+					s_character_address <= conv_std_logic_vector(12, 6); -- Lives
+				elsif (pixel_col = conv_std_logic_vector(30, 6) and mode = "10") then
+					s_character_address <= conv_std_logic_vector(9, 6);
+				elsif (pixel_col = conv_std_logic_vector(31, 6) and mode = "10") then
+					s_character_address <= conv_std_logic_vector(22, 6);
+				elsif (pixel_col = conv_std_logic_vector(32, 6) and mode = "10") then
+					s_character_address <= conv_std_logic_vector(5, 6);
+				elsif (pixel_col = conv_std_logic_vector(33, 6) and mode = "10") then
+					s_character_address <= conv_std_logic_vector(19, 6);
+				elsif (pixel_col = conv_std_logic_vector(35, 6) and mode = "10") then
+					s_character_address <= "110000" + tens_lives; -- Tens digit
+				elsif (pixel_col = conv_std_logic_vector(36, 6) and mode = "10") then
+					s_character_address <= "110000" + ones_lives; -- Ones digit lives 
+				else 
+					 s_character_address <= "100000";
+				end if;
+				current_score := conv_integer(unsigned(score));		
+				if (current_score < 10) then
+					if (pixel_col = "001000") then -- Single digit
+						s_character_address <= CONV_STD_LOGIC_VECTOR(current_score + 48, 6);
 					end if;
-						
+				else
+					tens_score := CONV_STD_LOGIC_VECTOR(current_score/10, 6);  -- Right shift by 4 to get tens digit
+					ones_score := CONV_STD_LOGIC_VECTOR(current_score mod 10,6); 
+					if (pixel_col = "001000") then
+						s_character_address <= tens_score + "110000"; -- Displays single digit
+					elsif (pixel_col = "001001") then
+							s_character_address <= ones_score + "110000"; -- Displays tens digit
+					end if;
+				end if;	
 			elsif ((pixel_row2(9 downto 4) = conv_std_logic_vector(15,6) or pixel_row2(9 downto 4) = conv_std_logic_vector(14,6)) and enable = '0') then
 				case pixel_col2(9 downto 5) is
 					when "00111" => p_character_address <= "010000"; -- Displays paused

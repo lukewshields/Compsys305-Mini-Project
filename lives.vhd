@@ -10,10 +10,10 @@ USE  IEEE.STD_LOGIC_SIGNED.all;
 
 entity lives is 
 	port (
-		collision, reset : in std_logic;
-		num_lives : in std_logic_vector(5 downto 0);-- up to 16 lives
-		lives_out : out std_logic_vector(5 downto 0);
-		death : out std_logic
+		collision, reset, death : in std_logic;
+		mode : in std_logic_vector (1 downto 0);
+		lives_out : out std_logic_vector(5 downto 0)
+		--death : out std_logic
 	);
 
 end entity lives;
@@ -29,16 +29,16 @@ process (collision, reset)
 		
 		--if(rising_edge(vert_s)) then
 		--keep track of modes and if the prev mode is diff from the curr mode then we need to reset the lives
-			if (reset = '1') then 
-				lives_count <= conv_std_logic_vector(8, 6);
+			if (reset = '1' or death = '1') then 
+				lives_count <= conv_std_logic_vector(4, 6);
 			else 
-				if (rising_edge(collision)) then
+				if (rising_edge(collision) and mode = "10") then
 					lives_count <= lives_count - "000001";
-					if (lives_count <= "000001") then
-						death <= '1';
-					else 
-						death <= '0';
-					end if;
+----					if (lives_count <= "000001") then
+----						death <= '1';
+----					else 
+----						death <= '0';
+----					end if;
 				end if;
 			end if;
 		--end if;

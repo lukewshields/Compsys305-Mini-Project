@@ -11,8 +11,9 @@ ENTITY bird IS
 		 mode : in std_logic_vector (1 downto 0);
 		 collision : in std_logic;
        pixel_row, pixel_col	: IN std_logic_vector(9 DOWNTO 0);
+		 lives : in std_logic_vector(5 downto 0);
 		 --mode : in std_logic_vector(1 downto 0);
-		 red, green, blue, bird_on_out : OUT std_logic;
+		 red, green, blue, bird_on_out, death : OUT std_logic;
 		 bird_x_pos_out: out std_logic_vector(9 DOWNTO 0)
 		 );		
 END bird;
@@ -27,6 +28,7 @@ SIGNAL bird_y_motion			: std_logic_vector(9 DOWNTO 0) := conv_std_logic_vector(1
 signal prev_clicked : std_logic;
 signal counter : integer := 0; 
 signal fall_early,has_collided : std_logic;
+signal death_s : std_logic;
 
 
 
@@ -62,6 +64,7 @@ Move_Ball: process (vert_sync, click)
 begin
 	--Move ball once every vertical sync
 	if (rising_edge(vert_sync)) then		
+		if (death_s = '0') then
 		if (reset = '1') then
 			bird_y_pos <= conv_std_logic_vector(200, 10);
 			bird_y_motion <= conv_std_logic_vector(0, 10);
@@ -92,15 +95,27 @@ begin
 				bird_y_pos <= conv_std_logic_vector(200, 10);
 				bird_y_motion <= conv_std_logic_vector(0, 10);
 				has_collided <= '1';
+				if (lives <= "000000") then
+					death_s <= '1';
+				else 
+					death_s <= '0';
+				end if;
 			end if;
 			
 			if (click = '1' and has_collided='1') then
-				has_collided <= '0'; --begin falling again
+				has_collided <= '0';
+				--death_s <= '0';--begin falling again
 			end if;
 			
 		end if;
+		end if;
+		
+		if (click = '1') then 
+			death_s <= '0';
+		end if;
 	end if;
 end process Move_Ball;
+death <= death_s;
 
 --	collision_motion : process(vert_sync)
 --		
