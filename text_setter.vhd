@@ -33,16 +33,7 @@ begin
 	if (rising_edge(clk))  then 
 			if (mode = "10") then
 				if (pixel_row = conv_std_logic_vector(3, 6)) then --this text goes away for some reason since last commit not sure when it started to dissapear??
---						if (pixel_col = conv_std_logic_vector(11, 6)) then s_character_address <= conv_std_logic_vector(7, 6); --game
---						elsif (pixel_col = conv_std_logic_vector(12, 6)) then s_character_address <=  conv_std_logic_vector(1, 6);
---						elsif (pixel_col = conv_std_logic_vector(13, 6)) then s_character_address <= conv_std_logic_vector(13, 6);
---						elsif (pixel_col = conv_std_logic_vector(14, 6)) then s_character_address <= conv_std_logic_vector(5, 6);
---					
---						elsif (pixel_col = conv_std_logic_vector(16, 6)) then s_character_address <=  conv_std_logic_vector(13, 6);--mode
---						elsif (pixel_col = conv_std_logic_vector(17, 6)) then s_character_address <=  conv_std_logic_vector(15, 6);
---						elsif (pixel_col = conv_std_logic_vector(18, 6)) then  s_character_address <=  conv_std_logic_vector(4, 6);
---						elsif (pixel_col = conv_std_logic_vector(19, 6)) then  s_character_address <=  conv_std_logic_vector(5, 6);
---						end if;
+
 					if (difficulty = "00") then
 						if (pixel_col = conv_std_logic_vector(11, 6)) then s_character_address <= conv_std_logic_vector(7, 6); --game
 						elsif (pixel_col = conv_std_logic_vector(12, 6)) then s_character_address <=  conv_std_logic_vector(1, 6);
@@ -93,39 +84,6 @@ begin
 						elsif (pixel_col = conv_std_logic_vector(23, 6)) then s_character_address <= conv_std_logic_vector(18, 6); --end if;
 						elsif (pixel_col = conv_std_logic_vector(24, 6)) then s_character_address <= conv_std_logic_vector(4, 6);  else s_character_address <= "100000" ; end if;
 					end if;
-					
---					case pixel_col is
---						when conv_std_logic_vector(11, 6)  => s_character_address <= conv_std_logic_vector(7, 6); --game
---						when conv_std_logic_vector(12, 6)  => s_character_address <=  conv_std_logic_vector(1, 6);
---						when conv_std_logic_vector(13, 6) => s_character_address <= conv_std_logic_vector(13, 6);
---						when conv_std_logic_vector(14, 6) => s_character_address <= conv_std_logic_vector(5, 6);
---							
---						when conv_std_logic_vector(16, 6)  => s_character_address <=  conv_std_logic_vector(13, 6);--mode
---						when conv_std_logic_vector(17, 6)  => s_character_address <=  conv_std_logic_vector(15, 6);
---						when conv_std_logic_vector(18, 6)  => s_character_address <=  conv_std_logic_vector(4, 6);
---						when conv_std_logic_vector(19, 6)  => s_character_address <=  conv_std_logic_vector(5, 6);
---						
---						if (difficulty = "00") then
---							when conv_std_logic_vector(21, 6)  => s_character_address <= conv_std_logic_vector(5, 6);  --easy
---							when conv_std_logic_vector(22, 6)  => s_character_address <=  conv_std_logic_vector(1, 6); 
---							when conv_std_logic_vector(23, 6)  => s_character_address <= conv_std_logic_vector(19, 6); 
---							when conv_std_logic_vector(24, 6)  => s_character_address <= conv_std_logic_vector(25, 6); 
---						elsif (difficulty ="01") then
---							when conv_std_logic_vector(21, 6)  => s_character_address <= conv_std_logic_vector(13, 6);   --medium
---							when conv_std_logic_vector(22, 6)  => s_character_address <=  conv_std_logic_vector(5, 6);  
---							when conv_std_logic_vector(23, 6)  => s_character_address <= conv_std_logic_vector(4, 6);  
---							when conv_std_logic_vector(24, 6)  => s_character_address <= conv_std_logic_vector(9, 6);   
---							when conv_std_logic_vector(25, 6)  => s_character_address <=  conv_std_logic_vector(21, 6); 
---							when conv_std_logic_vector(26, 6)  => s_character_address <=  conv_std_logic_vector(13, 6); 
---						else 
---						   when conv_std_logic_vector(21, 6)  => s_character_address <= conv_std_logic_vector(8, 6);   --hard
---							when conv_std_logic_vector(22, 6)  => s_character_address <=  conv_std_logic_vector(1, 6); 
---							when conv_std_logic_vector(23, 6)  => s_character_address <= conv_std_logic_vector(18, 6); 
---							when conv_std_logic_vector(24, 6)  => s_character_address <= conv_std_logic_vector(4, 6);  
---						end if;
---					
---						when others => s_character_address <= "100000";
---					end case;
 				end if;
 				
 				

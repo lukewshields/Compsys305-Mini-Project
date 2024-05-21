@@ -7,7 +7,7 @@ USE  IEEE.STD_LOGIC_SIGNED.all;
 
 ENTITY bird IS
 	PORT
-		(clk, vert_sync, click, enable, reset	: IN std_logic;
+		(clk, vert_sync, click, enable, reset, game_on	: IN std_logic;
 		 mode : in std_logic_vector (1 downto 0);
 		 collision : in std_logic;
        pixel_row, pixel_col	: IN std_logic_vector(9 DOWNTO 0);
@@ -80,24 +80,24 @@ begin
 			elsif ((counter >= 8 or (click /= '1' and prev_clicked = '1')) and has_collided = '0') then
 				counter <= 0;
 				fall_early <= '1';
---			elsif (collision = '1') then
---				bird_y_pos = CONV_STD_LOGIC_VECTOR(300,10);
---				bird_y_motion <= CONV_STD_LOGIC_VECTOR(0,10);
 			elsif (has_collided = '0') then
 				bird_y_motion <= CONV_STD_LOGIC_VECTOR(4,10);
 			end if;
-			bird_y_pos <= bird_y_pos + bird_y_motion;
+			
+			if (game_on = '1') then --used this to make sure we do not fall when initially starting the game
+				bird_y_pos <= bird_y_pos + bird_y_motion;
+			end if;
 
-			if(collision = '1' or reset = '1') then
+			if(collision = '1' or reset = '1') then --collide or change of modes
 				bird_y_pos <= conv_std_logic_vector(200, 10);
 				bird_y_motion <= conv_std_logic_vector(0, 10);
 				has_collided <= '1';
 			end if;
 			
 			if (click = '1' and has_collided='1') then
-				has_collided <= '0';
+				has_collided <= '0'; --begin falling again
 			end if;
-			--Compute next ball Y position
+			
 		end if;
 	end if;
 end process Move_Ball;

@@ -5,7 +5,7 @@ USE  IEEE.STD_LOGIC_SIGNED.all;
 
 entity score_check is 
 	port(
-		vert_sync, Enable, collision, game_on, reset : in std_logic;
+		vert_sync, Enable, collision, game_on, reset, death : in std_logic;
 		mode : in std_logic_vector (1 downto 0);
 		pipe_x_pos1,pipe_x_pos2,pipe_x_pos3 : in std_logic_vector (10 downto 0);
 		pipe_width,bird_x_pos : in std_logic_vector (9 downto 0);
@@ -23,8 +23,12 @@ signal current_score : integer;
 		begin 
 			if (rising_edge(vert_sync)) then
 				if (enable = '1') then
-					if (collision = '1' or reset = '1') then
+					if (reset = '1' or death = '1') then
 						score_s <= "0000000";
+					elsif (reset = '1' or collision = '1') then
+						pipe_count1 <= 1;
+						pipe_count2 <= 1;
+						pipe_count3 <= 1;
 					elsif (game_on = '1') then --need logic for that we are actually playing the game i.e. elsif game_on then, this doe not fix problem somehow pipe is still behind the bird when we init the game
 						if ((pipe_x_pos1 + pipe_width) <= bird_x_pos and pipe_count1 = 0) then
 							score_s <= score_s + "0000001";

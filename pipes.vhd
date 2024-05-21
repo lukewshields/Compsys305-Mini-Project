@@ -9,12 +9,14 @@ USE  IEEE.STD_LOGIC_UNSIGNED.all;
 
 entity pipes is 
     port (pixel_row, pixel_col, rand: in std_logic_vector (9 downto 0);
-			mode : in std_logic_vector (1 downto 0);
+			mode, level : in std_logic_vector (1 downto 0);
+			score : in std_logic_vector(6 downto 0);
 		  --init_x_pos : in std_logic_vector(10 downto 0);
 			clk, vert_sync, enable, click, collision, reset: in std_logic;
-			diff : in std_logic_vector(2 downto 0);
+			--diff : in std_logic_vector(2 downto 0);
+			
 			red, green, blue, pipes_on_out, game_on: out std_logic;
-			difficulty : out std_logic_vector (1 downto 0); --00 CORRESPONDS TO EASY 01 corresponds to MEDIUM, 11 corresponds to HARD
+			 --00 CORRESPONDS TO EASY 01 corresponds to MEDIUM, 11 corresponds to HARD
 			pipes_x_pos1_out,pipes_x_pos2_out,pipes_x_pos3_out : out std_logic_vector (10 downto 0); -- for determining score
 			pipe_width_out: OUT std_logic_vector (9 downto 0)
 	 );
@@ -69,9 +71,9 @@ architecture arc of pipes is
 						
 
 	pipes_on <= '1' when (((
-	((pixel_row <= pipe_height or pixel_row + pipe_height_bot >= bottom) and (pipe_x_pos <= pixel_col or pipe_x_pos > conv_std_logic_vector(1500, 11)) and pixel_col <= pipe_x_pos + pipe_width) or 
-	((pixel_row <= pipe_height2 or pixel_row + pipe_height_bot2 >= bottom) and (pipe_x_pos2 <= pixel_col or pipe_x_pos2 > conv_std_logic_vector(1500, 11)) and pixel_col <= pipe_x_pos2 + pipe_width) or 
-	((pixel_row <= pipe_height3 or pixel_row + pipe_height_bot3 >= bottom) and (pipe_x_pos3 <= pixel_col or pipe_x_pos3 > conv_std_logic_vector(1500, 11)) and pixel_col <= pipe_x_pos3 + pipe_width)
+	((pixel_row <= pipe_height or pixel_row + pipe_height_bot >= bottom) and (pipe_x_pos <= pixel_col or pipe_x_pos > conv_std_logic_vector(1600, 11)) and pixel_col <= pipe_x_pos + pipe_width) or 
+	((pixel_row <= pipe_height2 or pixel_row + pipe_height_bot2 >= bottom) and (pipe_x_pos2 <= pixel_col or pipe_x_pos2 > conv_std_logic_vector(1600, 11)) and pixel_col <= pipe_x_pos2 + pipe_width) or 
+	((pixel_row <= pipe_height3 or pixel_row + pipe_height_bot3 >= bottom) and (pipe_x_pos3 <= pixel_col or pipe_x_pos3 > conv_std_logic_vector(1600, 11)) and pixel_col <= pipe_x_pos3 + pipe_width)
 	) and (mode = "10" or mode = "01"))
 
 	 or (pixel_row >= conv_std_logic_vector(450, 10)) -- and (mode = "10" or mode = "01")
@@ -201,24 +203,19 @@ architecture arc of pipes is
 	end process pipe_motion;
 	
 	gap_width : process(vert_sync)
-	
 		begin
-			if (rising_edge(vert_sync)) then --maybe later move this logic out of the pipes module, and move it to its own difficulty module, so many diff things can be set by it?
-				if (diff(0) = '1' and mode = "10") then
-					pipe_gap <= conv_std_logic_vector(200, 10);
-					difficulty <= "00";
-				elsif(diff(1) = '1' and mode = "10") then
-					pipe_gap <= conv_std_logic_vector(160, 10);
-					difficulty <= "01";
-				elsif(diff(2) = '1' and mode = "10") then
-					pipe_gap <= conv_std_logic_vector(120, 10);
-					difficulty <= "11";
-				else 
-					pipe_gap <= conv_std_logic_vector(200, 10);
-					difficulty <= "00";
-				end if;
-			end if;		
+			if (level = "00") then
+				pipe_gap <= conv_std_logic_vector(200, 10);
+				pipe_x_motion <= conv_std_logic_vector(4, 10);
+			elsif (level = "01") then
+				pipe_gap <= conv_std_logic_vector(160, 10);
+				pipe_x_motion <= conv_std_logic_vector(4, 10);
+			elsif (level = "11") then
+				pipe_gap <= conv_std_logic_vector(160, 10);
+				pipe_x_motion <= conv_std_logic_vector(5, 10);
+			end if;
+
 	end process gap_width;
-	
+--	
 	
 end architecture arc;

@@ -21,10 +21,10 @@ begin
 	begin
 		if (mode = "10" or mode = "01") then
 			if(rising_edge(enable) and count = '0') then
-				hold_enable <= '1';
+				hold_enable <= '0';
 				count <= '1';
 			elsif (count='1' and rising_edge(enable)) then
-				hold_enable <= '0';
+				hold_enable <= '1';
 				count <= '0';
 			end if;
 		end if;

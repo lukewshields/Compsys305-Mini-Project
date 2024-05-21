@@ -19,7 +19,7 @@ entity lives is
 end entity lives;
 
 architecture arc of lives is 
-signal lives_count : std_logic_vector (5 downto 0) := conv_std_logic_vector(8, 6);
+signal lives_count : std_logic_vector (5 downto 0) := conv_std_logic_vector(20, 6);
 --signal prev_collision : std_logic;
 begin
 
