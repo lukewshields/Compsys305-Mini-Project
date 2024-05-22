@@ -13,16 +13,15 @@ entity pipes is
 			score : in std_logic_vector(6 downto 0);
 			clk, vert_sync, enable, click, collision, reset, death: in std_logic;
 			red, green, blue, pipes_on_out, game_on: out std_logic;
-			 --00 CORRESPONDS TO EASY 01 corresponds to MEDIUM, 11 corresponds to HARD
 			pipes_x_pos1_out,pipes_x_pos2_out,pipes_x_pos3_out : out std_logic_vector (10 downto 0); -- for determining score
-			pipe_width_out: OUT std_logic_vector (9 downto 0)
+			pipe_width_out, pipe_speed: OUT std_logic_vector (9 downto 0) --also for the score
 	 );
 end entity pipes;
 
 architecture arc of pipes is 
     --could get rid of all the pipe before the variable names maybe
 	 signal pipe_gap : std_logic_vector (9 downto 0); --:= conv_std_logic_vector(120, 10); -- can later be shrunk based on the level/difficulty of the game 
-	 --note 120 will be used for hard mode, 160 for medium and 200 for easy
+	 --note 160 will be used for hard mode, 160 for medium and 200 for easy
 	 
     signal pipes_on : std_logic;
     signal pipe_height : std_logic_vector (9 downto 0) := conv_std_logic_vector(160, 10); --without any other _ , then pipe_height is equal to the top one
@@ -63,10 +62,12 @@ architecture arc of pipes is
 	 pipe_width_out <= pipe_width;
 	 pipes_on_out <= pipes_on;
 	 
+	 pipe_speed <= pipe_x_motion;
+	 
 	 --random_10 <=  rand & '0' & '0';
 	game_on <= game_on_s;			
 						
-
+	
 	pipes_on <= '1' when (((
 	((pixel_row <= pipe_height or pixel_row + pipe_height_bot >= bottom) and (pipe_x_pos <= pixel_col or pipe_x_pos > conv_std_logic_vector(1600, 11)) and pixel_col <= pipe_x_pos + pipe_width) or 
 	((pixel_row <= pipe_height2 or pixel_row + pipe_height_bot2 >= bottom) and (pipe_x_pos2 <= pixel_col or pipe_x_pos2 > conv_std_logic_vector(1600, 11)) and pixel_col <= pipe_x_pos2 + pipe_width) or 
