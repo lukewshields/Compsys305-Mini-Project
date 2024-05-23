@@ -17,7 +17,7 @@ signal count : std_logic := '0';
 
 
 begin
-	process (enable, collision, mode)
+	process (enable, collision, mode, count)
 	begin
 		if (mode = "10" or mode = "01") then
 			if(rising_edge(enable) and count = '0') then

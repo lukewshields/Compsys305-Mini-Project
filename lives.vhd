@@ -19,19 +19,19 @@ entity lives is
 end entity lives;
 
 architecture arc of lives is 
-signal lives_count : std_logic_vector (5 downto 0) := conv_std_logic_vector(20, 6);
+signal lives_count : std_logic_vector (5 downto 0);
 signal count : integer := 0;
 --signal prev_collision : std_logic;
 begin
 
-process (collision, reset)
+process (collision, reset, death, mode, collision_power, count, lives_count)
 	begin
 		--prev_collision <= collision;
 		
 		--if(rising_edge(vert_s)) then
 		--keep track of modes and if the prev mode is diff from the curr mode then we need to reset the lives
 			if (reset = '1' or death = '1') then 
-				lives_count <= conv_std_logic_vector(4, 6);
+				lives_count <= conv_std_logic_vector(3, 6);
 			elsif (mode = "10") then
 				if (rising_edge(collision)) then
 					lives_count <= lives_count - "000001";

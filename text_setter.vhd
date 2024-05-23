@@ -287,6 +287,30 @@ begin
 						
 					end case;
 				end if;
+				if (pixel_row = conv_std_logic_vector(12, 6)) then
+					case pixel_col is 
+						when conv_std_logic_vector(9, 6)  => s_character_address <=  conv_std_logic_vector(3, 6); --click
+						when conv_std_logic_vector(10, 6)  => s_character_address <=  conv_std_logic_vector(12, 6);
+						when conv_std_logic_vector(11, 6)  => s_character_address <=  conv_std_logic_vector(9, 6);
+						when conv_std_logic_vector(12, 6)  => s_character_address <=  conv_std_logic_vector(3, 6);
+						when conv_std_logic_vector(13, 6)  => s_character_address <=  conv_std_logic_vector(11, 6);
+							
+						when conv_std_logic_vector(15, 6)  => s_character_address <=  conv_std_logic_vector(6, 6); --for 
+						when conv_std_logic_vector(16, 6)  => s_character_address <=  conv_std_logic_vector(15, 6);
+						when conv_std_logic_vector(17, 6)  => s_character_address <=  conv_std_logic_vector(18, 6);
+						
+						when conv_std_logic_vector(19, 6)  => s_character_address <=  conv_std_logic_vector(14, 6); --new 
+						when conv_std_logic_vector(20, 6)  => s_character_address <=  conv_std_logic_vector(5, 6);
+						when conv_std_logic_vector(21, 6)  => s_character_address <=  conv_std_logic_vector(23, 6);
+							
+						when conv_std_logic_vector(23, 6)  => s_character_address <=  conv_std_logic_vector(7, 6); --game
+						when conv_std_logic_vector(24, 6)  => s_character_address <=  conv_std_logic_vector(1, 6);
+						when conv_std_logic_vector(25, 6)  => s_character_address <=  conv_std_logic_vector(13, 6);
+						when conv_std_logic_vector(26, 6)  => s_character_address <=  conv_std_logic_vector(5, 6);
+						
+						when others => s_character_address <= "100000";
+					end case;
+				end if;
 			end if;
 			
 		elsif (mode = "00" or mode = "11") then
@@ -330,7 +354,7 @@ begin
 				end case;
 			elsif (pixel_row = conv_std_logic_vector(13, 6)) then
 				case pixel_col is 
-						when conv_std_logic_vector(13, 6)  => s_character_address <=  conv_std_logic_vector(16, 6); --sw
+						when conv_std_logic_vector(13, 6)  => s_character_address <=  conv_std_logic_vector(16, 6); --pb1
 						when conv_std_logic_vector(14, 6)  => s_character_address <=  conv_std_logic_vector(2, 6);
 						when conv_std_logic_vector(15, 6) => s_character_address <= conv_std_logic_vector(49, 6);
 						--when conv_std_logic_vector(18, 6) => s_character_address <= conv_std_logic_vector(
@@ -349,9 +373,9 @@ begin
 				end case;
 			elsif (pixel_row = conv_std_logic_vector(15, 6)) then
 				case pixel_col is 
-						when conv_std_logic_vector(15, 6)  => s_character_address <=  conv_std_logic_vector(16, 6); --sw
+						when conv_std_logic_vector(15, 6)  => s_character_address <=  conv_std_logic_vector(16, 6); --pb
 						when conv_std_logic_vector(16, 6)  => s_character_address <=  conv_std_logic_vector(2, 6);
-						when conv_std_logic_vector(17, 6) => s_character_address <= conv_std_logic_vector(50, 6);--1
+						when conv_std_logic_vector(17, 6) => s_character_address <= conv_std_logic_vector(50, 6);--2
 						
 						when conv_std_logic_vector(19, 6)  => s_character_address <=  conv_std_logic_vector(7, 6);--game
 						when conv_std_logic_vector(20, 6)  => s_character_address <=  conv_std_logic_vector(1, 6);
@@ -360,6 +384,19 @@ begin
 				
 						when others => s_character_address <= "100000";
 				end case;
+--			elsif (pixel_row = conv_std_logic_vector(17, 6)) then
+--				case pixel_col is 
+--						when conv_std_logic_vector(15, 6)  => s_character_address <=  conv_std_logic_vector(16, 6); --pb
+--						when conv_std_logic_vector(16, 6)  => s_character_address <=  conv_std_logic_vector(2, 6);
+--						when conv_std_logic_vector(17, 6) => s_character_address <= conv_std_logic_vector(51, 6);--3
+--						
+--						when conv_std_logic_vector(19, 6)  => s_character_address <=  conv_std_logic_vector(13, 6);--game
+--						when conv_std_logic_vector(20, 6)  => s_character_address <=  conv_std_logic_vector(5, 6);
+--						when conv_std_logic_vector(21, 6)  => s_character_address <=  conv_std_logic_vector(14, 6);
+--						when conv_std_logic_vector(22, 6)  => s_character_address <=  conv_std_logic_vector(21, 6);
+--				
+--						when others => s_character_address <= "100000";
+--				end case;
 			else
 				s_character_address <= "100000";
 				p_character_address <= "100000";

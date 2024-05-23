@@ -16,7 +16,6 @@ architecture beh of mode_controller is
     signal next_state : state_type := menu;
     --signal mode1 : std_logic_vector (1 downto 0);
 
-
 begin
     SYNC_PROCESS: process(clk)
         begin  
@@ -39,7 +38,7 @@ begin
             end case; 
     end process;
 
-    NEXT_STATE_DECODE : process(state, next_state)
+    NEXT_STATE_DECODE : process(state, next_state, pb1, pb2, pb3)
         begin
         next_state <= menu;
         case (state) is 

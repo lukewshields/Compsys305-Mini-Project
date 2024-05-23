@@ -14,7 +14,7 @@ architecture arc of LFSR is
 	signal rand_temp : std_logic_vector (7 downto 0);
 	begin
 	
-	process (clk, reset)
+	process (clk, reset, rand_temp)
 		begin
 		if (reset = '1') then
 			rand_temp <= "01101010";

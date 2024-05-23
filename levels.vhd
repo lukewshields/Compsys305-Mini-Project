@@ -23,7 +23,7 @@ architecture arc of levels is
 begin
 
 
-level_set : process(vert_sync) 
+level_set : process(vert_sync, difficulty, score, mode) 
 	begin
 		if((difficulty(2) = '1' or score > "010100") and mode = "10") then
 		 level <= "11";

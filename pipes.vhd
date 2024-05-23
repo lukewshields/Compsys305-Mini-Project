@@ -36,8 +36,7 @@ architecture arc of pipes is
     signal pipe_width : std_logic_vector (9 downto 0) := conv_std_logic_vector(40, 10);
 
     signal pipe_x_motion : std_logic_vector (9 downto 0) := conv_std_logic_vector(4, 10);
-	 
-	 signal pipe_x_motion_prev : std_logic_vector (9 downto 0);
+
 	 signal has_collided : std_logic;
 	 
     signal pipe_x_pos : std_logic_vector (10 downto 0) := conv_std_logic_vector(960, 11);
@@ -49,7 +48,6 @@ architecture arc of pipes is
 	 
 	 signal game_on_s : std_logic;
 	 
-	-- signal random_10 : std_logic_vector (9 downto 0); 
 	 
     begin
 
@@ -64,7 +62,6 @@ architecture arc of pipes is
 	 
 	 pipe_speed <= pipe_x_motion;
 	 
-	 --random_10 <=  rand & '0' & '0';
 	game_on <= game_on_s;			
 						
 	
@@ -77,23 +74,9 @@ architecture arc of pipes is
 	 or (pixel_row >= conv_std_logic_vector(450, 10)) -- and (mode = "10" or mode = "01")
 	) else '0'; --later add an and mode is in one of the states where we need pipes
 	
-	
-	
---		pipes_on <= '1' when (( ( 
---	((pixel_row <= pipe_height or pixel_row + pipe_height_bot >= bottom) --and (pipe_x_pos <= pixel_col or pipe_x_pos > conv_std_logic_vector(1048, 11)) and pixel_col <= pipe_x_pos + pipe_width)) or 
---	(pixel_row <= pipe_height2 or pixel_row + pipe_height_bot2 >= bottom) or 
---	(pixel_row <= pipe_height3 or pixel_row + pipe_height_bot3 >= bottom)
---	)
---	 and 
---	
---	(
---	((pipe_x_pos <= pixel_col or pipe_x_pos > conv_std_logic_vector(1048, 11)) and pixel_col <= pipe_x_pos + pipe_width) or
---	((pipe_x_pos2 <= pixel_col or pipe_x_pos2 > conv_std_logic_vector(1048, 11)) and pixel_col <= pipe_x_pos2 + pipe_width) or
---	((pipe_x_pos3 <= pixel_col or pipe_x_pos3 > conv_std_logic_vector(1048, 11)) and pixel_col <= pipe_x_pos3 + pipe_width) 
---	))
---	 or (pixel_row >= conv_std_logic_vector(450, 10))
---	) else '0';
 	 
+	 
+	 --these call all be cleaned up quite a bit probably
 	move_pipe : process(vert_sync)
     begin
 		  --pipe_x_pos <= conv_std_logic_vector(400, 11);
@@ -121,6 +104,16 @@ architecture arc of pipes is
 					elsif (has_collided = '1') then
 						game_on_s <= '0';
 						pipe_x_pos <= conv_std_logic_vector(960, 11);
+						if (rand < conv_std_logic_vector(20, 10)) then
+							pipe_height <= conv_std_logic_vector(20, 10);
+							pipe_height_bot <= conv_std_logic_vector(300, 10);
+						elsif (rand > conv_std_logic_vector(280, 10)) then
+							pipe_height <= conv_std_logic_vector(280, 10);
+							pipe_height_bot <= conv_std_logic_vector(40, 10);
+						else 
+							pipe_height <= rand;
+							pipe_height_bot <= conv_std_logic_vector(480, 10) - rand - pipe_gap;
+						end if;
 					elsif (death = '0') then
 						game_on_s <= '1';
 						pipe_x_pos <= pipe_x_pos - pipe_x_motion;
@@ -154,6 +147,16 @@ architecture arc of pipes is
 						
 					elsif (has_collided = '1') then
 						pipe_x_pos2 <= conv_std_logic_vector(720, 11);
+						if (rand < conv_std_logic_vector(20, 10)) then
+							pipe_height2 <= conv_std_logic_vector(20, 10);
+							pipe_height_bot2 <= conv_std_logic_vector(300, 10);
+						elsif (rand > conv_std_logic_vector(280, 10)) then
+							pipe_height2 <= conv_std_logic_vector(280, 10);
+							pipe_height_bot2 <= conv_std_logic_vector(40, 10);
+						else 
+							pipe_height2 <= rand;
+							pipe_height_bot2 <=  conv_std_logic_vector(480, 10) - rand - pipe_gap;
+						end if;
 					elsif (death = '0') then
 						pipe_x_pos2 <= pipe_x_pos2 - pipe_x_motion;
 					end if;
@@ -171,7 +174,7 @@ architecture arc of pipes is
 --				--end if;
 				
 				if (enable = '1' and (mode = "10" or mode = "01")) then
-					if ((pipe_x_pos3 + pipe_width <= conv_std_logic_vector(1,11)) and has_collided = '0') then
+					if ((pipe_x_pos3 + pipe_width <= conv_std_logic_vector(1,11)) and has_collided = '0') then 
 						pipe_x_pos3 <= conv_std_logic_vector(700, 11);
 						if (rand < conv_std_logic_vector(20, 10)) then
 							pipe_height3 <= conv_std_logic_vector(20, 10);
@@ -185,6 +188,16 @@ architecture arc of pipes is
 						end if;
 					elsif (has_collided = '1') then
 						pipe_x_pos3 <= conv_std_logic_vector(1200, 11);
+						if (rand < conv_std_logic_vector(20, 10)) then
+							pipe_height3 <= conv_std_logic_vector(20, 10);
+							pipe_height_bot3 <= conv_std_logic_vector(300, 10);
+						elsif (rand > conv_std_logic_vector(280, 10)) then
+							pipe_height3 <= conv_std_logic_vector(280, 10);
+							pipe_height_bot3 <= conv_std_logic_vector(40, 10);
+						else 
+							pipe_height3 <= rand;
+							pipe_height_bot3 <=  conv_std_logic_vector(480, 10) - rand - pipe_gap;
+						end if;
 					elsif (death = '0') then 
 						pipe_x_pos3 <= pipe_x_pos3 - pipe_x_motion;
 					end if;
