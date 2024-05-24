@@ -30,18 +30,47 @@ signal counter : integer := 0;
 signal fall_early,has_collided : std_logic;
 signal death_s : std_logic;
 
+constant BIRD_SCALE : std_logic_vector:= conv_std_logic_vector(1, 10);
+signal character_address : std_logic_vector(12 downto 0) :=  conv_std_logic_vector(0, 13);
+signal t_bird_rgb : std_logic_vector(11 downto 0);
+signal temp_bird_on : std_logic;
+
+component sprite32
+	generic (
+					scale:std_logic_vector
+					);
+	port(
+			clk, reset, horiz_sync : IN STD_LOGIC;
+			character_address : IN STD_LOGIC_VECTOR(12 downto 0);
+			sprite_row, sprite_column, 
+			pixel_row, pixel_column : IN STD_LOGIC_VECTOR(9 downto 0);
+			rgb : OUT STD_LOGIC_VECTOR(11 downto 0);
+			sprite_on: OUT STD_LOGIC
+			);
+end component;
+
+
+BEGIN
+bird_x_pos_out<= conv_std_logic_vector(300,10);
 
 
 
-BEGIN           
-bird_x_pos_out<=bird_x_pos;
+sprite_component : sprite32
+	generic map(
+					BIRD_SCALE
+					)
+	port map(
+			clk, '0', vert_sync, character_address, bird_y_pos, bird_x_pos, pixel_row, pixel_col, t_bird_rgb, temp_bird_on
+			);
+           
+--bird_x_pos_out<=bird_x_pos;
 --size <= CONV_STD_LOGIC_VECTOR(8,10);
 -- bird_x_pos and bird_y_pos show the (x,y) for the centre of ball
 
---how to get a bird shape instead of a ball shape?
-bird_on <= '1' when ((((pixel_col - bird_x_pos) * (pixel_col - bird_x_pos) + (pixel_row - bird_y_pos) * (pixel_row - bird_y_pos) <= size * size)) and (mode = "10" or mode = "01")) else	-- y_pos - size <= pixel_row <= y_pos + size
-			'0'; -- later add an and mode is in one of the states where we want the ball
-
+----how to get a bird shape instead of a ball shape?
+--bird_on <= '1' when ((((pixel_col - bird_x_pos) * (pixel_col - bird_x_pos) + (pixel_row - bird_y_pos) * (pixel_row - bird_y_pos) <= size * size)) and (mode = "10" or mode = "01")) else	-- y_pos - size <= pixel_row <= y_pos + size
+--			'0'; -- later add an and mode is in one of the states where we want the ball
+bird_on <= temp_bird_on;
 
 -- Colours for pixel data on video signal
 --cyan bg and red ball

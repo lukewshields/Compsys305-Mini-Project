@@ -88,6 +88,21 @@ architecture arc of FlappyBird is
 	);
 	end component char_rom;
 	
+	
+	component color_rom IS
+	GENERIC
+	(
+		t_init_file : STRING;
+		t_numwords_a : NATURAL
+	);
+	PORT
+	(
+		rom_address			:	IN STD_LOGIC_VECTOR (12 DOWNTO 0);
+		clock				: 	IN STD_LOGIC ;
+		rom_output		:	OUT STD_LOGIC_VECTOR (11 DOWNTO 0)
+	);
+END component color_rom;
+	
 	component text_setter is 
 		port (
 			pixel_row, pixel_col : in std_logic_vector (5 downto 0);
@@ -369,6 +384,10 @@ begin
 			clock => clk_25,
 			rom_mux_output => rom_mux_addy2
 	);
+	
+--	co1: color_rom
+--		port map(
+--		);
 	
 	t: text_setter
 		 port map(
