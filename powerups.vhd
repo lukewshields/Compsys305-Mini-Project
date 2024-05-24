@@ -18,42 +18,32 @@ end entity powerups;
 architecture arc of powerups is 
 
 signal powerup_on : std_logic;
-signal size : std_logic_vector(9 downto 0) := conv_std_logic_vector(7, 10);
+signal size : std_logic_vector(9 downto 0) := conv_std_logic_vector(12, 10);
 signal x_pos : std_logic_vector(10 downto 0);
 signal y_pos : std_logic_vector(9 downto 0) := conv_std_logic_vector(240, 10);
 
 
 begin
 
-powerup_on <= '1' when ((((pixel_col - x_pos) * (pixel_col - x_pos) + (pixel_row - y_pos) * (pixel_row - y_pos) <= size * size)) and (mode = "10")) else	-- y_pos - size <= pixel_row <= y_pos + size
-			'0'; --something is off with this so that it cannot possibly render unless it is at a certain point in screen????
+--powerup_on <= '1' when ((((pixel_col - x_pos) * (pixel_col - x_pos) + (pixel_row - y_pos) * (pixel_row - y_pos) <= size * size)) and (mode = "10")) else	-- y_pos - size <= pixel_row <= y_pos + size
+--			'0'; --something is off with this so that it cannot possibly render unless it is at a certain point in screen????
 
 --draws a sideways heart kinda?
---powerup_on <= '1' when ( --GPT failed at drawing a heart ;(
---    --(((pixel_col - x_pos) * (pixel_col - x_pos) + (pixel_row - y_pos) * (pixel_row - y_pos)) <= (size * size)) and 
---    (mode = "10") and
---    (
---        -- Heart Shape Equation
---        (
---				(((pixel_row - y_pos) <= size) and ((pixel_col - x_pos) * (pixel_col - x_pos) + (pixel_row - y_pos) * (pixel_row - y_pos) <= size * size))
---
---            and
---            (
---                -- Lower left part of the heart
---                (
---                    ((pixel_col - x_pos) + abs(pixel_row - y_pos)) <= size
---                )
---            )
---            and
---            (
---                -- Lower right part of the heart
---                (
---                    (abs(pixel_col - x_pos) - abs(pixel_row - y_pos)) <= size
---                )
---            )
---        )
---    )
---) else '0';
+powerup_on <= '1' when ((
+  -- Two smaller circles (replace with your conditions)
+  (
+    ((pixel_col - (x_pos + 6)) * (pixel_col - (x_pos + 6)) + 
+     (pixel_row - y_pos) * (pixel_row - y_pos)) <= (36)
+  ) or
+  (
+    ((pixel_col - (x_pos - 6)) * (pixel_col - (x_pos - 6)) + 
+     (pixel_row - y_pos) * (pixel_row - y_pos)) <= (36)
+  )
+) and
+(mode = "10")
+-- ... other conditions ...
+) else '0';
+
 
 --Gpt garbage
 --powerup_on <= '1' when (
