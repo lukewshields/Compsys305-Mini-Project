@@ -100,7 +100,7 @@ begin
 					else 
 						count := count + CONV_STD_LOGIC_VECTOR(1, 10);
 					end if;
-				end if;
+				end if; 
 
 			when others =>
 				state <= IDLE;

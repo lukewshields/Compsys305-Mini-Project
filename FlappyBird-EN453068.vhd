@@ -1,4 +1,4 @@
---Top Entity File
+
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.all;
 USE  IEEE.STD_LOGIC_ARITH.all;
@@ -19,9 +19,9 @@ end entity FlappyBird;
 
 architecture arc of FlappyBird is
 	component vga_sync is 
-			port(	clock_25Mhz, red, green, blue		: IN	STD_LOGIC;
-				red_out, green_out, blue_out, horiz_sync_out, vert_sync_out	: OUT	STD_LOGIC;
-				pixel_row, pixel_column: OUT STD_LOGIC_VECTOR(9 DOWNTO 0));
+	PORT(	clock_25Mhz, red, green, blue		: IN	STD_LOGIC;
+			red_out, green_out, blue_out, horiz_sync_out, vert_sync_out	: OUT	STD_LOGIC;
+			pixel_row, pixel_column: OUT STD_LOGIC_VECTOR(9 DOWNTO 0));
 	end component;
 
 	component pll is 
@@ -45,12 +45,13 @@ architecture arc of FlappyBird is
 	end component pipes;
 		
 	component bird is 
-    port (clk, vert_sync, horiz_sync, click, enable, reset, game_on	: IN std_logic;
+    port (clk, vert_sync, click, enable, reset, game_on	: IN std_logic;
 		 mode : in std_logic_vector (1 downto 0);
 		 collision : in std_logic;
        pixel_row, pixel_col	: IN std_logic_vector(9 DOWNTO 0);
 		 lives : in std_logic_vector(5 downto 0);
 		 red, green, blue, bird_on_out, death : OUT std_logic;
+		 rgb : out std_logic_vector(11 downto 0);
 		 bird_x_pos_out: out std_logic_vector(9 DOWNTO 0)
 		 );			
 	end component bird;
@@ -73,7 +74,7 @@ architecture arc of FlappyBird is
 	
 	component enable_handle is 
 		port (mode : in std_logic_vector (1 downto 0);
-			enable, game_on: in std_logic;
+			enable, collision: in std_logic;
 			hold_enable : out std_logic
 		);
 	end component enable_handle;
@@ -155,10 +156,10 @@ architecture arc of FlappyBird is
 	component levels is 
 		port(
 			vert_sync : in std_logic;
-			difficulty : in std_logic_vector(2 downto 0); 
+			difficulty : in std_logic_vector(2 downto 0); --switches user input on level
 			score : in std_logic_vector(6 downto 0);
 			mode : in std_logic_vector(1 downto 0);
-			level : out std_logic_vector(1 downto 0) 
+			level : out std_logic_vector(1 downto 0) -- output of level depending on manual switches and score
 		);
 	end component levels;
 	
@@ -172,48 +173,46 @@ architecture arc of FlappyBird is
 		);
 	end component powerups;
 	
-	signal clk_25, red, green, blue, vert_s, hori_s : std_logic;
-	signal pixel_row_vga, pixel_col_vga : std_logic_vector (9 downto 0);
-	
-	signal trash3 : std_logic; --GET RID OF MEEEE!!!!!
-	
+	signal clk_25, red, green, blue, vert_s : std_logic;
+	signal pixel_row_vga : std_logic_vector (9 downto 0);
+	signal pixel_col_vga : std_logic_vector (9 downto 0);
+	signal trash3 : std_logic;
 	signal red_pipes, green_pipes, blue_pipes : std_logic;
 	signal red_powerup, green_powerup, blue_powerup : std_logic;
-	
-	signal green_pipes2, blue_pipes2 : std_logic; --GET RID OF ME!!!
-	
+	signal green_pipes2, blue_pipes2 : std_logic;
 	signal red_bird, green_bird, blue_bird : std_logic;
 	signal red_final, green_final, blue_final : std_logic;
-	
 	signal leftclick : std_logic;
 	
 	signal collide, collide_stable, collide_power, collide_pipe, collide_stable_power, collide_stable_pipe : std_logic;
 	
 	signal hold_enable : std_logic;
 	signal pipes_on, bird_on, powerup_on : std_logic;
-	signal pipes_x_pos, pipes_x_pos2, pipes_x_pos3 : std_logic_vector (10 downto 0);
-	signal bird_x_pos, pipe_width: std_logic_vector (9 downto 0); 
-	signal score : std_logic_vector (6 downto 0); --Current score
-	signal rand_bits : std_logic_vector (9 downto 0); 
+	signal pipes_x_pos,pipes_x_pos2,pipes_x_pos3 : std_logic_vector (10 downto 0);
+	signal bird_x_pos, pipe_width: std_logic_vector (9 downto 0);
+	signal score : std_logic_vector (6 downto 0);
+	signal rand_bits : std_logic_vector (9 downto 0);
 	signal tens_score : std_logic_vector (3 downto 0);
 	signal ones_score : std_logic_vector (3 downto 0);
 
-	signal char_addy, pause_addy : std_logic_vector (5 downto 0); --addresses sent to the char rom
-	signal rom_mux_addy, rom_mux_addy2 : std_logic; --signals outputed from each char rom to display text on vga
+	signal char_addy,pause_addy : std_logic_vector (5 downto 0);
+	signal rom_mux_addy,rom_mux_addy2 : std_logic;
 	
-	signal mode : std_logic_vector (1 downto 0); --Game mode 00 is menu, 01 is training, 10 is full game mode
-	signal death : std_logic; --Out of lives
+	signal mode : std_logic_vector (1 downto 0);
+	signal death : std_logic;
 	
-	signal level : std_logic_vector(1 downto 0); 
+	signal level : std_logic_vector(1 downto 0);
 	
 	signal lives_out : std_logic_vector (5 downto 0);
 	
 	signal game_on : std_logic; --from pipes sent to score check to fix initial score of 1 whenever having a collision
 	signal reset_state : std_logic; -- from the mode controller and it resets the score and lives when switching modes
 	
-	signal pipe_speed : std_logic_vector (9 downto 0); -- To match the speed of the powerup
+	signal pipe_speed : std_logic_vector (9 downto 0);
 
-	signal reseted : std_logic; --GET RID OF ME!!
+	signal reseted : std_logic;
+	
+	signal temp_rgb : std_logic_vector(11 downto 0);
 	
 begin
 
@@ -226,14 +225,14 @@ begin
 			red_out => VGA_R(3),
 			green_out => VGA_G(3),
 			blue_out => VGA_B(3),
-			horiz_sync_out => hori_s,
+			horiz_sync_out => VGA_HS,
 			vert_sync_out => vert_s, 
 			pixel_row => pixel_row_vga,
 			pixel_column => pixel_col_vga
 		);
 
 	VGA_VS <= vert_s;
-	VGA_HS <= hori_s;
+	
 			
 	LEDR(1) <= collide_stable;
 	LEDR(0) <= death;
@@ -248,7 +247,7 @@ begin
 			refclk => CLOCK_50,
 			rst => '0',
 			outclk_0 => clk_25,
-			locked => trash3 --GET RID OF ME!!
+			locked => trash3
 		);
 	
 	pipe1 : pipes
@@ -278,7 +277,7 @@ begin
 			pipe_speed => pipe_speed
 		);
 		
-	--Final signal asssignment sent to vga
+	
 	red_final <= (red_bird or red_powerup or rom_mux_addy or rom_mux_addy2);
 
 	green_final <= (green_pipes or rom_mux_addy or rom_mux_addy2);
@@ -293,7 +292,6 @@ begin
 			click => leftclick,
 			enable => hold_enable,
 			reset => reset_state,
-			horiz_sync => hori_s,
 			game_on => game_on,
 			mode => mode,
 			collision => collide_stable,
@@ -303,6 +301,7 @@ begin
 		   red => red_bird, 
 		   green => green_bird,
 		   blue => blue_bird,
+			rgb => temp_rgb,
 			bird_on_out => bird_on,
 			death => death,
 			bird_x_pos_out => bird_x_pos
@@ -317,7 +316,6 @@ begin
          left_button => leftclick
 		);
 	
-	--Collision between bird and pipes
 	c: collision 
 		port map (
 			bird_on => bird_on,
@@ -327,8 +325,7 @@ begin
 			mode => mode,
 			collide => collide
 		);
-	
-	--collision between bird and powerup
+		
 	c2: collision 
 		port map (
 			bird_on => bird_on,
@@ -336,10 +333,9 @@ begin
 			enable => hold_enable,
 			vert_sync => vert_s,
 			mode => mode,
-			collide => collide_power 
+			collide => collide_power --collide between the bird and a power up
 		);
 		
-	--detects collisoin between powerup and pipes
 	c3: collision 
 		port map (
 			bird_on => powerup_on,
@@ -347,18 +343,18 @@ begin
 			enable => hold_enable,
 			vert_sync => vert_s,
 			mode => mode,
-			collide => collide_pipe 
+			collide => collide_pipe --collide between the power up and pipe
 		);
 		
 	e : enable_handle 
 		port map (
 			mode => mode,
 			enable => not KEY(0),
-			game_on => game_on,
+			collision => collide,
 			hold_enable => hold_enable
 		);
 		
-	--Smaller text display	
+		
 	ch: char_rom
 		port map(
 			character_address => char_addy,
@@ -369,7 +365,6 @@ begin
 		);
 		
 	
-	--Larger text display
 	ch2: char_rom
 		port map(
 			character_address => pause_addy,
@@ -445,8 +440,7 @@ begin
 			reset_state => reset_state,
 			mode => mode 
 		);
-		
-	--Stablilizes all collision signals
+--		
 	collision_handle : hold_collision
 		port map (
 			collide => collide,
@@ -490,6 +484,8 @@ begin
 			level => level
 		);
 		
+	--for death detection use pixel clashes between red and green signals
+	
 	special : powerups 
 		port map (
 			pixel_row => pixel_row_vga,
@@ -509,4 +505,6 @@ begin
 			blue => blue_powerup,
 			powerup_on_out => powerup_on
 		);
+		
+		
 end architecture arc;

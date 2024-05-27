@@ -7,7 +7,7 @@ USE  IEEE.STD_LOGIC_SIGNED.all;
 
 ENTITY bird IS
 	PORT
-		(clk, vert_sync, click, enable, reset, game_on	: IN std_logic;
+		(clk, vert_sync, horiz_sync, click, enable, reset, game_on	: IN std_logic;
 		 mode : in std_logic_vector (1 downto 0);
 		 collision : in std_logic;
        pixel_row, pixel_col	: IN std_logic_vector(9 DOWNTO 0);
@@ -52,16 +52,14 @@ end component;
 
 
 BEGIN
-bird_x_pos_out<= conv_std_logic_vector(300,10);
-
-
+--bird_x_pos<= conv_std_logic_vector(300,10);
 
 sprite_component : sprite32
 	generic map(
 					BIRD_SCALE
 					)
 	port map(
-			clk, '0', vert_sync, character_address, bird_y_pos, bird_x_pos, pixel_row, pixel_col, t_bird_rgb, temp_bird_on
+			clk, '0', horiz_sync, character_address, bird_y_pos, bird_x_pos, pixel_row, pixel_col, t_bird_rgb, temp_bird_on
 			);
            
 --bird_x_pos_out<=bird_x_pos;
@@ -69,9 +67,9 @@ sprite_component : sprite32
 -- bird_x_pos and bird_y_pos show the (x,y) for the centre of ball
 
 ----how to get a bird shape instead of a ball shape?
---bird_on <= '1' when ((((pixel_col - bird_x_pos) * (pixel_col - bird_x_pos) + (pixel_row - bird_y_pos) * (pixel_row - bird_y_pos) <= size * size)) and (mode = "10" or mode = "01")) else	-- y_pos - size <= pixel_row <= y_pos + size
---			'0'; -- later add an and mode is in one of the states where we want the ball
-bird_on <= temp_bird_on;
+bird_on <= '1' when ((((pixel_col - bird_x_pos) * (pixel_col - bird_x_pos) + (pixel_row - bird_y_pos) * (pixel_row - bird_y_pos) <= size * size)) and (mode = "10" or mode = "01")) else	-- y_pos - size <= pixel_row <= y_pos + size
+			'0'; -- later add an and mode is in one of the states where we want the ball
+--bird_on <= temp_bird_on;
 
 -- Colours for pixel data on video signal
 --cyan bg and red ball
@@ -79,6 +77,7 @@ bird_on <= temp_bird_on;
 Red <= bird_on;
 Green <= not bird_on; 
 Blue <=  not bird_on;
+
 bird_on_out <= bird_on;
 
 ----this output signal tracks the front of the bird

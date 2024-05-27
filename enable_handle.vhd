@@ -6,7 +6,7 @@ USE  IEEE.STD_LOGIC_SIGNED.all;
 
 entity enable_handle is 
 	port (mode : in std_logic_vector (1 downto 0);
-			enable, collision: in std_logic;
+			enable, game_on: in std_logic;
 			hold_enable : out std_logic
 		);
 
@@ -17,9 +17,9 @@ signal count : std_logic := '0';
 
 
 begin
-	process (enable, collision, mode, count)
+	process (enable, mode, count)
 	begin
-		if (mode = "10" or mode = "01") then
+		if ((mode = "10" or mode = "01") and game_on = '1') then
 			if(rising_edge(enable) and count = '0') then
 				hold_enable <= '0';
 				count <= '1';
