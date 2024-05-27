@@ -19,12 +19,15 @@ end entity FlappyBird;
 
 architecture arc of FlappyBird is
 	component vga_sync is 
-			port(	clock_25Mhz, red, green, blue		: IN	STD_LOGIC;
-				red_out, green_out, blue_out, horiz_sync_out, vert_sync_out	: OUT	STD_LOGIC;
-				pixel_row, pixel_column: OUT STD_LOGIC_VECTOR(9 DOWNTO 0));
+	PORT(	clock_25Mhz, red, green, blue		: IN	STD_LOGIC;
+			rgb : in std_logic_vector(11 downto 0);
+			bird_on : IN std_logic;
+			red_out, green_out, blue_out : out std_logic_vector(3 downto 0);
+			horiz_sync_out, vert_sync_out	: OUT	STD_LOGIC;
+			pixel_row, pixel_column: OUT STD_LOGIC_VECTOR(9 DOWNTO 0));
 	end component;
 
-	component pll is 
+	component pll is
 		port (
 			refclk   : in  std_logic := '0'; --  refclk.clk
 			rst      : in  std_logic := '0'; --   reset.reset
@@ -45,14 +48,17 @@ architecture arc of FlappyBird is
 	end component pipes;
 		
 	component bird is 
-    port (clk, vert_sync, horiz_sync, click, enable, reset, game_on	: IN std_logic;
+	PORT
+		(clk, vert_sync, horiz_sync, click, enable, reset, game_on	: IN std_logic;
 		 mode : in std_logic_vector (1 downto 0);
 		 collision : in std_logic;
        pixel_row, pixel_col	: IN std_logic_vector(9 DOWNTO 0);
 		 lives : in std_logic_vector(5 downto 0);
+		 --mode : in std_logic_vector(1 downto 0);
 		 red, green, blue, bird_on_out, death : OUT std_logic;
+		 rgb : out std_logic_vector(11 downto 0);
 		 bird_x_pos_out: out std_logic_vector(9 DOWNTO 0)
-		 );			
+		 );		
 	end component bird;
 	
 	component mouse is
@@ -215,6 +221,8 @@ architecture arc of FlappyBird is
 
 	signal reseted : std_logic; --GET RID OF ME!!
 	
+	signal temp_rgb : std_logic_vector(11 downto 0);
+	
 begin
 
 	vga : vga_sync 
@@ -223,9 +231,11 @@ begin
 			red => red_final,
 			green => green_final,
 			blue => blue_final,
-			red_out => VGA_R(3),
-			green_out => VGA_G(3),
-			blue_out => VGA_B(3),
+			rgb => temp_rgb,
+			bird_on => bird_on,
+			red_out => VGA_R,
+			green_out => VGA_G,
+			blue_out => VGA_B,
 			horiz_sync_out => hori_s,
 			vert_sync_out => vert_s, 
 			pixel_row => pixel_row_vga,
@@ -303,6 +313,7 @@ begin
 		   red => red_bird, 
 		   green => green_bird,
 		   blue => blue_bird,
+			rgb => temp_rgb,
 			bird_on_out => bird_on,
 			death => death,
 			bird_x_pos_out => bird_x_pos

@@ -6,7 +6,10 @@ use  IEEE.STD_LOGIC_UNSIGNED.all;
 
 ENTITY VGA_SYNC IS
 	PORT(	clock_25Mhz, red, green, blue		: IN	STD_LOGIC;
-			red_out, green_out, blue_out, horiz_sync_out, vert_sync_out	: OUT	STD_LOGIC;
+			rgb : in std_logic_vector(11 downto 0);
+			bird_on : IN std_logic;
+			red_out, green_out, blue_out : out std_logic_vector(3 downto 0);
+			horiz_sync_out, vert_sync_out	: OUT	STD_LOGIC;
 			pixel_row, pixel_column: OUT STD_LOGIC_VECTOR(9 DOWNTO 0));
 END VGA_SYNC;
 
@@ -14,12 +17,14 @@ ARCHITECTURE a OF VGA_SYNC IS
 	SIGNAL horiz_sync, vert_sync : STD_LOGIC;
 	SIGNAL video_on, video_on_v, video_on_h : STD_LOGIC;
 	SIGNAL h_count, v_count :STD_LOGIC_VECTOR(9 DOWNTO 0);
+	signal t_rgb : std_logic_vector(11 downto 0);
 
 BEGIN
 
 -- video_on is high only when RGB data is displayed
 video_on <= video_on_H AND video_on_V;
 
+t_rgb <= rgb;
 
 
 PROCESS
@@ -79,9 +84,34 @@ BEGIN
 	END IF;
 
 -- Put all video signals through DFFs to elminate any delays that cause a blurry image
-		red_out <= red AND video_on;
-		green_out <= green AND video_on;
-		blue_out <= blue AND video_on;
+	if(video_on = '1') then
+		if(bird_on = '1') then 
+			red_out <= t_rgb(11 downto 8);
+			green_out <= t_rgb(7 downto 4);
+			blue_out <= t_rgb(3 downto 0);
+		else
+			red_out <= red & red & red & red;
+			green_out <= green & green & green & green;
+			blue_out <= blue & blue & blue & blue;
+		end if;
+	else
+--			red_out <= "0000";
+--			green_out <= "0000";
+--			blue_out <= "0000";
+
+--			red_out <= red & red & red & red;
+--			green_out <= green & green & green & green;
+--			blue_out <= blue & blue & blue & blue;
+		
+	end if;
+--		red_out <= "1111" when video_on = '1' else "0000";
+--		green_out <= "1111"when video_on = '1' else "0000";
+--		blue_out <= "1111"when video_on = '1' else "0000";
+--	
+----		red_out <= red AND video_on;
+----		green_out <= green AND video_on;
+----		blue_out <= blue AND video_on;
+	
 		horiz_sync_out <= horiz_sync;
 		vert_sync_out <= vert_sync;
 
