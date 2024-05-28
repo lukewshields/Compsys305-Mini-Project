@@ -9,14 +9,15 @@ entity score_check is
 		mode : in std_logic_vector (1 downto 0);
 		pipe_x_pos1,pipe_x_pos2,pipe_x_pos3 : in std_logic_vector (10 downto 0);
 		pipe_width,bird_x_pos : in std_logic_vector (9 downto 0);
-		score: out std_logic_vector (6 downto 0); --std logic vector for use of arithemetic
+		score: out std_logic_vector (6 downto 0); 
 		tens,ones: out std_logic_vector (3 downto 0)
 	);
 end entity score_check;
---enable is sync reset is aysnc
+
+
 architecture beh of score_check is 
 signal score_s : std_logic_vector(6 downto 0);
-signal pipe_count1,pipe_count2,pipe_count3 : integer:= 1; --changed this to 1 from 0 and now score sometimes works
+signal pipe_count1,pipe_count2,pipe_count3 : integer:= 1; 
 signal current_score : integer;
 	begin
 		process (vert_sync, Enable)
@@ -29,7 +30,7 @@ signal current_score : integer;
 						pipe_count1 <= 1;
 						pipe_count2 <= 1;
 						pipe_count3 <= 1;
-					elsif (game_on = '1') then --need logic for that we are actually playing the game i.e. elsif game_on then, this doe not fix problem somehow pipe is still behind the bird when we init the game
+					elsif (game_on = '1') then 
 						if ((pipe_x_pos1 + pipe_width) <= bird_x_pos and pipe_count1 = 0) then
 							score_s <= score_s + "0000001";
 							pipe_count1 <= 1;

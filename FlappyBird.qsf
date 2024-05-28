@@ -278,7 +278,6 @@ set_global_assignment -name VHDL_FILE enable_handle.vhd
 set_global_assignment -name VHDL_FILE text_setter.vhd
 set_global_assignment -name VHDL_FILE BCD_to_7Seg.vhd
 set_global_assignment -name VHDL_FILE score_check.vhd
-set_global_assignment -name VHDL_FILE test_collison.vhd
 set_global_assignment -name VHDL_FILE hold_collision.vhd
 set_global_assignment -name VHDL_FILE lives.vhd
 set_global_assignment -name VHDL_FILE levels.vhd

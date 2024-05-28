@@ -3,7 +3,7 @@ USE IEEE.STD_LOGIC_1164.all;
 USE  IEEE.STD_LOGIC_ARITH.all;
 USE  IEEE.STD_LOGIC_SIGNED.all;
 
-
+--Component for life powerups
 entity powerups is 
 
 	port (
@@ -26,7 +26,7 @@ signal y_pos : std_logic_vector(9 downto 0) := conv_std_logic_vector(240, 10);
 begin
 
 powerup_on <= '1' when ((((pixel_col - x_pos) * (pixel_col - x_pos) + (pixel_row - y_pos) * (pixel_row - y_pos) <= size * size)) and (mode = "10")) else	-- y_pos - size <= pixel_row <= y_pos + size
-			'0'; --something is off with this so that it cannot possibly render unless it is at a certain point in screen????
+			'0';
 
 --draws a sideways heart kinda?
 --powerup_on <= '1' when ( --GPT failed at drawing a heart ;(
@@ -91,7 +91,7 @@ Red <=  powerup_on;
 Green <= not powerup_on; 
 Blue <=  not powerup_on;
 
-move_powerup : process(vert_sync) --update x motion according to the pipe_speed
+move_powerup : process(vert_sync, game_on, death, enable) --update x motion according to the pipe_speed
 
 begin
 	if (game_on = '1' and death = '0') then
@@ -115,42 +115,11 @@ begin
 			end if;
 		end if;
 	else 
+		
 		x_pos <= conv_std_logic_vector(800, 11);
 	end if;
 
 end process move_powerup;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
---
---	if (rising_edge(vert_sync)) then
---		if(game_on = '1') then
---			if (enable = '1' and (mode = "10")) then
---				if ((x_pos <= conv_std_logic_vector(1, 10))) then -- reset and randomize the positions again while keeping them on the screen and off of pipes	
---					x_pos <= conv_std_logic_vector(990, 10);
---				elsif (collision = '1') then
---					x_pos <= conv_std_logic_vector(660, 10);
---				else 
---					x_pos <= x_pos - pipe_speed;
---				end if;
---			end if;
---		end if;
---	end if;
-
 
 
 end architecture arc;

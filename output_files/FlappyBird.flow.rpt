@@ -1,5 +1,5 @@
 Flow report for FlappyBird
-Thu May 23 16:21:36 2024
+Tue May 28 12:40:40 2024
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
 
 
@@ -40,15 +40,15 @@ refer to the applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Flow Summary                                                                      ;
 +---------------------------------+-------------------------------------------------+
-; Flow Status                     ; Successful - Thu May 23 16:21:31 2024           ;
+; Flow Status                     ; Successful - Tue May 28 12:40:34 2024           ;
 ; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Standard Edition ;
 ; Revision Name                   ; FlappyBird                                      ;
 ; Top-level Entity Name           ; FlappyBird                                      ;
 ; Family                          ; Cyclone V                                       ;
 ; Device                          ; 5CEBA4F23C7                                     ;
 ; Timing Models                   ; Final                                           ;
-; Logic utilization (in ALMs)     ; 866 / 18,480 ( 5 % )                            ;
-; Total registers                 ; 420                                             ;
+; Logic utilization (in ALMs)     ; 851 / 18,480 ( 5 % )                            ;
+; Total registers                 ; 417                                             ;
 ; Total pins                      ; 55 / 224 ( 25 % )                               ;
 ; Total virtual pins              ; 0                                               ;
 ; Total block memory bits         ; 8,192 / 3,153,920 ( < 1 % )                     ;
@@ -67,7 +67,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 05/23/2024 16:19:56 ;
+; Start date & time ; 05/28/2024 12:39:20 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; FlappyBird          ;
 +-------------------+---------------------+
@@ -78,7 +78,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------+----------------------------------------+---------------+----------------+------------+
 ; Assignment Name                     ; Value                                  ; Default Value ; Entity Name    ; Section Id ;
 +-------------------------------------+----------------------------------------+---------------+----------------+------------+
-; COMPILER_SIGNATURE_ID               ; 224948462602469.171643799617196        ; --            ; --             ; --         ;
+; COMPILER_SIGNATURE_ID               ; 224948461339009.171685675923444        ; --            ; --             ; --         ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --            ; --             ; --         ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --            ; --             ; --         ;
 ; MISC_FILE                           ; pll.cmp                                ; --            ; --             ; --         ;
@@ -102,11 +102,11 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:17     ; 1.0                     ; 5016 MB             ; 00:00:04                           ;
-; Fitter               ; 00:01:12     ; 1.1                     ; 7796 MB             ; 00:00:55                           ;
-; Assembler            ; 00:00:02     ; 1.0                     ; 4833 MB             ; 00:00:01                           ;
-; Timing Analyzer      ; 00:00:04     ; 2.1                     ; 5297 MB             ; 00:00:04                           ;
-; Total                ; 00:01:35     ; --                      ; --                  ; 00:01:04                           ;
+; Analysis & Synthesis ; 00:00:10     ; 1.0                     ; 5021 MB             ; 00:00:07                           ;
+; Fitter               ; 00:01:01     ; 1.1                     ; 7798 MB             ; 00:00:56                           ;
+; Assembler            ; 00:00:02     ; 1.0                     ; 4838 MB             ; 00:00:01                           ;
+; Timing Analyzer      ; 00:00:04     ; 2.0                     ; 5293 MB             ; 00:00:05                           ;
+; Total                ; 00:01:17     ; --                      ; --                  ; 00:01:09                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -115,10 +115,10 @@ refer to the applicable agreement for further details.
 +----------------------+------------------+------------+------------+----------------+
 ; Module Name          ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
 +----------------------+------------------+------------+------------+----------------+
-; Analysis & Synthesis ; EN453068         ; Windows 10 ; 10.0       ; x86_64         ;
-; Fitter               ; EN453068         ; Windows 10 ; 10.0       ; x86_64         ;
-; Assembler            ; EN453068         ; Windows 10 ; 10.0       ; x86_64         ;
-; Timing Analyzer      ; EN453068         ; Windows 10 ; 10.0       ; x86_64         ;
+; Analysis & Synthesis ; EN433572         ; Windows 10 ; 10.0       ; x86_64         ;
+; Fitter               ; EN433572         ; Windows 10 ; 10.0       ; x86_64         ;
+; Assembler            ; EN433572         ; Windows 10 ; 10.0       ; x86_64         ;
+; Timing Analyzer      ; EN433572         ; Windows 10 ; 10.0       ; x86_64         ;
 +----------------------+------------------+------------+------------+----------------+
 
 

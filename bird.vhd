@@ -7,14 +7,15 @@ USE  IEEE.STD_LOGIC_SIGNED.all;
 
 ENTITY bird IS
 	PORT
-		(clk, vert_sync, click, enable, reset, game_on	: IN std_logic;
-		 mode : in std_logic_vector (1 downto 0);
-		 collision : in std_logic;
-       pixel_row, pixel_col	: IN std_logic_vector(9 DOWNTO 0);
-		 lives : in std_logic_vector(5 downto 0);
-		 --mode : in std_logic_vector(1 downto 0);
-		 red, green, blue, bird_on_out, death : OUT std_logic;
-		 bird_x_pos_out: out std_logic_vector(9 DOWNTO 0)
+		(
+			 clk, vert_sync, click, enable, reset, game_on	: IN std_logic;
+			 mode : in std_logic_vector (1 downto 0);
+			 collision : in std_logic;
+			 pixel_row, pixel_col	: IN std_logic_vector(9 DOWNTO 0);
+			 lives : in std_logic_vector(5 downto 0);
+
+			 red, green, blue, bird_on_out, death : OUT std_logic;
+			 bird_x_pos_out: out std_logic_vector(9 DOWNTO 0)
 		 );		
 END bird;
 
@@ -30,39 +31,20 @@ signal counter : integer := 0;
 signal fall_early,has_collided : std_logic;
 signal death_s : std_logic;
 
-
-
-
 BEGIN           
 bird_x_pos_out<=bird_x_pos;
---size <= CONV_STD_LOGIC_VECTOR(8,10);
--- bird_x_pos and bird_y_pos show the (x,y) for the centre of ball
 
---how to get a bird shape instead of a ball shape?
-bird_on <= '1' when ((((pixel_col - bird_x_pos) * (pixel_col - bird_x_pos) + (pixel_row - bird_y_pos) * (pixel_row - bird_y_pos) <= size * size)) and (mode = "10" or mode = "01")) else	-- y_pos - size <= pixel_row <= y_pos + size
-			'0'; -- later add an and mode is in one of the states where we want the ball
-
-
--- Colours for pixel data on video signal
---cyan bg and red ball
+bird_on <= '1' when ((((pixel_col - bird_x_pos) * (pixel_col - bird_x_pos) + (pixel_row - bird_y_pos) * (pixel_row - bird_y_pos) <= size * size)) and (mode = "10" or mode = "01") and game_on = '1') else	
+			'0'; 
 
 Red <=  bird_on;
 Green <= not bird_on; 
 Blue <=  not bird_on;
 bird_on_out <= bird_on;
 
-----this output signal tracks the front of the bird
---front_bird_y <= bird_y_pos;
---front_bird_x <= bird_x_pos + size;
---
-----this output signal tracks the top of the bird
---top_bird_y <= bird_y_pos + size;
---top_bird_x <= bird_x_pos;
-
 
 Move_Ball: process (vert_sync, click)  
 begin
-	--Move ball once every vertical sync
 	if (rising_edge(vert_sync)) then		
 		if (death_s = '0') then
 		if (reset = '1') then
@@ -77,7 +59,7 @@ begin
 				fall_early <= '0';
 			end if;
 		
-			if (counter < 8 and fall_early = '0' and bird_y_pos >= conv_std_logic_vector(10,10)) then --need to do the similar thing with the collide previous collision and collision
+			if (counter < 8 and fall_early = '0' and bird_y_pos >= conv_std_logic_vector(10,10)) then 
 				bird_y_motion <= - conv_std_logic_vector(10,10);
 				counter <= counter + 1;
 			elsif ((counter >= 8 or (click /= '1' and prev_clicked = '1')) and has_collided = '0') then
@@ -104,7 +86,6 @@ begin
 			
 			if (click = '1' and has_collided='1') then
 				has_collided <= '0';
-				--death_s <= '0';--begin falling again
 			end if;
 			
 		end if;
@@ -116,15 +97,5 @@ begin
 	end if;
 end process Move_Ball;
 death <= death_s;
-
---	collision_motion : process(vert_sync)
---		
---		begin
---			if (rising_edge(vert_sync)) then
---				if (collision = '1') then -- still unstable signal wolnt compile with rising edge
---					bird_y_pos <= conv_std_logic_vector(200, 10);
---				end if;
---			end if;
---	end process collision_motion;
 			
 END behavior;

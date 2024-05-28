@@ -789,6 +789,7 @@ reset => bird_y_motion.OUTPUTSELECT
 reset => bird_y_motion.OUTPUTSELECT
 reset => bird_y_motion.OUTPUTSELECT
 reset => Move_Ball.IN0
+game_on => bird_on.IN1
 game_on => bird_y_pos.OUTPUTSELECT
 game_on => bird_y_pos.OUTPUTSELECT
 game_on => bird_y_pos.OUTPUTSELECT
@@ -930,30 +931,18 @@ left_button <= left_button~reg0.DB_MAX_OUTPUT_PORT_TYPE
 |FlappyBird|collision:c
 bird_on => collide.IN0
 pipes_on => collide.IN1
-enable => ~NO_FANOUT~
-vert_sync => ~NO_FANOUT~
-mode[0] => ~NO_FANOUT~
-mode[1] => ~NO_FANOUT~
 collide <= collide.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |FlappyBird|collision:c2
 bird_on => collide.IN0
 pipes_on => collide.IN1
-enable => ~NO_FANOUT~
-vert_sync => ~NO_FANOUT~
-mode[0] => ~NO_FANOUT~
-mode[1] => ~NO_FANOUT~
 collide <= collide.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |FlappyBird|collision:c3
 bird_on => collide.IN0
 pipes_on => collide.IN1
-enable => ~NO_FANOUT~
-vert_sync => ~NO_FANOUT~
-mode[0] => ~NO_FANOUT~
-mode[1] => ~NO_FANOUT~
 collide <= collide.DB_MAX_OUTPUT_PORT_TYPE
 
 
@@ -964,7 +953,7 @@ mode[1] => Equal0.IN2
 mode[1] => Equal1.IN2
 enable => count.CLK
 enable => hold_enable~reg0.CLK
-collision => ~NO_FANOUT~
+game_on => process_0.IN1
 hold_enable <= hold_enable~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
@@ -2630,7 +2619,6 @@ mode[1] <= mode[1].DB_MAX_OUTPUT_PORT_TYPE
 
 |FlappyBird|hold_collision:collision_handle
 collide => process_0.IN1
-clk => ~NO_FANOUT~
 vert_sync => collide2.CLK
 vert_sync => count[0].CLK
 vert_sync => count[1].CLK
@@ -2669,7 +2657,6 @@ collide_stable <= collide2.DB_MAX_OUTPUT_PORT_TYPE
 
 |FlappyBird|hold_collision:collision_handle2
 collide => process_0.IN1
-clk => ~NO_FANOUT~
 vert_sync => collide2.CLK
 vert_sync => count[0].CLK
 vert_sync => count[1].CLK
@@ -2708,7 +2695,6 @@ collide_stable <= collide2.DB_MAX_OUTPUT_PORT_TYPE
 
 |FlappyBird|hold_collision:collision_handle3
 collide => process_0.IN1
-clk => ~NO_FANOUT~
 vert_sync => collide2.CLK
 vert_sync => count[0].CLK
 vert_sync => count[1].CLK
@@ -2768,6 +2754,9 @@ lives_out[5] <= lives_count[5].DB_MAX_OUTPUT_PORT_TYPE
 
 |FlappyBird|levels:level_set
 vert_sync => ~NO_FANOUT~
+game_on => level_set.IN0
+game_on => level_set.IN0
+game_on => level[1].IN1
 difficulty[0] => ~NO_FANOUT~
 difficulty[1] => level_set.IN1
 difficulty[2] => level_set.IN1
@@ -2787,8 +2776,8 @@ score[6] => LessThan0.IN8
 score[6] => LessThan1.IN8
 mode[0] => Equal0.IN3
 mode[1] => Equal0.IN2
-level[0] <= level.DB_MAX_OUTPUT_PORT_TYPE
-level[1] <= level_set.DB_MAX_OUTPUT_PORT_TYPE
+level[0] <= level[0]$latch.DB_MAX_OUTPUT_PORT_TYPE
+level[1] <= level[1]$latch.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |FlappyBird|powerups:special

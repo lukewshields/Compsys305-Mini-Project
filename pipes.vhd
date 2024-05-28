@@ -19,18 +19,18 @@ entity pipes is
 end entity pipes;
 
 architecture arc of pipes is 
-    --could get rid of all the pipe before the variable names maybe
-	 signal pipe_gap : std_logic_vector (9 downto 0); --:= conv_std_logic_vector(120, 10); -- can later be shrunk based on the level/difficulty of the game 
-	 --note 160 will be used for hard mode, 160 for medium and 200 for easy
+    
+	 signal pipe_gap : std_logic_vector (9 downto 0); --pipe gap set by the level 
+	 --note 140 will be used for hard mode, 140 for medium and 180 for easy
 	 
     signal pipes_on : std_logic;
-    signal pipe_height : std_logic_vector (9 downto 0) := conv_std_logic_vector(160, 10); --without any other _ , then pipe_height is equal to the top one
+    signal pipe_height : std_logic_vector (9 downto 0) := conv_std_logic_vector(160, 10); 
 	 signal pipe_height_bot : std_logic_vector (9 downto 0) := conv_std_logic_vector(160, 10);
 	 
-	 signal pipe_height2 : std_logic_vector (9 downto 0) := conv_std_logic_vector(160, 10); --without any other _ , then pipe_height is equal to the top one
+	 signal pipe_height2 : std_logic_vector (9 downto 0) := conv_std_logic_vector(160, 10); 
 	 signal pipe_height_bot2 : std_logic_vector (9 downto 0) := conv_std_logic_vector(160, 10);
 	 
-	 signal pipe_height3 : std_logic_vector (9 downto 0) := conv_std_logic_vector(160, 10); --without any other _ , then pipe_height is equal to the top one
+	 signal pipe_height3 : std_logic_vector (9 downto 0) := conv_std_logic_vector(160, 10); 
 	 signal pipe_height_bot3 : std_logic_vector (9 downto 0) := conv_std_logic_vector(160, 10);
 	 
     signal pipe_width : std_logic_vector (9 downto 0) := conv_std_logic_vector(40, 10);
@@ -71,22 +71,15 @@ architecture arc of pipes is
 	((pixel_row <= pipe_height3 or pixel_row + pipe_height_bot3 >= bottom) and (pipe_x_pos3 <= pixel_col or pipe_x_pos3 > conv_std_logic_vector(1600, 11)) and pixel_col <= pipe_x_pos3 + pipe_width)
 	) and (mode = "10" or mode = "01"))
 
-	 or (pixel_row >= conv_std_logic_vector(450, 10)) -- and (mode = "10" or mode = "01")
-	) else '0'; --later add an and mode is in one of the states where we need pipes
+	 or (pixel_row >= conv_std_logic_vector(450, 10))
+	) else '0'; 
 	
 	 
 	 
-	 --these call all be cleaned up quite a bit probably
+	 
 	move_pipe : process(vert_sync)
     begin
-		  --pipe_x_pos <= conv_std_logic_vector(400, 11);
-		  
-        if rising_edge(vert_sync) then
---				if (reset = '1') then
---					pipe_x_pos <= conv_std_logic_vector(960, 11); --CANT ASSIGN MULTIPLE DRIVERS
---					
---				--end if;
-			
+        if rising_edge(vert_sync) then	
 				if (enable = '1' and (mode = "10" or mode = "01")) then
 					if ((pipe_x_pos + pipe_width <= conv_std_logic_vector(1, 11)) and has_collided = '0') then --something about this is wrong maybe size of vectors idk adding the pipe_x_pos + ('0' & pipe_width) does nothing to where we reset but makes sure that we are always resetting??
 						game_on_s <= '1';
@@ -126,10 +119,6 @@ architecture arc of pipes is
 	 move_pipe2 : process(vert_sync)
 		begin
 			if (rising_edge(vert_sync)) then
---				if (reset = '1') then
---					pipe_x_pos <= conv_std_logic_vector(720, 11);
---				--end if;
-				
 				if (enable = '1' and (mode = "10" or mode = "01")) then
 					if ((pipe_x_pos2 + pipe_width <= conv_std_logic_vector(1,11)) and has_collided = '0') then
 						pipe_x_pos2 <= conv_std_logic_vector(700, 11);
@@ -169,10 +158,6 @@ architecture arc of pipes is
 	move_pipe3 : process(vert_sync)
 		begin
 			if (rising_edge(vert_sync)) then
---				if (reset = '1') then
---					pipe_x_pos <= conv_std_logic_vector(1200, 11);
---				--end if;
-				
 				if (enable = '1' and (mode = "10" or mode = "01")) then
 					if ((pipe_x_pos3 + pipe_width <= conv_std_logic_vector(1,11)) and has_collided = '0') then 
 						pipe_x_pos3 <= conv_std_logic_vector(700, 11);
@@ -209,13 +194,9 @@ architecture arc of pipes is
 	pipe_motion : process(vert_sync)
 		begin
 			if (rising_edge(vert_sync)) then
-				
-				if (collision = '1' or reset = '1') then -- still unstable signal wolnt compile with rising edge
+				if (collision = '1' or reset = '1') then 
 					has_collided <= '1';
---					pipe_x_pos <= conv_std_logic_vector(600, 11);
---					pipe_x_pos2 <= conv_std_logic_vector(360, 11);
---					pipe_x_pos3 <= conv_std_logic_vector(840, 11);
-				elsif (click = '1' and has_collided = '1') then -- from here to the reset of the pipes takes time 
+				elsif (click = '1' and has_collided = '1') then 
 					has_collided <= '0';
 				end if;
 			end if;
@@ -224,13 +205,13 @@ architecture arc of pipes is
 	gap_width : process(vert_sync)
 		begin
 			if (level = "00") then
-				pipe_gap <= conv_std_logic_vector(200, 10);
+				pipe_gap <= conv_std_logic_vector(180, 10);
 				pipe_x_motion <= conv_std_logic_vector(4, 10);
-			elsif (level = "01" and mode = "01") then
-				pipe_gap <= conv_std_logic_vector(160, 10);
+			elsif (level = "01" and mode = "10") then
+				pipe_gap <= conv_std_logic_vector(140, 10);
 				pipe_x_motion <= conv_std_logic_vector(4, 10);
 			elsif (level = "11" and mode = "10") then
-				pipe_gap <= conv_std_logic_vector(160, 10);
+				pipe_gap <= conv_std_logic_vector(140, 10);
 				pipe_x_motion <= conv_std_logic_vector(5, 10);
 			end if;
 
